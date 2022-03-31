@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-03-22T13:12:53.947761+00:00",
+  "timestamp": "2022-03-31T01:15:58.796078+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -2789,9 +2789,24 @@
       "labels": [],
       "body": "For example, UEID refers to the Relying Party as the recipient when it can also be the Verifier.",
       "createdAt": "2022-02-22T17:28:12Z",
-      "updatedAt": "2022-02-22T17:28:12Z",
+      "updatedAt": "2022-03-22T13:14:52Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is addressed by #171.  Turns out the UEID was the only mention of RP. However this issue prompted some re thinking and re organization of the claims into sections and wording about relationship of AR to AE.",
+          "createdAt": "2022-03-22T13:14:26Z",
+          "updatedAt": "2022-03-22T13:14:26Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It will be addressed by #171",
+          "createdAt": "2022-03-22T13:14:51Z",
+          "updatedAt": "2022-03-22T13:14:51Z"
+        }
+      ]
     },
     {
       "number": 170,
@@ -8239,6 +8254,32 @@
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jc-cddl",
       "headRefOid": "5188d1b9badb2cae215d9bbb95a332e40f1db705",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 174,
+      "id": "PR_kwDOCEWCXc41W8ey",
+      "title": "Type in DLOS's claim",
+      "url": "https://github.com/ietf-rats-wg/eat/pull/174",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-03-31T01:15:53Z",
+      "updatedAt": "2022-03-31T01:15:53Z",
+      "baseRepository": "ietf-rats-wg/eat",
+      "baseRefName": "master",
+      "baseRefOid": "c88bea72b9697fc0a7302e8143f698b54327af82",
+      "headRepository": "ietf-rats-wg/eat",
+      "headRefName": "of",
+      "headRefOid": "7dba54da104a9179dbe2ae448f22be66fe6c32cb",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
