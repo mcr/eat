@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-03-31T01:15:58.796078+00:00",
+  "timestamp": "2022-04-06T21:40:39.058541+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -7715,7 +7715,7 @@
       "labels": [],
       "body": "This brings in the CWT Labels for EAT claims including updating the CDDL and examples.\r\n\r\nThis also fill out all the IANA section for the TBD items too, that was previously a \"TODO\" item.",
       "createdAt": "2022-01-22T21:25:31Z",
-      "updatedAt": "2022-02-17T18:52:08Z",
+      "updatedAt": "2022-04-05T16:31:30Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "76722d0ef25c0cd7b54e42b59431bfb9b238863f",
@@ -8193,13 +8193,13 @@
       "labels": [],
       "body": "1. Claims about the Entity (most claims)\r\n2. Claims about the Token (e.g. profile, intended use)\r\n3. Nonce\r\n4. Encoding keys\r\n\r\nThis is to clarify claims occurring in attestation evidence and/or attestation results",
       "createdAt": "2022-03-01T19:13:53Z",
-      "updatedAt": "2022-03-21T10:11:58Z",
+      "updatedAt": "2022-04-06T21:40:03Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "17959f3c7711d484a6c64cf13d8b182fa5a0584a",
+      "baseRefOid": "b50a70c0f31f8880c94f170ac5c79cc514f7c939",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "ClaimCategories",
-      "headRefOid": "bf109220ecdb8563e28dab2f4735d6f836079eb2",
+      "headRefOid": "17b8f8b732f9ccc0863d5f4995158511227ad201",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -8247,13 +8247,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-03-08T17:53:09Z",
-      "updatedAt": "2022-03-10T22:08:36Z",
+      "updatedAt": "2022-04-06T17:26:20Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "17959f3c7711d484a6c64cf13d8b182fa5a0584a",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jc-cddl",
-      "headRefOid": "5188d1b9badb2cae215d9bbb95a332e40f1db705",
+      "headRefOid": "61d2bf65acf51ee31c92882ceb15773903d6a2d6",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -8266,26 +8266,42 @@
       "id": "PR_kwDOCEWCXc41W8ey",
       "title": "Type in DLOS's claim",
       "url": "https://github.com/ietf-rats-wg/eat/pull/174",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2022-03-31T01:15:53Z",
-      "updatedAt": "2022-03-31T01:15:53Z",
+      "updatedAt": "2022-04-05T16:31:26Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "c88bea72b9697fc0a7302e8143f698b54327af82",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "of",
       "headRefOid": "7dba54da104a9179dbe2ae448f22be66fe6c32cb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-03-31T06:15:29Z",
+      "mergedAt": "2022-03-31T06:15:29Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "b50a70c0f31f8880c94f170ac5c79cc514f7c939"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOCEWCXc43Qal8",
+          "commit": {
+            "abbreviatedOid": "7dba54d"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-03-31T06:15:19Z",
+          "updatedAt": "2022-03-31T06:15:19Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
