@@ -5,9 +5,9 @@
 RATS Working Group                                          L. Lundblade
 Internet-Draft                                       Security Theory LLC
 Intended status: Standards Track                              G. Mandyam
-Expires: 8 October 2022                                    J. O'Donoghue
+Expires: 9 October 2022                                    J. O'Donoghue
                                               Qualcomm Technologies Inc.
-                                                            6 April 2022
+                                                            7 April 2022
 
 
                    The Entity Attestation Token (EAT)
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 October 2022.
+   This Internet-Draft will expire on 9 October 2022.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Lundblade, et al.        Expires 8 October 2022                 [Page 1]
+Lundblade, et al.        Expires 9 October 2022                 [Page 1]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -99,34 +99,35 @@ Table of Contents
        3.2.12. The Uptime Claim (uptime) . . . . . . . . . . . . . .  24
        3.2.13. The Boot Odometer Claim (odometer)  . . . . . . . . .  24
        3.2.14. The Boot Seed Claim (boot-seed) . . . . . . . . . . .  24
-     3.3.  The DLOA (Digital Letter of Approval) Claim (dloas) . . .  25
-       3.3.1.  The Software Manifests Claim (manifests)  . . . . . .  26
-       3.3.2.  The Software Evidence Claim (swevidence)  . . . . . .  27
-       3.3.3.  The SW Measurement Results Claim (swresults)  . . . .  28
-         3.3.3.1.  Scheme  . . . . . . . . . . . . . . . . . . . . .  28
-         3.3.3.2.  Objective . . . . . . . . . . . . . . . . . . . .  28
-         3.3.3.3.  Results . . . . . . . . . . . . . . . . . . . . .  29
+       3.2.15. The DLOA (Digital Letter of Approval) Claim
+               (dloas) . . . . . . . . . . . . . . . . . . . . . . .  25
+       3.2.16. The Software Manifests Claim (manifests)  . . . . . .  26
+       3.2.17. The Software Evidence Claim (swevidence)  . . . . . .  27
+       3.2.18. The SW Measurement Results Claim (swresults)  . . . .  28
+         3.2.18.1.  Scheme . . . . . . . . . . . . . . . . . . . . .  28
+         3.2.18.2.  Objective  . . . . . . . . . . . . . . . . . . .  28
 
 
 
-Lundblade, et al.        Expires 8 October 2022                 [Page 2]
+Lundblade, et al.        Expires 9 October 2022                 [Page 2]
 
 Internet-Draft                     EAT                        April 2022
 
 
-         3.3.3.4.  Objective Name  . . . . . . . . . . . . . . . . .  29
-       3.3.4.  Submodules (submods)  . . . . . . . . . . . . . . . .  31
-         3.3.4.1.  Submodule Types . . . . . . . . . . . . . . . . .  31
-         3.3.4.2.  No Inheritance  . . . . . . . . . . . . . . . . .  35
-         3.3.4.3.  Security Levels . . . . . . . . . . . . . . . . .  35
-         3.3.4.4.  Submodule Names . . . . . . . . . . . . . . . . .  36
-         3.3.4.5.  CDDL for submods  . . . . . . . . . . . . . . . .  36
-     3.4.  Claims Describing the Token . . . . . . . . . . . . . . .  36
-       3.4.1.  Token ID Claim (cti and jti)  . . . . . . . . . . . .  36
-       3.4.2.  Timestamp claim (iat) . . . . . . . . . . . . . . . .  36
-       3.4.3.  The Profile Claim (profile) . . . . . . . . . . . . .  37
-       3.4.4.  The Intended Use Claim (intended-use) . . . . . . . .  37
-     3.5.  Including Keys  . . . . . . . . . . . . . . . . . . . . .  39
+         3.2.18.3.  Results  . . . . . . . . . . . . . . . . . . . .  29
+         3.2.18.4.  Objective Name . . . . . . . . . . . . . . . . .  29
+       3.2.19. Submodules (submods)  . . . . . . . . . . . . . . . .  31
+         3.2.19.1.  Submodule Types  . . . . . . . . . . . . . . . .  31
+         3.2.19.2.  No Inheritance . . . . . . . . . . . . . . . . .  35
+         3.2.19.3.  Security Levels  . . . . . . . . . . . . . . . .  35
+         3.2.19.4.  Submodule Names  . . . . . . . . . . . . . . . .  36
+         3.2.19.5.  CDDL for submods . . . . . . . . . . . . . . . .  36
+     3.3.  Claims Describing the Token . . . . . . . . . . . . . . .  36
+       3.3.1.  Token ID Claim (cti and jti)  . . . . . . . . . . . .  36
+       3.3.2.  Timestamp claim (iat) . . . . . . . . . . . . . . . .  36
+       3.3.3.  The Profile Claim (profile) . . . . . . . . . . . . .  37
+       3.3.4.  The Intended Use Claim (intended-use) . . . . . . . .  37
+     3.4.  Including Keys  . . . . . . . . . . . . . . . . . . . . .  39
    4.  Unprotected JWT Claims-Sets . . . . . . . . . . . . . . . . .  39
    5.  Detached EAT Bundles  . . . . . . . . . . . . . . . . . . . .  40
    6.  Endorsements and Verification Keys  . . . . . . . . . . . . .  41
@@ -161,15 +162,15 @@ Internet-Draft                     EAT                        April 2022
        8.2.1.  Common Data Types . . . . . . . . . . . . . . . . . .  47
        8.2.2.  JSON Interoperability . . . . . . . . . . . . . . . .  48
        8.2.3.  Labels  . . . . . . . . . . . . . . . . . . . . . . .  48
-     8.3.  CBOR Interoperability . . . . . . . . . . . . . . . . . .  48
 
 
 
-Lundblade, et al.        Expires 8 October 2022                 [Page 3]
+Lundblade, et al.        Expires 9 October 2022                 [Page 3]
 
 Internet-Draft                     EAT                        April 2022
 
 
+     8.3.  CBOR Interoperability . . . . . . . . . . . . . . . . . .  48
        8.3.1.  EAT Constrained Device Serialization  . . . . . . . .  49
      8.4.  Collected Common CDDL . . . . . . . . . . . . . . . . . .  49
      8.5.  Collected CDDL for CBOR . . . . . . . . . . . . . . . . .  55
@@ -217,15 +218,15 @@ Internet-Draft                     EAT                        April 2022
      C.1.  DevID Used With EAT . . . . . . . . . . . . . . . . . . .  92
      C.2.  How EAT Provides an Equivalent Secure Device Identity . .  92
      C.3.  An X.509 Format EAT . . . . . . . . . . . . . . . . . . .  93
-     C.4.  Device Identifier Permanence  . . . . . . . . . . . . . .  93
 
 
 
-Lundblade, et al.        Expires 8 October 2022                 [Page 4]
+Lundblade, et al.        Expires 9 October 2022                 [Page 4]
 
 Internet-Draft                     EAT                        April 2022
 
 
+     C.4.  Device Identifier Permanence  . . . . . . . . . . . . . .  93
    Appendix D.  Changes from Previous Drafts . . . . . . . . . . . .  93
      D.1.  From draft-rats-eat-01  . . . . . . . . . . . . . . . . .  93
      D.2.  From draft-mandyam-rats-eat-00  . . . . . . . . . . . . .  94
@@ -240,6 +241,7 @@ Internet-Draft                     EAT                        April 2022
      D.11. From draft-ietf-rats-eat-09 . . . . . . . . . . . . . . .  96
      D.12. From draft-ietf-rats-eat-10 . . . . . . . . . . . . . . .  96
      D.13. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . .  97
+     D.14. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . .  98
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  98
 
 1.  Introduction
@@ -275,9 +277,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-
-
-Lundblade, et al.        Expires 8 October 2022                 [Page 5]
+Lundblade, et al.        Expires 9 October 2022                 [Page 5]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -326,14 +326,14 @@ Internet-Draft                     EAT                        April 2022
 
    An entity may be the whole device or it may be a subsystem, a
    subsystem of a subsystem and so on.  EAT allows claims to be
-   organized into submodules, nested EATs and so on.  See Section 3.3.4.
-   The entity to which a claim applies is the submodule in which it
-   appears, or to the top-level entity if it doesn't appear in a
-   submodule.
+   organized into submodules, nested EATs and so on.  See
+   Section 3.2.19.  The entity to which a claim applies is the submodule
+   in which it appears, or to the top-level entity if it doesn't appear
+   in a submodule.
 
 
 
-Lundblade, et al.        Expires 8 October 2022                 [Page 6]
+Lundblade, et al.        Expires 9 October 2022                 [Page 6]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -389,7 +389,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                 [Page 7]
+Lundblade, et al.        Expires 9 October 2022                 [Page 7]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -445,7 +445,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                 [Page 8]
+Lundblade, et al.        Expires 9 October 2022                 [Page 8]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -501,7 +501,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                 [Page 9]
+Lundblade, et al.        Expires 9 October 2022                 [Page 9]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -557,7 +557,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 10]
+Lundblade, et al.        Expires 9 October 2022                [Page 10]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -613,7 +613,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 11]
+Lundblade, et al.        Expires 9 October 2022                [Page 11]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -669,7 +669,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 12]
+Lundblade, et al.        Expires 9 October 2022                [Page 12]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -725,7 +725,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 13]
+Lundblade, et al.        Expires 9 October 2022                [Page 13]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -781,7 +781,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 14]
+Lundblade, et al.        Expires 9 October 2022                [Page 14]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -837,7 +837,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 15]
+Lundblade, et al.        Expires 9 October 2022                [Page 15]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -893,7 +893,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 16]
+Lundblade, et al.        Expires 9 October 2022                [Page 16]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -949,7 +949,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 17]
+Lundblade, et al.        Expires 9 October 2022                [Page 17]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1005,7 +1005,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 18]
+Lundblade, et al.        Expires 9 October 2022                [Page 18]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1061,7 +1061,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 19]
+Lundblade, et al.        Expires 9 October 2022                [Page 19]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1088,7 +1088,8 @@ Internet-Draft                     EAT                        April 2022
 
    This claim is not intended as a replacement for a formal security
    certification scheme, such as those based on FIPS 140 [FIPS-140] or
-   those based on Common Criteria [Common.Criteria].  See Section 3.3.
+   those based on Common Criteria [Common.Criteria].  See
+   Section 3.2.15.
 
    $$claims-set-claims //= (
        security-level-label =>
@@ -1116,8 +1117,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-
-Lundblade, et al.        Expires 8 October 2022                [Page 20]
+Lundblade, et al.        Expires 9 October 2022                [Page 20]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1173,7 +1173,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 21]
+Lundblade, et al.        Expires 9 October 2022                [Page 21]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1229,7 +1229,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 22]
+Lundblade, et al.        Expires 9 October 2022                [Page 22]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1285,7 +1285,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 23]
+Lundblade, et al.        Expires 9 October 2022                [Page 23]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1341,14 +1341,14 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 24]
+Lundblade, et al.        Expires 9 October 2022                [Page 24]
 
 Internet-Draft                     EAT                        April 2022
 
 
    $$claims-set-claims //=  (boot-seed-label => bytes)
 
-3.3.  The DLOA (Digital Letter of Approval) Claim (dloas)
+3.2.15.  The DLOA (Digital Letter of Approval) Claim (dloas)
 
    A DLOA (Digital Letter of Approval) [DLOA] is an XML document that
    describes a certification that an entity has received.  Examples of
@@ -1397,12 +1397,12 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 25]
+Lundblade, et al.        Expires 9 October 2022                [Page 25]
 
 Internet-Draft                     EAT                        April 2022
 
 
-3.3.1.  The Software Manifests Claim (manifests)
+3.2.16.  The Software Manifests Claim (manifests)
 
    This claim contains descriptions of software present on the entity.
    These manifests are installed on the entity when the software is
@@ -1453,7 +1453,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 26]
+Lundblade, et al.        Expires 9 October 2022                [Page 26]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1480,7 +1480,7 @@ Internet-Draft                     EAT                        April 2022
 
    $$manifest-formats /= bytes .cbor coswid-that-is-a-cbor-tag-xx
 
-3.3.2.  The Software Evidence Claim (swevidence)
+3.2.17.  The Software Evidence Claim (swevidence)
 
    This claim contains descriptions, lists, evidence or measurements of
    the software that exists on the entity.  The defining characteristic
@@ -1509,12 +1509,12 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 27]
+Lundblade, et al.        Expires 9 October 2022                [Page 27]
 
 Internet-Draft                     EAT                        April 2022
 
 
-3.3.3.  The SW Measurement Results Claim (swresults)
+3.2.18.  The SW Measurement Results Claim (swresults)
 
    This claims reports the outcome of the comparison of a measurement on
    some software to the expected Reference Values.  It may report a
@@ -1536,14 +1536,14 @@ Internet-Draft                     EAT                        April 2022
    For each software objective, the following can be reported.  TODO:
    defined objective
 
-3.3.3.1.  Scheme
+3.2.18.1.  Scheme
 
    This is the free-form text name of the verification system or scheme
    that performed the verification.  There is no official registry of
    schemes or systems.  It may be the name of a commercial product or
    such.
 
-3.3.3.2.  Objective
+3.2.18.2.  Objective
 
    This roughly characterizes the coverage of the software measurement
    software.  This corresponds to the attestation target or the
@@ -1565,7 +1565,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 28]
+Lundblade, et al.        Expires 9 October 2022                [Page 28]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1574,7 +1574,7 @@ Internet-Draft                     EAT                        April 2022
 
    6 -- partial:  Some other partial set of the software
 
-3.3.3.3.  Results
+3.2.18.3.  Results
 
    This describes the result of the measurement and also the comparison
    to Reference Values.
@@ -1597,7 +1597,7 @@ Internet-Draft                     EAT                        April 2022
       some, but not all, measurements compared correctly to Reference
       Values
 
-3.3.3.4.  Objective Name
+3.2.18.4.  Objective Name
 
    This is a free-form text string that describes the objective.  For
    example, "Linux kernel" or "Facebook App"
@@ -1621,7 +1621,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 29]
+Lundblade, et al.        Expires 9 October 2022                [Page 29]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1677,12 +1677,12 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 30]
+Lundblade, et al.        Expires 9 October 2022                [Page 30]
 
 Internet-Draft                     EAT                        April 2022
 
 
-3.3.4.  Submodules (submods)
+3.2.19.  Submodules (submods)
 
    Some devices are complex, having many subsystems.  A mobile phone is
    a good example.  It may have several connectivity subsystems for
@@ -1701,7 +1701,7 @@ Internet-Draft                     EAT                        April 2022
    be called recursion.  It allows claims sets inside of claims sets
    inside of claims sets...
 
-3.3.4.1.  Submodule Types
+3.2.19.1.  Submodule Types
 
    The following sections define the three types of submodules:
 
@@ -1711,7 +1711,7 @@ Internet-Draft                     EAT                        April 2022
 
    *  The digest of a detached Claims-Set
 
-3.3.4.1.1.  Submodule Claims-Set
+3.2.19.1.1.  Submodule Claims-Set
 
    This is a subordinate Claims-Set containing claims about the
    submodule.
@@ -1733,7 +1733,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 31]
+Lundblade, et al.        Expires 9 October 2022                [Page 31]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1741,7 +1741,7 @@ Internet-Draft                     EAT                        April 2022
    This data type for this type of submodule is a map/object.  It is
    identified when decoding by it's type being a map/object.
 
-3.3.4.1.2.  Nested Token
+3.2.19.1.2.  Nested Token
 
    This type of submodule is a fully formed complete token.  It is
    typically produced by a separate Attester.  It is typically used by a
@@ -1762,7 +1762,7 @@ Internet-Draft                     EAT                        April 2022
    The following two sections describe how to encode and decode a nested
    token.
 
-3.3.4.1.2.1.  Surrounding EAT is CBOR-Encoded
+3.2.19.1.2.1.  Surrounding EAT is CBOR-Encoded
 
    This describes the encoding and decoding of CBOR or JSON-encoded
    tokens nested inside a CBOR-encoded token.
@@ -1789,7 +1789,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 32]
+Lundblade, et al.        Expires 9 October 2022                [Page 32]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1811,7 +1811,7 @@ Internet-Draft                     EAT                        April 2022
        tstr /
        bstr .cbor Tagged-CBOR-Token
 
-3.3.4.1.2.2.  Surrounding EAT is JSON-Encoded
+3.2.19.1.2.2.  Surrounding EAT is JSON-Encoded
 
    This describes the encoding and decoding of CBOR or JSON-encoded
    tokens nested inside a JSON-encoded token.
@@ -1845,7 +1845,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 33]
+Lundblade, et al.        Expires 9 October 2022                [Page 33]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1860,7 +1860,7 @@ Internet-Draft                     EAT                        April 2022
 
    B64URL-Tagged-CBOR-Token = tstr .regexp "[A-Za-z0-9_=-]+"
 
-3.3.4.1.3.  Detached Submodule Digest
+3.2.19.1.3.  Detached Submodule Digest
 
    This is type of submodule equivalent to a Claims-Set submodule,
    except the Claims-Set is conveyed separately outside of the token.
@@ -1901,7 +1901,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 34]
+Lundblade, et al.        Expires 9 October 2022                [Page 34]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1929,7 +1929,7 @@ Internet-Draft                     EAT                        April 2022
    protocols conveying them must make sure they are not modified in
    transit.
 
-3.3.4.2.  No Inheritance
+3.2.19.2.  No Inheritance
 
    The subordinate modules do not inherit anything from the containing
    token.  The subordinate modules must explicitly include all of their
@@ -1938,7 +1938,7 @@ Internet-Draft                     EAT                        April 2022
    This rule is in place for simplicity.  It avoids complex inheritance
    rules that might vary from one type of claim to another.
 
-3.3.4.3.  Security Levels
+3.2.19.3.  Security Levels
 
    The security level of the non-token subordinate modules should always
    be less than or equal to that of the containing modules in the case
@@ -1957,17 +1957,17 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 35]
+Lundblade, et al.        Expires 9 October 2022                [Page 35]
 
 Internet-Draft                     EAT                        April 2022
 
 
-3.3.4.4.  Submodule Names
+3.2.19.4.  Submodule Names
 
    The label or name for each submodule in the submods map is a text
    string naming the submodule.  No submodules may have the same name.
 
-3.3.4.5.  CDDL for submods
+3.2.19.5.  CDDL for submods
 
    The submodule type is distinguished in the encoded bytes by its data
    type, map/object for a Claims-Set, string for nested token and array
@@ -1983,16 +1983,16 @@ Internet-Draft                     EAT                        April 2022
       digest : bstr
    ]
 
-3.4.  Claims Describing the Token
+3.3.  Claims Describing the Token
 
    The claims in this section provide meta data about the token they
    occur in.  They do not describe the entity.
 
    They may appear in Attestation Evidence or Attestation Results.  When
-   these claims appear in Attestation Evidence, they must never be
+   these claims appear in Attestation Evidence, they SHOULD not be
    passed through the Verifier into Attestation Results.
 
-3.4.1.  Token ID Claim (cti and jti)
+3.3.1.  Token ID Claim (cti and jti)
 
    CWT defines the "cti" claim.  JWT defines the "jti" claim.  These are
    equivalent to each other in EAT and carry a unique token identifier
@@ -2000,7 +2000,7 @@ Internet-Draft                     EAT                        April 2022
    of the token but are distinct from the nonce that is used by the
    Relying Party to guarantee freshness and defend against replay.
 
-3.4.2.  Timestamp claim (iat)
+3.3.2.  Timestamp claim (iat)
 
    The "iat" claim defined in CWT and JWT is used to indicate the date-
    of-creation of the token, the time at which the claims are collected
@@ -2013,7 +2013,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 36]
+Lundblade, et al.        Expires 9 October 2022                [Page 36]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2033,7 +2033,7 @@ Internet-Draft                     EAT                        April 2022
    years, so the only point of a floating-point timestamp is to have
    precession greater than one second.  This is not needed for EAT.
 
-3.4.3.  The Profile Claim (profile)
+3.3.3.  The Profile Claim (profile)
 
    See Section 7 for the detailed description of a profile.
 
@@ -2055,7 +2055,7 @@ Internet-Draft                     EAT                        April 2022
 
    $$claims-set-claims //= (profile-label => ~uri / ~oid)
 
-3.4.4.  The Intended Use Claim (intended-use)
+3.3.4.  The Intended Use Claim (intended-use)
 
    EAT's may be used in the context of several different applications.
    The intended-use claim provides an indication to an EAT consumer
@@ -2069,7 +2069,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 37]
+Lundblade, et al.        Expires 9 October 2022                [Page 37]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2125,12 +2125,12 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 38]
+Lundblade, et al.        Expires 9 October 2022                [Page 38]
 
 Internet-Draft                     EAT                        April 2022
 
 
-3.5.  Including Keys
+3.4.  Including Keys
 
    An EAT may include a cryptographic key such as a public key.  The
    signing of the EAT binds the key to all the other claims in the
@@ -2181,7 +2181,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 39]
+Lundblade, et al.        Expires 9 October 2022                [Page 39]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2237,7 +2237,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 40]
+Lundblade, et al.        Expires 9 October 2022                [Page 40]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2293,7 +2293,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 41]
+Lundblade, et al.        Expires 9 October 2022                [Page 41]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2349,7 +2349,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 42]
+Lundblade, et al.        Expires 9 October 2022                [Page 42]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2394,7 +2394,7 @@ Internet-Draft                     EAT                        April 2022
    EAT profile will guarantee interoperability.
 
    The profile can be named in the token using the profile claim
-   described in Section 3.4.3.
+   described in Section 3.3.3.
 
    A profile can apply to Attestation Evidence or to Attestation Results
    or both.
@@ -2405,7 +2405,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 43]
+Lundblade, et al.        Expires 9 October 2022                [Page 43]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2461,7 +2461,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 44]
+Lundblade, et al.        Expires 9 October 2022                [Page 44]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2517,7 +2517,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 45]
+Lundblade, et al.        Expires 9 October 2022                [Page 45]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2573,7 +2573,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 46]
+Lundblade, et al.        Expires 9 October 2022                [Page 46]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2629,7 +2629,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 47]
+Lundblade, et al.        Expires 9 October 2022                [Page 47]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2685,7 +2685,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 48]
+Lundblade, et al.        Expires 9 October 2022                [Page 48]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2741,7 +2741,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 49]
+Lundblade, et al.        Expires 9 October 2022                [Page 49]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2797,7 +2797,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 50]
+Lundblade, et al.        Expires 9 October 2022                [Page 50]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2853,7 +2853,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 51]
+Lundblade, et al.        Expires 9 October 2022                [Page 51]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2909,7 +2909,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 52]
+Lundblade, et al.        Expires 9 October 2022                [Page 52]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2965,7 +2965,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 53]
+Lundblade, et al.        Expires 9 October 2022                [Page 53]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3021,7 +3021,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 54]
+Lundblade, et al.        Expires 9 October 2022                [Page 54]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3077,7 +3077,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 55]
+Lundblade, et al.        Expires 9 October 2022                [Page 55]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3133,7 +3133,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 56]
+Lundblade, et al.        Expires 9 October 2022                [Page 56]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3189,7 +3189,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 57]
+Lundblade, et al.        Expires 9 October 2022                [Page 57]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3245,7 +3245,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 58]
+Lundblade, et al.        Expires 9 October 2022                [Page 58]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3301,7 +3301,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 59]
+Lundblade, et al.        Expires 9 October 2022                [Page 59]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3357,7 +3357,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 60]
+Lundblade, et al.        Expires 9 October 2022                [Page 60]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3413,7 +3413,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 61]
+Lundblade, et al.        Expires 9 October 2022                [Page 61]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3469,7 +3469,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 62]
+Lundblade, et al.        Expires 9 October 2022                [Page 62]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3525,7 +3525,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 63]
+Lundblade, et al.        Expires 9 October 2022                [Page 63]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3581,7 +3581,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 64]
+Lundblade, et al.        Expires 9 October 2022                [Page 64]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3637,7 +3637,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 65]
+Lundblade, et al.        Expires 9 October 2022                [Page 65]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3693,7 +3693,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 66]
+Lundblade, et al.        Expires 9 October 2022                [Page 66]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3749,7 +3749,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 67]
+Lundblade, et al.        Expires 9 October 2022                [Page 67]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3805,7 +3805,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 68]
+Lundblade, et al.        Expires 9 October 2022                [Page 68]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3861,7 +3861,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 69]
+Lundblade, et al.        Expires 9 October 2022                [Page 69]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3917,7 +3917,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 70]
+Lundblade, et al.        Expires 9 October 2022                [Page 70]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3973,7 +3973,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 71]
+Lundblade, et al.        Expires 9 October 2022                [Page 71]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4029,7 +4029,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 72]
+Lundblade, et al.        Expires 9 October 2022                [Page 72]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4085,7 +4085,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 73]
+Lundblade, et al.        Expires 9 October 2022                [Page 73]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4141,7 +4141,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 74]
+Lundblade, et al.        Expires 9 October 2022                [Page 74]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4197,7 +4197,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 75]
+Lundblade, et al.        Expires 9 October 2022                [Page 75]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4253,7 +4253,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 76]
+Lundblade, et al.        Expires 9 October 2022                [Page 76]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4309,7 +4309,7 @@ A.1.  Simple TEE Attestation
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 77]
+Lundblade, et al.        Expires 9 October 2022                [Page 77]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4365,7 +4365,7 @@ A.2.  Submodules for Board and Device
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 78]
+Lundblade, et al.        Expires 9 October 2022                [Page 78]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4421,7 +4421,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 79]
+Lundblade, et al.        Expires 9 October 2022                [Page 79]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4477,7 +4477,7 @@ A.4.  Detached EAT Bundle
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 80]
+Lundblade, et al.        Expires 9 October 2022                [Page 80]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4533,7 +4533,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 81]
+Lundblade, et al.        Expires 9 October 2022                [Page 81]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4589,7 +4589,7 @@ A.5.  Key / Key Store Attestation
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 82]
+Lundblade, et al.        Expires 9 October 2022                [Page 82]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4645,7 +4645,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 83]
+Lundblade, et al.        Expires 9 October 2022                [Page 83]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4701,7 +4701,7 @@ A.6.  SW Measurements of an IoT Device
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 84]
+Lundblade, et al.        Expires 9 October 2022                [Page 84]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4757,7 +4757,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 85]
+Lundblade, et al.        Expires 9 October 2022                [Page 85]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4813,7 +4813,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 86]
+Lundblade, et al.        Expires 9 October 2022                [Page 86]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4869,7 +4869,7 @@ A.7.  Attestation Results in JSON format
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 87]
+Lundblade, et al.        Expires 9 October 2022                [Page 87]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4925,7 +4925,7 @@ B.1.  Collision Probability
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 88]
+Lundblade, et al.        Expires 9 October 2022                [Page 88]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4981,7 +4981,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 89]
+Lundblade, et al.        Expires 9 October 2022                [Page 89]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5037,7 +5037,7 @@ B.2.  No Use of UUID
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 90]
+Lundblade, et al.        Expires 9 October 2022                [Page 90]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5093,7 +5093,7 @@ Appendix C.  EAT Relation to IEEE.802.1AR Secure Device Identity (DevID)
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 91]
+Lundblade, et al.        Expires 9 October 2022                [Page 91]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5149,7 +5149,7 @@ C.2.  How EAT Provides an Equivalent Secure Device Identity
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 92]
+Lundblade, et al.        Expires 9 October 2022                [Page 92]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5205,7 +5205,7 @@ D.1.  From draft-rats-eat-01
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 93]
+Lundblade, et al.        Expires 9 October 2022                [Page 93]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5261,7 +5261,7 @@ D.6.  From draft-ietf-rats-eat-04
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 94]
+Lundblade, et al.        Expires 9 October 2022                [Page 94]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5317,7 +5317,7 @@ D.10.  From draft-ietf-rats-eat-08
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 95]
+Lundblade, et al.        Expires 9 October 2022                [Page 95]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5373,7 +5373,7 @@ D.12.  From draft-ietf-rats-eat-10
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 96]
+Lundblade, et al.        Expires 9 October 2022                [Page 96]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5429,7 +5429,7 @@ D.13.  From draft-ietf-rats-eat-11
 
 
 
-Lundblade, et al.        Expires 8 October 2022                [Page 97]
+Lundblade, et al.        Expires 9 October 2022                [Page 97]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5445,6 +5445,11 @@ Internet-Draft                     EAT                        April 2022
    *  Add boot odometer claim
 
    *  Add privacy considerations for replay protection
+
+D.14.  From draft-ietf-rats-eat-11
+
+   *  Reorganize claims into 4 sections, particularly claims about the
+      entity and about the token
 
 Authors' Addresses
 
@@ -5480,9 +5485,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-Lundblade, et al.        Expires 8 October 2022                [Page 98]
+Lundblade, et al.        Expires 9 October 2022                [Page 98]
