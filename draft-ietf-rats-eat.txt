@@ -792,11 +792,10 @@ Internet-Draft                     EAT                        April 2022
       may be created based on some other manufacturer registration
       scheme.
 
-   *  Entity manufacturers are allowed to change from one type of UEID
-      to another anytime they want.  For example, they may find they can
-      optimize their manufacturing by switching from type 0x01 to type
-      0x02 or vice versa.  The essential requirement on the manufacturer
-      is that UEIDs be universally unique.
+   *  The manufacturing process for an entity is allowed to change from
+      using one type of UEID to another.  For example, a manufacturer
+      may find they can optimize their process by switching from type
+      0x01 to type 0x02 or vice versa.
 
    A Device Identifier URN is registered for UEIDs.  See Section 9.3.4.
 
@@ -832,6 +831,7 @@ Internet-Draft                     EAT                        April 2022
    sueids-type = {
        + tstr => ueid-type
    }
+
 
 
 
@@ -5456,6 +5456,8 @@ D.14.  From draft-ietf-rats-eat-11
    *  Clarify relationship of claims in evidence to results when
       forwarding
 
+   *  Clarify manufacturer switching UEID types
+
 Authors' Addresses
 
    Laurence Lundblade
@@ -5474,14 +5476,12 @@ Authors' Addresses
    Email: mandyam@qti.qualcomm.com
 
 
-   Jeremy O'Donoghue
-   Qualcomm Technologies Inc.
-   279 Farnborough Road
-   Farnborough
-   GU14 7LS
-   United Kingdom
 
-   Phone: +44 1252 363189
+
+
+
+
+
 
 
 
@@ -5490,15 +5490,15 @@ Lundblade, et al.        Expires 9 October 2022                [Page 98]
 Internet-Draft                     EAT                        April 2022
 
 
+   Jeremy O'Donoghue
+   Qualcomm Technologies Inc.
+   279 Farnborough Road
+   Farnborough
+   GU14 7LS
+   United Kingdom
+
+   Phone: +44 1252 363189
    Email: jodonogh@qti.qualcomm.com
-
-
-
-
-
-
-
-
 
 
 
