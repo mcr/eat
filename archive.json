@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-04-06T21:40:39.058541+00:00",
+  "timestamp": "2022-04-07T17:02:37.927062+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -8193,13 +8193,13 @@
       "labels": [],
       "body": "1. Claims about the Entity (most claims)\r\n2. Claims about the Token (e.g. profile, intended use)\r\n3. Nonce\r\n4. Encoding keys\r\n\r\nThis is to clarify claims occurring in attestation evidence and/or attestation results",
       "createdAt": "2022-03-01T19:13:53Z",
-      "updatedAt": "2022-04-06T21:40:03Z",
+      "updatedAt": "2022-04-07T17:02:00Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "b50a70c0f31f8880c94f170ac5c79cc514f7c939",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "ClaimCategories",
-      "headRefOid": "17b8f8b732f9ccc0863d5f4995158511227ad201",
+      "headRefOid": "85143aa4d778c7b9835402943781823e3bf02e7a",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -8302,6 +8302,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 175,
+      "id": "PR_kwDOCEWCXc41xDmq",
+      "title": "Clarify UEID manufacturing type switch",
+      "url": "https://github.com/ietf-rats-wg/eat/pull/175",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Address #170",
+      "createdAt": "2022-04-06T21:55:48Z",
+      "updatedAt": "2022-04-06T21:55:48Z",
+      "baseRepository": "ietf-rats-wg/eat",
+      "baseRefName": "master",
+      "baseRefOid": "b50a70c0f31f8880c94f170ac5c79cc514f7c939",
+      "headRepository": "ietf-rats-wg/eat",
+      "headRefName": "clarify-ueid",
+      "headRefOid": "61e9331d02132fb052d6a4beb31a263d106f1eda",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
