@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-04-07T17:02:37.927062+00:00",
+  "timestamp": "2022-04-11T16:37:52.920776+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -2782,15 +2782,15 @@
       "id": "I_kwDOCEWCXc5EYJ70",
       "title": "Wording of claims so they can be both Evidence and Results",
       "url": "https://github.com/ietf-rats-wg/eat/issues/169",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "For example, UEID refers to the Relying Party as the recipient when it can also be the Verifier.",
       "createdAt": "2022-02-22T17:28:12Z",
-      "updatedAt": "2022-03-22T13:14:52Z",
-      "closedAt": null,
+      "updatedAt": "2022-04-07T17:15:35Z",
+      "closedAt": "2022-04-07T17:15:35Z",
       "comments": [
         {
           "author": "laurencelundblade",
@@ -2805,6 +2805,13 @@
           "body": "It will be addressed by #171",
           "createdAt": "2022-03-22T13:14:51Z",
           "updatedAt": "2022-03-22T13:14:51Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed in #171",
+          "createdAt": "2022-04-07T17:15:35Z",
+          "updatedAt": "2022-04-07T17:15:35Z"
         }
       ]
     },
@@ -2813,16 +2820,24 @@
       "id": "I_kwDOCEWCXc5EYUaJ",
       "title": "Clarify UEID manufacturing type switch",
       "url": "https://github.com/ietf-rats-wg/eat/issues/170",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2022-02-22T18:14:58Z",
-      "updatedAt": "2022-02-22T18:14:58Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2022-04-07T17:15:04Z",
+      "closedAt": "2022-04-07T17:15:04Z",
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed in #175",
+          "createdAt": "2022-04-07T17:15:04Z",
+          "updatedAt": "2022-04-07T17:15:04Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -8186,24 +8201,26 @@
       "id": "PR_kwDOCEWCXc4zv4CO",
       "title": "Sort the claims into four categories",
       "url": "https://github.com/ietf-rats-wg/eat/pull/171",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "1. Claims about the Entity (most claims)\r\n2. Claims about the Token (e.g. profile, intended use)\r\n3. Nonce\r\n4. Encoding keys\r\n\r\nThis is to clarify claims occurring in attestation evidence and/or attestation results",
       "createdAt": "2022-03-01T19:13:53Z",
-      "updatedAt": "2022-04-07T17:02:00Z",
+      "updatedAt": "2022-04-07T17:09:48Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "b50a70c0f31f8880c94f170ac5c79cc514f7c939",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "ClaimCategories",
-      "headRefOid": "85143aa4d778c7b9835402943781823e3bf02e7a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "c8ac8d61616d75e79b6edf82071c7b1ada54a041",
+      "closedAt": "2022-04-07T17:09:44Z",
+      "mergedAt": "2022-04-07T17:09:44Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "7f0168fb2798f800d668f462caa6a57c9a3674ee"
+      },
       "comments": [],
       "reviews": []
     },
@@ -8247,13 +8264,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-03-08T17:53:09Z",
-      "updatedAt": "2022-04-06T17:26:20Z",
+      "updatedAt": "2022-04-11T16:37:22Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "17959f3c7711d484a6c64cf13d8b182fa5a0584a",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jc-cddl",
-      "headRefOid": "61d2bf65acf51ee31c92882ceb15773903d6a2d6",
+      "headRefOid": "c215a23fd1aaed3094b7df96d91ca80162ca7a69",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -8308,24 +8325,26 @@
       "id": "PR_kwDOCEWCXc41xDmq",
       "title": "Clarify UEID manufacturing type switch",
       "url": "https://github.com/ietf-rats-wg/eat/pull/175",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Address #170",
       "createdAt": "2022-04-06T21:55:48Z",
-      "updatedAt": "2022-04-06T21:55:48Z",
+      "updatedAt": "2022-04-07T17:14:43Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "b50a70c0f31f8880c94f170ac5c79cc514f7c939",
+      "baseRefOid": "7f0168fb2798f800d668f462caa6a57c9a3674ee",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "clarify-ueid",
-      "headRefOid": "61e9331d02132fb052d6a4beb31a263d106f1eda",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "7bbee76c98db5c48178108f3cd9a39f56df40907",
+      "closedAt": "2022-04-07T17:14:39Z",
+      "mergedAt": "2022-04-07T17:14:38Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "37eb1857258c0dcef61154a0e390fd350705398d"
+      },
       "comments": [],
       "reviews": []
     }
