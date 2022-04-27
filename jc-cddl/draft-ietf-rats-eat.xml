@@ -51,7 +51,7 @@
         <email>jodonogh@qti.qualcomm.com</email>
       </address>
     </author>
-    <date year="2022" month="April" day="26"/>
+    <date year="2022" month="April" day="27"/>
     <area>Internet</area>
     <workgroup>RATS Working Group</workgroup>
     <keyword>signing attestation cbor</keyword>
@@ -4171,7 +4171,7 @@ there can be more tha one of them</li>
     </section>
   </back>
   <!-- ##markdown-source:
-H4sIAGJIaGIAA+y9a3Pb2HYg+h2/AqU+VW3lkJQly89Md0YtqfuoY1seS44z
+H4sIAPiqaGIAA+y9a3Pb2HYg+h2/AqU+VW3lkJQly89Md0YtqfuoY1seS44z
 N5XqgkiQwjEJMABomfE4v33We68NgLKSM1P3frhO6rQIbOzn2uv9GI/HSdNm
 5eyPbFmV+au0rTd5Uqxr+qtpjx4/fvn4KJlm7au0aWdJMqumZbaChrM6m7fj
 Im/n4zprm3GeteNl1uZNmyR3i1fp+5Prq/RjVX8qykX6W11t1skP6bQqm7xs
