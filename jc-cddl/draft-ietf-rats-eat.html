@@ -3121,21 +3121,22 @@ Since the names are used only in the detached EAT bundle, they can be very short
 <pre class="lang-CDDL sourcecode">
 DEB-Messages = DEB-Tagged-Message / DEB-Untagged-Message
 
-DEB-Tagged-Message   = #6.602(DEB-Untagged-Message)
+DEB-Tagged-Message   = #6.TBD(DEB-Untagged-Message)
 DEB-Untagged-Message = Detached-EAT-Bundle
 
 Detached-EAT-Bundle = [
+    main-token : Nested-Token,
 
-    main-token : bstr,
     detached-claims-sets: {
-        + tstr =&gt; bstr
 
+        + tstr =&gt; JC&lt;json-wrapped-claims-set, cbor-wrapped-claims-set&gt;
     }
 ]
 
 json-wrapped-claims-set = base64-url-text
 
 cbor-wrapped-claims-set = bstr .cbor Claims-Set
+
 </pre><a href="#section-5-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3786,15 +3787,15 @@ Detached-Submodule-Digest = [
 
 DEB-Messages = DEB-Tagged-Message / DEB-Untagged-Message
 
-DEB-Tagged-Message   = #6.602(DEB-Untagged-Message)
+DEB-Tagged-Message   = #6.TBD(DEB-Untagged-Message)
 DEB-Untagged-Message = Detached-EAT-Bundle
 
 Detached-EAT-Bundle = [
+    main-token : Nested-Token,
 
-    main-token : bstr,
     detached-claims-sets: {
-        + tstr =&gt; bstr
 
+        + tstr =&gt; JC&lt;json-wrapped-claims-set, cbor-wrapped-claims-set&gt;
     }
 ]
 
@@ -3803,30 +3804,31 @@ json-wrapped-claims-set = base64-url-text
 cbor-wrapped-claims-set = bstr .cbor Claims-Set
 
 
-nonce-label            = JC&lt; "nonce",    10 &gt;
-ueid-label             = JC&lt; "ueid",     256 &gt;
-sueids-label           = JC&lt; "sueids",   257 &gt;
-oemid-label            = JC&lt; "oemid",    258 &gt;
-hardware-model-label   = JC&lt; "hwmodel",  259 &gt;
-hardware-version-label = JC&lt; "hwvers",   260 &gt;
-secure-boot-label      = JC&lt; "secboot",  262 &gt;
-debug-status-label     = JC&lt; "dbgstat",  263 &gt;
-location-label         = JC&lt; "location", 264 &gt;
-profile-label          = JC&lt; "profile",  265 &gt;
-submods-label          = JC&lt; "submods",  266 &gt;
 
+nonce-label            = JC&lt; "nonce",      10 &gt;
+ueid-label             = JC&lt; "ueid",       256 &gt;
+sueids-label           = JC&lt; "sueids",     257 &gt;
+oemid-label            = JC&lt; "oemid",      258 &gt;
+hardware-model-label   = JC&lt; "hwmodel",    259 &gt;
+hardware-version-label = JC&lt; "hwvers",     260 &gt;
+secure-boot-label      = JC&lt; "secboot",    262 &gt;
+debug-status-label     = JC&lt; "dbgstat",    263 &gt;
+location-label         = JC&lt; "location",   264 &gt;
+profile-label          = JC&lt; "profile",    265 &gt;
+submods-label          = JC&lt; "submods",    266 &gt;
 
-security-level-label = &lt;TBD&gt;
-uptime-label         = &lt;TBD&gt;
-boot-seed-label      = &lt;TB&gt;
-odometer-label       = &lt;TBD&gt;
-intended-use-label   = &lt;TBD&gt;
-dloas-label          = &lt;TBD&gt;
-sw-name-label        = &lt;TBD&gt;
-sw-version-label     = &lt;TBD&gt;
-manifests-label      = &lt;TBD&gt;
-swevidence-label     = &lt;TBD&gt;
-swresults-label      = &lt;TBD&gt;
+security-level-label   = JC&lt; "seclevel",   TBD &gt;
+uptime-label           = JC&lt; "uptime",     TBD &gt;
+boot-seed-label        = JC&lt; "bootseed",   TBD &gt;
+intended-use-label     = JC&lt; "intuse",     TBD &gt;
+dloas-label            = JC&lt; "dloas",      TBD &gt;
+sw-name-label          = JC&lt; "swname",     TBD &gt;
+sw-version-label       = JC&lt; "swversion",  TBD &gt;
+manifests-label        = JC&lt; "manifests",  TBD &gt;
+swevidence-label       = JC&lt; "swevidence", TBD &gt;
+swresults-label        = JC&lt; "swresults" , TBD &gt;
+odometer-label         = JC&lt; "odometer",   TBD &gt;
+
 
 </pre><a href="#section-8.4.1-3" class="pilcrow">¶</a>
 </div>

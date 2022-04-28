@@ -2244,15 +2244,15 @@ Internet-Draft                     EAT                        April 2022
 
    DEB-Messages = DEB-Tagged-Message / DEB-Untagged-Message
 
-   DEB-Tagged-Message   = #6.602(DEB-Untagged-Message)
+   DEB-Tagged-Message   = #6.TBD(DEB-Untagged-Message)
    DEB-Untagged-Message = Detached-EAT-Bundle
 
    Detached-EAT-Bundle = [
+       main-token : Nested-Token,
 
-       main-token : bstr,
        detached-claims-sets: {
-           + tstr => bstr
 
+           + tstr => JC<json-wrapped-claims-set, cbor-wrapped-claims-set>
        }
    ]
 
@@ -3000,15 +3000,15 @@ Internet-Draft                     EAT                        April 2022
 
    DEB-Messages = DEB-Tagged-Message / DEB-Untagged-Message
 
-   DEB-Tagged-Message   = #6.602(DEB-Untagged-Message)
+   DEB-Tagged-Message   = #6.TBD(DEB-Untagged-Message)
    DEB-Untagged-Message = Detached-EAT-Bundle
 
    Detached-EAT-Bundle = [
+       main-token : Nested-Token,
 
-       main-token : bstr,
        detached-claims-sets: {
-           + tstr => bstr
 
+           + tstr => JC<json-wrapped-claims-set, cbor-wrapped-claims-set>
        }
    ]
 
@@ -3017,7 +3017,7 @@ Internet-Draft                     EAT                        April 2022
    cbor-wrapped-claims-set = bstr .cbor Claims-Set
 
 
-   nonce-label            = JC< "nonce",    10 >
+
 
 
 
@@ -3026,29 +3026,29 @@ Lundblade, et al.        Expires 30 October 2022               [Page 54]
 Internet-Draft                     EAT                        April 2022
 
 
-   ueid-label             = JC< "ueid",     256 >
-   sueids-label           = JC< "sueids",   257 >
-   oemid-label            = JC< "oemid",    258 >
-   hardware-model-label   = JC< "hwmodel",  259 >
-   hardware-version-label = JC< "hwvers",   260 >
-   secure-boot-label      = JC< "secboot",  262 >
-   debug-status-label     = JC< "dbgstat",  263 >
-   location-label         = JC< "location", 264 >
-   profile-label          = JC< "profile",  265 >
-   submods-label          = JC< "submods",  266 >
+   nonce-label            = JC< "nonce",      10 >
+   ueid-label             = JC< "ueid",       256 >
+   sueids-label           = JC< "sueids",     257 >
+   oemid-label            = JC< "oemid",      258 >
+   hardware-model-label   = JC< "hwmodel",    259 >
+   hardware-version-label = JC< "hwvers",     260 >
+   secure-boot-label      = JC< "secboot",    262 >
+   debug-status-label     = JC< "dbgstat",    263 >
+   location-label         = JC< "location",   264 >
+   profile-label          = JC< "profile",    265 >
+   submods-label          = JC< "submods",    266 >
 
-
-   security-level-label = <TBD>
-   uptime-label         = <TBD>
-   boot-seed-label      = <TB>
-   odometer-label       = <TBD>
-   intended-use-label   = <TBD>
-   dloas-label          = <TBD>
-   sw-name-label        = <TBD>
-   sw-version-label     = <TBD>
-   manifests-label      = <TBD>
-   swevidence-label     = <TBD>
-   swresults-label      = <TBD>
+   security-level-label   = JC< "seclevel",   TBD >
+   uptime-label           = JC< "uptime",     TBD >
+   boot-seed-label        = JC< "bootseed",   TBD >
+   intended-use-label     = JC< "intuse",     TBD >
+   dloas-label            = JC< "dloas",      TBD >
+   sw-name-label          = JC< "swname",     TBD >
+   sw-version-label       = JC< "swversion",  TBD >
+   manifests-label        = JC< "manifests",  TBD >
+   swevidence-label       = JC< "swevidence", TBD >
+   swresults-label        = JC< "swresults" , TBD >
+   odometer-label         = JC< "odometer",   TBD >
 
 8.4.2.  CBOR-Specific CDDL
 
