@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-04-26T19:30:47.027837+00:00",
+  "timestamp": "2022-04-28T18:33:24.647003+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -8264,13 +8264,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-03-08T17:53:09Z",
-      "updatedAt": "2022-04-26T19:30:00Z",
+      "updatedAt": "2022-04-28T18:32:55Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jc-cddl",
-      "headRefOid": "4c66311878f4fe9be8339eac5aa95d2fca24f375",
+      "headRefOid": "ef6481d5dec2be9d432e7a2d8dd23f1d726ae44d",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
