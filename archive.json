@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-04-28T18:33:24.647003+00:00",
+  "timestamp": "2022-04-29T23:00:38.103290+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -8257,24 +8257,26 @@
       "id": "PR_kwDOCEWCXc40HvFc",
       "title": "first go at using JC<> template from uccs",
       "url": "https://github.com/ietf-rats-wg/eat/pull/173",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2022-03-08T17:53:09Z",
-      "updatedAt": "2022-04-28T18:32:55Z",
+      "updatedAt": "2022-04-29T23:00:12Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jc-cddl",
-      "headRefOid": "ef6481d5dec2be9d432e7a2d8dd23f1d726ae44d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "4a1432d15329c1ba6c54cba32e6e402fcf322985",
+      "closedAt": "2022-04-29T23:00:08Z",
+      "mergedAt": "2022-04-29T23:00:08Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "4a8e6da095768ae2f02bfcdfd743737106bf6c53"
+      },
       "comments": [],
       "reviews": []
     },
