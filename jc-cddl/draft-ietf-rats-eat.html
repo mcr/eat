@@ -830,7 +830,7 @@ address div.right {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Lundblade, et al.</td>
-<td class="center">Expires 30 October 2022</td>
+<td class="center">Expires 31 October 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -843,12 +843,12 @@ address div.right {
 <dd class="internet-draft">draft-ietf-rats-eat-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-04-28" class="published">28 April 2022</time>
+<time datetime="2022-04-29" class="published">29 April 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-10-30">30 October 2022</time></dd>
+<dd class="expires"><time datetime="2022-10-31">31 October 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -896,7 +896,7 @@ CWT and JWT.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 October 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 October 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -932,7 +932,7 @@ CWT and JWT.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-entity-overview" class="xref">Entity Overview</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="xref">1.2</a>.  <a href="#name-cwt-jwt-uccs-ujcs-and-deb" class="xref">CWT, JWT, UCCS, UJCS and DEB</a></p>
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="xref">1.2</a>.  <a href="#name-cwt-jwt-and-deb" class="xref">CWT, JWT and DEB</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
                 <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="xref">1.3</a>.  <a href="#name-cddl-cbor-and-json" class="xref">CDDL, CBOR and JSON</a></p>
@@ -1527,36 +1527,36 @@ It may also have low security, having no special security defenses.
 There is no minimum security requirement to be an entity.<a href="#section-1.1-9" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="cwt-jwt-uccs-ujcs-and-deb">
+<div id="cwt-jwt-and-deb">
 <section id="section-1.2">
-        <h3 id="name-cwt-jwt-uccs-ujcs-and-deb">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-cwt-jwt-uccs-ujcs-and-deb" class="section-name selfRef">CWT, JWT, UCCS, UJCS and DEB</a>
+        <h3 id="name-cwt-jwt-and-deb">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-cwt-jwt-and-deb" class="section-name selfRef">CWT, JWT and DEB</a>
         </h3>
-<p id="section-1.2-1">An EAT is a claims set about an entity based on one of the following:<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">An EAT is primarily a claims set about an entity based on one of the following:<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.2-2.1">CBOR Web Token (CWT) <span>[<a href="#RFC8392" class="xref">RFC8392</a>]</span><a href="#section-1.2-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-1.2-2.2">Unprotected CWT Claims Sets (UCCS) <span>[<a href="#UCCS.Draft" class="xref">UCCS.Draft</a>]</span><a href="#section-1.2-2.2" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-1.2-2.3">JSON Web Token (JWT) <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span><a href="#section-1.2-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.2-2.2">JSON Web Token (JWT) <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span><a href="#section-1.2-2.2" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-1.2-3">All definitions, requirements, creation and validation procedures, security considerations, IANA registrations and so on from these carry over to EAT.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
 <p id="section-1.2-4">This specification extends those specifications by defining additional claims for attestation.
 This specification also describes the notion of a "profile" that can narrow the definition of an EAT, ensure interoperability and fill in details for specific usage scenarios.
 This specification also adds some considerations for registration of future EAT-related claims.<a href="#section-1.2-4" class="pilcrow">¶</a></p>
-<p id="section-1.2-5">The identification of a protocol element as an EAT, whether CBOR or JSON encoded, follows the general conventions used by CWT, JWT and UCCS.
+<p id="section-1.2-5">The identification of a protocol element as an EAT, whether CBOR or JSON encoded, follows the general conventions used by CWT, JWT.
 Largely this depends on the protocol carrying the EAT.
 In some cases it may be by content type (e.g., MIME type).
 In other cases it may be through use of CBOR tags.
 There is no fixed mechanism across all use cases.<a href="#section-1.2-5" class="pilcrow">¶</a></p>
-<p id="section-1.2-6">This specification adds one more top-level message:<a href="#section-1.2-6" class="pilcrow">¶</a></p>
+<p id="section-1.2-6">This specification adds one more top-level token type:<a href="#section-1.2-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.2-7.1">Detached EAT Bundle (DEB), <a href="#DEB" class="xref">Section 5</a><a href="#section-1.2-7.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-1.2-8">A DEB is structure to hold a collection of detached claims sets and the EAT that separately provides integrity and authenticity protection for them.
 It can be either CBOR or JSON encoded.<a href="#section-1.2-8" class="pilcrow">¶</a></p>
+<p id="section-1.2-9">Last, the definition of other token types is allowed.
+Of particular use may be a token type that provides no authenticity or integrity protection at all for use with transports like TLS that do provide that.<a href="#section-1.2-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cddl-cbor-and-json">
@@ -1572,13 +1572,12 @@ Some claims explicitly contain objects and messages that may use a different enc
 The implementor interprets the CDDL to come to either the CBOR or JSON encoding.
 In the case of JSON, Appendix E of <span>[<a href="#RFC8610" class="xref">RFC8610</a>]</span> is followed.
 Additional rules are given in <a href="#jsoninterop" class="xref">Section 8.2.2</a> where Appendix E is insufficient.
-In cases where the CDDL for CBOR is different than JSON the CDDL Generic named "JC&lt;&gt;" is used.
+In most cases where the CDDL for CBOR is different than JSON a CDDL Generic named "JC&lt;&gt;" is used.
 It is described in <a href="#CDDL_for_CWT" class="xref">Appendix D</a>.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 <p id="section-1.3-3">The CWT and JWT specifications were authored before CDDL was available and did not use CDDL.
 This specification includes a CDDL definition of most of what is defined in <span>[<a href="#RFC8392" class="xref">RFC8392</a>]</span>.
-Similarly, this specification includes CDDL for most of what is defined in <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span>.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
-<p id="section-1.3-4">The UCCS specification does not include CDDL.
-This specification provides CDDL for it.<a href="#section-1.3-4" class="pilcrow">¶</a></p>
+Similarly, this specification includes CDDL for most of what is defined in <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span>.
+These definitions are in <a href="#CDDL_for_CWT" class="xref">Appendix D</a> and are not normative.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operating-model-and-rats-architecture">
@@ -1727,13 +1726,13 @@ The definition of Nested-Token makes use of the CDDL defined in this section.
 When new token formats are defined, there means for identification as a nested token MUST also be defined.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div id="section-3-7">
 <pre class="lang-CDDL sourcecode">
-EAT-CBOR-Token = DEB-Tagged-Message ; $$EAT-CBOR-Tagged-Token / $$EAT-CBOR-Untagged-Token
+EAT-CBOR-Token = $$EAT-CBOR-Tagged-Token / $$EAT-CBOR-Untagged-Token
 
-;$$EAT-CBOR-Tagged-Token /= CWT-Tagged-Message
+$$EAT-CBOR-Tagged-Token /= CWT-Tagged-Message
 $$EAT-CBOR-Tagged-Token /= DEB-Tagged-Message
 
-;$$EAT-CBOR-Untagged-Token /= CWT-Untagged-Message
-;$$EAT-CBOR-Untagged-Token /= DEB-Untagged-Message
+$$EAT-CBOR-Untagged-Token /= CWT-Untagged-Message
+$$EAT-CBOR-Untagged-Token /= DEB-Untagged-Message
 </pre><a href="#section-3-7" class="pilcrow">¶</a>
 </div>
 <div id="section-3-8">
@@ -2027,7 +2026,8 @@ $$Claims-Set-Claims //= (
     hardware-model-label =&gt; hardware-model-type
 )
 
-hardware-model-type = JC&lt;base64-url-text .size (4..44), bytes .size (1..32)&gt;
+hardware-model-type = JC&lt;base64-url-text .size (4..44),
+                         bytes .size (1..32)&gt;
 </pre><a href="#section-4.2.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2154,7 +2154,8 @@ or those based on Common Criteria <span>[<a href="#Common.Criteria" class="xref"
 See <a href="#dloas" class="xref">Section 4.2.15</a>.<a href="#section-4.2.8-5" class="pilcrow">¶</a></p>
 <div id="section-4.2.8-6">
 <pre class="lang-CDDL sourcecode">
-$$Claims-Set-Claims //= ( security-level-label =&gt; security-level-type )
+$$Claims-Set-Claims //=
+    ( security-level-label =&gt; security-level-type )
 
 security-level-type = unrestricted /
                       restricted /
@@ -2291,7 +2292,8 @@ ds-enabled                     = JC&lt; "enabled", 0 &gt;
 disabled                       = JC&lt; "disabled", 1 &gt;
 disabled-since-boot            = JC&lt; "disabled-since-boot", 2 &gt;
 disabled-permanently           = JC&lt; "disabled-permanently", 3 &gt;
-disabled-fully-and-permanently = JC&lt; "disabled-fully-and-permanently", 4 &gt;
+disabled-fully-and-permanently = JC&lt; "disabled-fully-and-permanently",
+                                      4 &gt;
 
 </pre><a href="#section-4.2.10.5-2" class="pilcrow">¶</a>
 </div>
@@ -2739,8 +2741,7 @@ In being a submodule of the surrounding token, it is cryptographically bound to 
 If it was conveyed in parallel with the surrounding token, there would be no such binding and attackers could substitute a good attestation from another device for the attestation of an errant subsystem.<a href="#section-4.2.19.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.19.1.2-2">A nested token does not need to use the same encoding as the enclosing token.
 This is to allow Composite Devices to be built without regards to the encoding supported by their Attesters.
-Thus a CBOR-encoded token like a CWT or UCCS can have a JWT as a nested token submodule and a JSON-encoded token can have a CWT or UCCS as a nested token submodule.<a href="#section-4.2.19.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2.19.1.2-3">The following two sections describe how to encode and decode a nested token.<a href="#section-4.2.19.1.2-3" class="pilcrow">¶</a></p>
+Thus, a CBOR-encoded token like a CWT can have a JWT as a nested token submodule and vice versa.<a href="#section-4.2.19.1.2-2" class="pilcrow">¶</a></p>
 <div id="surrounding-eat-is-cbor-encoded">
 <section id="section-4.2.19.1.2.1">
                 <h6 id="name-surrounding-eat-is-cbor-enc">
@@ -2748,7 +2749,7 @@ Thus a CBOR-encoded token like a CWT or UCCS can have a JWT as a nested token su
                 </h6>
 <p id="section-4.2.19.1.2.1-1">This describes the encoding and decoding of CBOR or JSON-encoded tokens nested inside a CBOR-encoded token.<a href="#section-4.2.19.1.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.19.1.2.1-2">If the nested token is CBOR-encoded, then it MUST be a CBOR tag and MUST be wrapped in a byte string.
-The tag identifies whether the nested token is a CWT, a UCCS, a CBOR-encoded DEB, or some other CBOR-format token defined in the future.
+The tag identifies whether the nested token is a CWT, a CBOR-encoded DEB, or some other CBOR-format token defined in the future.
 A nested CBOR-encoded token that is not a CBOR tag is NOT allowed.<a href="#section-4.2.19.1.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.2.19.1.2.1-3">If the nested token is JSON-encoded, then the data item MUST be a text string containing JSON.
 The JSON is defined in CDDL by JSON-Nested-Token in the next section.<a href="#section-4.2.19.1.2.1-3" class="pilcrow">¶</a></p>
@@ -2790,7 +2791,7 @@ JSON-Token-Inside-CBOR-Token = tstr
 <dt id="section-4.2.19.1.2.2-4.3">
 "CBOR":  </dt>
                   <dd style="margin-left: 1.5em" id="section-4.2.19.1.2.2-4.4">
-                    <p id="section-4.2.19.1.2.2-4.4.1">The second array item must be some base64url-encoded CBOR that is a tag, typically a CWT, UCCS or CBOR-encoded DEB<a href="#section-4.2.19.1.2.2-4.4.1" class="pilcrow">¶</a></p>
+                    <p id="section-4.2.19.1.2.2-4.4.1">The second array item must be some base64url-encoded CBOR that is a tag, typically a CWT or CBOR-encoded DEB<a href="#section-4.2.19.1.2.2-4.4.1" class="pilcrow">¶</a></p>
 </dd>
                   <dd class="break"></dd>
 <dt id="section-4.2.19.1.2.2-4.5">
@@ -3097,14 +3098,15 @@ That is, the same, equivalent or better hardware defenses, access controls, key 
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-detached-eat-bundles" class="section-name selfRef">Detached EAT Bundles</a>
       </h2>
 <p id="section-5-1">A detached EAT bundle is a structure to convey a fully-formed and signed token plus detached claims set that relate to that token.
-It is a top-level EAT message like a CWT, JWT, UCCS and UJCS.
-It can be used any place that CWT, JWT, UCCS or UJCS messages are used.
+It is a top-level EAT message like a CWT or JWT.
+It can be occur any place that CWT or JWT messages occur.
 It may also be sent as a submodule.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">A DEB has two main parts.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The first part is a full top-level token.
 This top-level token must have at least one submodule that is a detached digest.
 This top-level token may be either CBOR or JSON-encoded.
-It may be a CWT, JWT, UCCS or UJCS, but not a DEB.
+It may be a CWT, or JWT but not a DEB.
+It may also be some future-defined token type.
 The same mechanism for distinguishing the type for nested token submodules is used here.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">The second part is a map/object containing the detached Claims-Sets corresponding to the detached digests in the full token.
 When the DEB is CBOR-encoded, each Claims-Set is wrapped in a byte string.
@@ -3129,7 +3131,8 @@ Detached-EAT-Bundle = [
 
     detached-claims-sets: {
 
-        + tstr =&gt; JC&lt;json-wrapped-claims-set, cbor-wrapped-claims-set&gt;
+        + tstr =&gt; JC&lt;json-wrapped-claims-set,
+                     cbor-wrapped-claims-set&gt;
     }
 ]
 
@@ -3253,7 +3256,7 @@ For example, to require the altitude data item in the location claim, CDDL can b
         <h3 id="name-list-of-profile-issues">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-list-of-profile-issues" class="section-name selfRef">List of Profile Issues</a>
         </h3>
-<p id="section-7.2-1">The following is a list of EAT, CWT, UCCS, JWS, UJCS, COSE, JOSE and CBOR options that a profile should address.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">The following is a list of EAT, CWT, JWS, COSE, JOSE and CBOR options that a profile should address.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <div id="use-of-json-cbor-or-both">
 <section id="section-7.2.1">
           <h4 id="name-use-of-json-cbor-or-both">
@@ -3303,9 +3306,9 @@ The profile should indicate whether decoders must accept non-preferred serializa
 <a href="#section-7.2.5" class="section-number selfRef">7.2.5. </a><a href="#name-cose-jose-protection" class="section-name selfRef">COSE/JOSE Protection</a>
           </h4>
 <p id="section-7.2.5-1">COSE and JOSE have several options for signed, MACed and encrypted messages.
-EAT/CWT has the option to have no protection using UCCS and JOSE has a NULL protection option.
+JWT may use the JOSE NULL protection option.
 It is possible to implement no protection, sign only, MAC only, sign then encrypt and so on.
-All combinations allowed by COSE, JOSE, JWT, CWT, UCCS and UJCS are allowed by EAT.<a href="#section-7.2.5-1" class="pilcrow">¶</a></p>
+All combinations allowed by COSE, JOSE, JWT, and CWT are allowed by EAT.<a href="#section-7.2.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.5-2">The profile should list the protections that must be supported by all decoders implementing the profile.
 The encoders them must implement a subset of what is listed for the decoders, perhaps only one.<a href="#section-7.2.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.2.5-3">Implementations may choose to sign or MAC before encryption so that the implementation layer doing the signing or MACing can be the smallest.
@@ -3403,8 +3406,7 @@ For example, it may require altitude in the location claim, or it may require th
           <h4 id="name-cbor-tags">
 <a href="#section-7.2.15" class="section-number selfRef">7.2.15. </a><a href="#name-cbor-tags" class="section-name selfRef">CBOR Tags</a>
           </h4>
-<p id="section-7.2.15-1">The profile should specify whether the token should be a CWT Tag or not.
-Similarly, the profile should specify whether the token should be a UCCS tag or not.<a href="#section-7.2.15-1" class="pilcrow">¶</a></p>
+<p id="section-7.2.15-1">The profile should specify whether the token should be a CWT Tag or not.<a href="#section-7.2.15-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.15-2">When COSE protection is used, the profile should specify whether COSE tags are used or not.
 Note that RFC 8392 requires COSE tags be used in a CWT tag.<a href="#section-7.2.15-2" class="pilcrow">¶</a></p>
 <p id="section-7.2.15-3">Often a tag is unncessary because the surrounding or carrying protocol identifies the object as an EAT.<a href="#section-7.2.15-3" class="pilcrow">¶</a></p>
@@ -3438,12 +3440,12 @@ Since CBOR can express some things that JSON can't (e.g., tags) or that are expr
         </h3>
 <p id="section-8.1-1">CDDL was not used to define CWT or JWT.
 It was not available at the time.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">This document defines CDDL for both CWT and JWT as well as UCCS.
+<p id="section-8.1-2">This document defines CDDL for both CWT and JWT.
 This document does not change the encoding or semantics of anything in a CWT or JWT.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.1-3">A Claims-Set is the central data structure for EAT, CWT, JWT and UCCS.
+<p id="section-8.1-3">A Claims-Set is the central data structure for EAT, CWT and JWT.
 It holds all the claims and is the structure that is secured by signing or other means.
-It is not possible to define EAT, CWT, JWT or UCCS in CDDL without it.
-The CDDL definition of Claims-Set here is applicable to EAT, CWT, JWT and UCCS.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+It is not possible to define EAT, CWT, or JWT in CDDL without it.
+The CDDL definition of Claims-Set here is applicable to EAT, CWT and JWT.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
 <p id="section-8.1-4">This document specifies how to encode a Claims-Set in CBOR or JSON.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
 <p id="section-8.1-5">With the exception of nested tokens and some other externally defined structures (e.g., SWIDs) an entire Claims-Set must be in encoded in either CBOR or JSON, never a mixture.<a href="#section-8.1-5" class="pilcrow">¶</a></p>
 <p id="section-8.1-6">CDDL for the seven claims defined by <span>[<a href="#RFC8392" class="xref">RFC8392</a>]</span> and <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span> is included here.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
@@ -3619,7 +3621,8 @@ $$Claims-Set-Claims //= (
     hardware-model-label =&gt; hardware-model-type
 )
 
-hardware-model-type = JC&lt;base64-url-text .size (4..44), bytes .size (1..32)&gt;
+hardware-model-type = JC&lt;base64-url-text .size (4..44),
+                         bytes .size (1..32)&gt;
 
 $$Claims-Set-Claims //= ( sw-name-label =&gt; tstr )
 
@@ -3630,7 +3633,8 @@ sw-version-type = [
     scheme:  $version-scheme
 ]
 
-$$Claims-Set-Claims //= ( security-level-label =&gt; security-level-type )
+$$Claims-Set-Claims //=
+    ( security-level-label =&gt; security-level-type )
 
 security-level-type = unrestricted /
                       restricted /
@@ -3657,7 +3661,8 @@ ds-enabled                     = JC&lt; "enabled", 0 &gt;
 disabled                       = JC&lt; "disabled", 1 &gt;
 disabled-since-boot            = JC&lt; "disabled-since-boot", 2 &gt;
 disabled-permanently           = JC&lt; "disabled-permanently", 3 &gt;
-disabled-fully-and-permanently = JC&lt; "disabled-fully-and-permanently", 4 &gt;
+disabled-fully-and-permanently = JC&lt; "disabled-fully-and-permanently",
+                                      4 &gt;
 
 
 $$Claims-Set-Claims //= (location-label =&gt; location-type)
@@ -3795,7 +3800,8 @@ Detached-EAT-Bundle = [
 
     detached-claims-sets: {
 
-        + tstr =&gt; JC&lt;json-wrapped-claims-set, cbor-wrapped-claims-set&gt;
+        + tstr =&gt; JC&lt;json-wrapped-claims-set,
+                     cbor-wrapped-claims-set&gt;
     }
 ]
 
@@ -3841,10 +3847,13 @@ odometer-label         = JC&lt; "odometer",   TBD &gt;
           </h4>
 <div id="section-8.4.2-1">
 <pre class="lang-CDDL sourcecode">
-EAT-CBOR-Token = DEB-Tagged-Message
+EAT-CBOR-Token = $$EAT-CBOR-Tagged-Token / $$EAT-CBOR-Untagged-Token
 
+$$EAT-CBOR-Tagged-Token /= CWT-Tagged-Message
 $$EAT-CBOR-Tagged-Token /= DEB-Tagged-Message
 
+$$EAT-CBOR-Untagged-Token /= CWT-Untagged-Message
+$$EAT-CBOR-Untagged-Token /= DEB-Untagged-Message
 
 
 Nested-Token = CBOR-Nested-Token
@@ -4770,10 +4779,6 @@ the EAT they are consuming.<a href="#section-11.3-3" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">3GPP</span>, <span class="refTitle">"3rd Generation Partnership Project; Technical Specification Group Core Network and Terminals; Numbering, addressing and identification"</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=729">https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=729</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="UCCS.Draft">[UCCS.Draft]</dt>
-        <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A CBOR Tag for Unprotected CWT Claims Sets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-uccs-02</span>, <time datetime="2022-01-12" class="refDate">12 January 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-rats-uccs-02.txt">https://www.ietf.org/archive/id/draft-ietf-rats-uccs-02.txt</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="WGS84">[WGS84]</dt>
       <dd>
 <span class="refAuthor">National Geospatial-Intelligence Agency (NGA)</span>, <span class="refTitle">"WORLD GEODETIC SYSTEM 1984, NGA.STND.0036_1.0.0_WGS84"</span>, <time datetime="2014-07-08" class="refDate">8 July 2014</time>, <span>&lt;<a href="https://earth-info.nga.mil/php/download.php?file=coord-wgs84">https://earth-info.nga.mil/php/download.php?file=coord-wgs84</a>&gt;</span>. </dd>
@@ -4883,7 +4888,7 @@ It is shown this way because the payload is all the claims, the most interesting
 <p id="appendix-A.1.1-1">This is a simple attestation of a TEE that includes a manifest that is a payload CoSWID to describe the TEE's software.<a href="#appendix-A.1.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.1.1-2">
 <pre>
-/ This is a UCCS EAT that describes a simple TEE. /
+/ This is an EAT payload that describes a simple TEE. /
 
 {
     / nonce /           10: h'948f8860d13a463e',
@@ -5120,11 +5125,11 @@ It includes CoSWID format measurments of the SW.
 The CoSWID is in byte-string wrapped in the token and also shown in diagnostic form.<a href="#appendix-A.1.5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.1.5-2">
 <pre>
-/ This EAT UCCS is for an IoT device with a TEE. The attestation   /
-/ is produced by the TEE. There is a submodule for the IoT OS (the /
-/ main OS of the IoT device that is not as secure as the TEE). The /
-/ submodule contains claims for the IoT OS. The TEE also measures  /
-/ the IoT OS and puts the measurements in the submodule.           /
+/ This EAT payload is for an IoT device with a TEE. The attestation /
+/ is produced by the TEE. There is a submodule for the IoT OS (the  /
+/ main OS of the IoT device that is not as secure as the TEE). The  /
+/ submodule contains claims for the IoT OS. The TEE also measures   /
+/ the IoT OS and puts the measurements in the submodule.            /
 
 {
     / nonce /           10: h'948f8860d13a463e',
@@ -5713,8 +5718,9 @@ JWT-Message = text .regexp \
 </div>
 <div id="appendix-D-5">
 <pre class="lang-CDDL sourcecode">
-; This is some CDDL describing a CWT at the top level
-; This is not normative. RFC 8392 is the normative definition of CWT.
+; This is some CDDL describing a CWT at the top level This is
+; not normative. RFC 8392 is the normative definition of CWT.
+
 CWT-Messages = CWT-Tagged-Message / CWT-Untagged-Message
 
 ; The payload of the COSE_Message is always a Claims-Set
@@ -6029,6 +6035,20 @@ there can be more tha one of them<a href="#appendix-E.4-1.4" class="pilcrow">¶<
           <li class="normal" id="appendix-E.14-1.4">Clarify relationship of claims in evidence to results when forwarding<a href="#appendix-E.14-1.4" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="appendix-E.14-1.5">Clarify manufacturer switching UEID types<a href="#appendix-E.14-1.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-E.14-1.6">Add new section on the top-level token type that has CBOR-specific and JSON-specific CDDL since the top-level can't be handled with JC&lt;&gt;<a href="#appendix-E.14-1.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-E.14-1.7">Remove definition of UCCS and UJCS, replacing it with a CDDL socket and mention of future token types<a href="#appendix-E.14-1.7" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-E.14-1.8">Split the examples into payload and top level tokens since UCCS can't be used for examples any more (It was nice because you could see the payload claims in it easily, where you can't with CWT)<a href="#appendix-E.14-1.8" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-E.14-1.9">Use JC&lt;&gt; Generic for most of the CDDL that varies between CBOR and JSON<a href="#appendix-E.14-1.9" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-E.14-1.10">DEB tag number is TBD rather than hard coded<a href="#appendix-E.14-1.10" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-E.14-1.11">Add appendix with non-normative CDDL for a Claims-Set, CWT and JWT<a href="#appendix-E.14-1.11" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-E.14-1.12">(Large reorganization of the document build and example verification makefile)<a href="#appendix-E.14-1.12" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
