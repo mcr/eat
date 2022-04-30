@@ -5,9 +5,9 @@
 RATS Working Group                                          L. Lundblade
 Internet-Draft                                       Security Theory LLC
 Intended status: Standards Track                              G. Mandyam
-Expires: 31 October 2022                                   J. O'Donoghue
+Expires: 1 November 2022                                   J. O'Donoghue
                                               Qualcomm Technologies Inc.
-                                                           29 April 2022
+                                                           30 April 2022
 
 
                    The Entity Attestation Token (EAT)
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 October 2022.
+   This Internet-Draft will expire on 1 November 2022.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Lundblade, et al.        Expires 31 October 2022                [Page 1]
+Lundblade, et al.        Expires 1 November 2022                [Page 1]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Lundblade, et al.        Expires 31 October 2022                [Page 2]
+Lundblade, et al.        Expires 1 November 2022                [Page 2]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -136,7 +136,7 @@ Internet-Draft                     EAT                        April 2022
        6.1.3.  CBOR Certificate COSE Header Parameters . . . . . . .  43
        6.1.4.  Claim-Based Key Identification  . . . . . . . . . . .  43
      6.2.  Other Considerations  . . . . . . . . . . . . . . . . . .  43
-   7.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  43
+   7.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  44
      7.1.  Format of a Profile Document  . . . . . . . . . . . . . .  44
      7.2.  List of Profile Issues  . . . . . . . . . . . . . . . . .  44
        7.2.1.  Use of JSON, CBOR or both . . . . . . . . . . . . . .  44
@@ -144,28 +144,28 @@ Internet-Draft                     EAT                        April 2022
        7.2.3.  CBOR String Encoding  . . . . . . . . . . . . . . . .  45
        7.2.4.  CBOR Preferred Serialization  . . . . . . . . . . . .  45
        7.2.5.  COSE/JOSE Protection  . . . . . . . . . . . . . . . .  45
-       7.2.6.  COSE/JOSE Algorithms  . . . . . . . . . . . . . . . .  45
-       7.2.7.  DEB Support . . . . . . . . . . . . . . . . . . . . .  45
+       7.2.6.  COSE/JOSE Algorithms  . . . . . . . . . . . . . . . .  46
+       7.2.7.  DEB Support . . . . . . . . . . . . . . . . . . . . .  46
        7.2.8.  Verification Key Identification . . . . . . . . . . .  46
        7.2.9.  Endorsement Identification  . . . . . . . . . . . . .  46
        7.2.10. Freshness . . . . . . . . . . . . . . . . . . . . . .  46
        7.2.11. Required Claims . . . . . . . . . . . . . . . . . . .  46
        7.2.12. Prohibited Claims . . . . . . . . . . . . . . . . . .  46
-       7.2.13. Additional Claims . . . . . . . . . . . . . . . . . .  46
-       7.2.14. Refined Claim Definition  . . . . . . . . . . . . . .  46
-       7.2.15. CBOR Tags . . . . . . . . . . . . . . . . . . . . . .  46
+       7.2.13. Additional Claims . . . . . . . . . . . . . . . . . .  47
+       7.2.14. Refined Claim Definition  . . . . . . . . . . . . . .  47
+       7.2.15. CBOR Tags . . . . . . . . . . . . . . . . . . . . . .  47
        7.2.16. Manifests and Software Evidence Claims  . . . . . . .  47
    8.  Encoding and Collected CDDL . . . . . . . . . . . . . . . . .  47
      8.1.  Claims-Set and CDDL for CWT and JWT . . . . . . . . . . .  47
      8.2.  Encoding Data Types . . . . . . . . . . . . . . . . . . .  48
        8.2.1.  Common Data Types . . . . . . . . . . . . . . . . . .  48
        8.2.2.  JSON Interoperability . . . . . . . . . . . . . . . .  48
-       8.2.3.  Labels  . . . . . . . . . . . . . . . . . . . . . . .  48
+       8.2.3.  Labels  . . . . . . . . . . . . . . . . . . . . . . .  49
      8.3.  CBOR Interoperability . . . . . . . . . . . . . . . . . .  49
 
 
 
-Lundblade, et al.        Expires 31 October 2022                [Page 3]
+Lundblade, et al.        Expires 1 November 2022                [Page 3]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -173,7 +173,7 @@ Internet-Draft                     EAT                        April 2022
        8.3.1.  EAT Constrained Device Serialization  . . . . . . . .  49
      8.4.  Collected CDDL  . . . . . . . . . . . . . . . . . . . . .  50
        8.4.1.  Payload CDDL  . . . . . . . . . . . . . . . . . . . .  50
-       8.4.2.  CBOR-Specific CDDL  . . . . . . . . . . . . . . . . .  55
+       8.4.2.  CBOR-Specific CDDL  . . . . . . . . . . . . . . . . .  56
        8.4.3.  JSON-Specific CDDL  . . . . . . . . . . . . . . . . .  56
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  56
      9.1.  Reuse of CBOR and JSON Web Token (CWT and JWT) Claims
@@ -208,44 +208,47 @@ Internet-Draft                     EAT                        April 2022
        A.1.2.  Submodules for Board and Device . . . . . . . . . . .  77
        A.1.3.  EAT Produced by Attestation Hardware Block  . . . . .  79
        A.1.4.  Key / Key Store Attestation . . . . . . . . . . . . .  79
-       A.1.5.  SW Measurements of an IoT Device  . . . . . . . . . .  81
-       A.1.6.  Attestation Results in JSON format  . . . . . . . . .  84
-     A.2.  Full Token Examples . . . . . . . . . . . . . . . . . . .  85
-       A.2.1.  Detached EAT Bundle . . . . . . . . . . . . . . . . .  85
-   Appendix B.  UEID Design Rationale  . . . . . . . . . . . . . . .  86
-     B.1.  Collision Probability . . . . . . . . . . . . . . . . . .  86
-     B.2.  No Use of UUID  . . . . . . . . . . . . . . . . . . . . .  89
-   Appendix C.  EAT Relation to IEEE.802.1AR Secure Device Identity
-           (DevID) . . . . . . . . . . . . . . . . . . . . . . . . .  89
-     C.1.  DevID Used With EAT . . . . . . . . . . . . . . . . . . .  90
+       A.1.5.  Submodules for Board and Device . . . . . . . . . . .  80
+       A.1.6.  EAT Produced by Attestation Hardware Block  . . . . .  82
+       A.1.7.  Key / Key Store Attestation . . . . . . . . . . . . .  82
+       A.1.8.  SW Measurements of an IoT Device  . . . . . . . . . .  84
+       A.1.9.  Attestation Results in JSON format  . . . . . . . . .  87
+     A.2.  Full Token Examples . . . . . . . . . . . . . . . . . . .  88
+       A.2.1.  Detached EAT Bundle . . . . . . . . . . . . . . . . .  88
+   Appendix B.  UEID Design Rationale  . . . . . . . . . . . . . . .  89
+     B.1.  Collision Probability . . . . . . . . . . . . . . . . . .  89
+     B.2.  No Use of UUID  . . . . . . . . . . . . . . . . . . . . .  92
 
 
 
-Lundblade, et al.        Expires 31 October 2022                [Page 4]
+Lundblade, et al.        Expires 1 November 2022                [Page 4]
 
 Internet-Draft                     EAT                        April 2022
 
 
-     C.2.  How EAT Provides an Equivalent Secure Device Identity . .  90
-     C.3.  An X.509 Format EAT . . . . . . . . . . . . . . . . . . .  91
-     C.4.  Device Identifier Permanence  . . . . . . . . . . . . . .  91
-   Appendix D.  CDDL for CWT and JWT . . . . . . . . . . . . . . . .  92
-   Appendix E.  Changes from Previous Drafts . . . . . . . . . . . .  93
-     E.1.  From draft-rats-eat-01  . . . . . . . . . . . . . . . . .  93
-     E.2.  From draft-mandyam-rats-eat-00  . . . . . . . . . . . . .  93
-     E.3.  From draft-ietf-rats-eat-01 . . . . . . . . . . . . . . .  93
-     E.4.  From draft-ietf-rats-eat-02 . . . . . . . . . . . . . . .  94
-     E.5.  From draft-ietf-rats-eat-03 . . . . . . . . . . . . . . .  94
-     E.6.  From draft-ietf-rats-eat-04 . . . . . . . . . . . . . . .  94
-     E.7.  From draft-ietf-rats-eat-05 . . . . . . . . . . . . . . .  95
-     E.8.  From draft-ietf-rats-eat-06 . . . . . . . . . . . . . . .  95
-     E.9.  From draft-ietf-rats-eat-07 . . . . . . . . . . . . . . .  95
-     E.10. From draft-ietf-rats-eat-08 . . . . . . . . . . . . . . .  95
-     E.11. From draft-ietf-rats-eat-09 . . . . . . . . . . . . . . .  95
-     E.12. From draft-ietf-rats-eat-10 . . . . . . . . . . . . . . .  96
-     E.13. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . .  97
-     E.14. From draft-ietf-rats-eat-12 . . . . . . . . . . . . . . .  97
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  98
+   Appendix C.  EAT Relation to IEEE.802.1AR Secure Device Identity
+           (DevID) . . . . . . . . . . . . . . . . . . . . . . . . .  92
+     C.1.  DevID Used With EAT . . . . . . . . . . . . . . . . . . .  93
+     C.2.  How EAT Provides an Equivalent Secure Device Identity . .  93
+     C.3.  An X.509 Format EAT . . . . . . . . . . . . . . . . . . .  94
+     C.4.  Device Identifier Permanence  . . . . . . . . . . . . . .  94
+   Appendix D.  CDDL for CWT and JWT . . . . . . . . . . . . . . . .  95
+   Appendix E.  Changes from Previous Drafts . . . . . . . . . . . .  96
+     E.1.  From draft-rats-eat-01  . . . . . . . . . . . . . . . . .  96
+     E.2.  From draft-mandyam-rats-eat-00  . . . . . . . . . . . . .  96
+     E.3.  From draft-ietf-rats-eat-01 . . . . . . . . . . . . . . .  96
+     E.4.  From draft-ietf-rats-eat-02 . . . . . . . . . . . . . . .  97
+     E.5.  From draft-ietf-rats-eat-03 . . . . . . . . . . . . . . .  97
+     E.6.  From draft-ietf-rats-eat-04 . . . . . . . . . . . . . . .  97
+     E.7.  From draft-ietf-rats-eat-05 . . . . . . . . . . . . . . .  98
+     E.8.  From draft-ietf-rats-eat-06 . . . . . . . . . . . . . . .  98
+     E.9.  From draft-ietf-rats-eat-07 . . . . . . . . . . . . . . .  98
+     E.10. From draft-ietf-rats-eat-08 . . . . . . . . . . . . . . .  98
+     E.11. From draft-ietf-rats-eat-09 . . . . . . . . . . . . . . .  98
+     E.12. From draft-ietf-rats-eat-10 . . . . . . . . . . . . . . .  99
+     E.13. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . . 100
+     E.14. From draft-ietf-rats-eat-12 . . . . . . . . . . . . . . . 100
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 101
 
 1.  Introduction
 
@@ -271,17 +274,17 @@ Internet-Draft                     EAT                        April 2022
    key material that make the claims set "attested" rather than just
    some parameters sent to the relying party by the device.
 
-   EAT is focused on authenticating, identifying and characterizing
-   implementations where implementations are devices, chips, hardware,
-   software and such.  This is distinct from protocols like TLS
 
 
 
-Lundblade, et al.        Expires 31 October 2022                [Page 5]
+Lundblade, et al.        Expires 1 November 2022                [Page 5]
 
 Internet-Draft                     EAT                        April 2022
 
 
+   EAT is focused on authenticating, identifying and characterizing
+   implementations where implementations are devices, chips, hardware,
+   software and such.  This is distinct from protocols like TLS
    [RFC8446] that authenticate and identify servers and services.  It is
    equally distinct from protocols like SASL [RFC4422] that authenticate
    and identify persons.
@@ -330,10 +333,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-
-
-
-Lundblade, et al.        Expires 31 October 2022                [Page 6]
+Lundblade, et al.        Expires 1 November 2022                [Page 6]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -389,7 +389,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022                [Page 7]
+Lundblade, et al.        Expires 1 November 2022                [Page 7]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -432,9 +432,10 @@ Internet-Draft                     EAT                        April 2022
    [RFC8610] for all definitions.  The implementor interprets the CDDL
    to come to either the CBOR or JSON encoding.  In the case of JSON,
    Appendix E of [RFC8610] is followed.  Additional rules are given in
-   Section 8.2.2 where Appendix E is insufficient.  In most cases where
-   the CDDL for CBOR is different than JSON a CDDL Generic named "JC<>"
-   is used.  It is described in Appendix D.
+   Section 8.2.2 where Appendix E is insufficient.
+
+   In most cases where the CDDL for CBOR is different than JSON a CDDL
+   Generic named "JC<>" is used.  It is described in Appendix D.
 
    The CWT and JWT specifications were authored before CDDL was
    available and did not use CDDL.  This specification includes a CDDL
@@ -444,8 +445,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-
-Lundblade, et al.        Expires 31 October 2022                [Page 8]
+Lundblade, et al.        Expires 1 November 2022                [Page 8]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -501,7 +501,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022                [Page 9]
+Lundblade, et al.        Expires 1 November 2022                [Page 9]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -557,7 +557,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 10]
+Lundblade, et al.        Expires 1 November 2022               [Page 10]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -613,7 +613,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 11]
+Lundblade, et al.        Expires 1 November 2022               [Page 11]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -669,7 +669,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 12]
+Lundblade, et al.        Expires 1 November 2022               [Page 12]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -725,7 +725,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 13]
+Lundblade, et al.        Expires 1 November 2022               [Page 13]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -781,7 +781,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 14]
+Lundblade, et al.        Expires 1 November 2022               [Page 14]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -837,7 +837,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 15]
+Lundblade, et al.        Expires 1 November 2022               [Page 15]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -893,7 +893,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 16]
+Lundblade, et al.        Expires 1 November 2022               [Page 16]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -949,7 +949,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 17]
+Lundblade, et al.        Expires 1 November 2022               [Page 17]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1005,7 +1005,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 18]
+Lundblade, et al.        Expires 1 November 2022               [Page 18]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1061,7 +1061,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 19]
+Lundblade, et al.        Expires 1 November 2022               [Page 19]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1117,7 +1117,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 20]
+Lundblade, et al.        Expires 1 November 2022               [Page 20]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1173,7 +1173,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 21]
+Lundblade, et al.        Expires 1 November 2022               [Page 21]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1229,7 +1229,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 22]
+Lundblade, et al.        Expires 1 November 2022               [Page 22]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1285,7 +1285,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 23]
+Lundblade, et al.        Expires 1 November 2022               [Page 23]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1341,7 +1341,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 24]
+Lundblade, et al.        Expires 1 November 2022               [Page 24]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1397,7 +1397,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 25]
+Lundblade, et al.        Expires 1 November 2022               [Page 25]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1453,7 +1453,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 26]
+Lundblade, et al.        Expires 1 November 2022               [Page 26]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1509,7 +1509,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 27]
+Lundblade, et al.        Expires 1 November 2022               [Page 27]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1565,7 +1565,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 28]
+Lundblade, et al.        Expires 1 November 2022               [Page 28]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1621,7 +1621,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 29]
+Lundblade, et al.        Expires 1 November 2022               [Page 29]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1677,7 +1677,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 30]
+Lundblade, et al.        Expires 1 November 2022               [Page 30]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1733,7 +1733,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 31]
+Lundblade, et al.        Expires 1 November 2022               [Page 31]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1789,7 +1789,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 32]
+Lundblade, et al.        Expires 1 November 2022               [Page 32]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1845,7 +1845,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 33]
+Lundblade, et al.        Expires 1 November 2022               [Page 33]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1901,7 +1901,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 34]
+Lundblade, et al.        Expires 1 November 2022               [Page 34]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -1957,7 +1957,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 35]
+Lundblade, et al.        Expires 1 November 2022               [Page 35]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2013,7 +2013,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 36]
+Lundblade, et al.        Expires 1 November 2022               [Page 36]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2069,7 +2069,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 37]
+Lundblade, et al.        Expires 1 November 2022               [Page 37]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2125,7 +2125,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 38]
+Lundblade, et al.        Expires 1 November 2022               [Page 38]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2181,7 +2181,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 39]
+Lundblade, et al.        Expires 1 November 2022               [Page 39]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2237,7 +2237,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 40]
+Lundblade, et al.        Expires 1 November 2022               [Page 40]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -2255,9 +2255,7 @@ Internet-Draft                     EAT                        April 2022
 
    Detached-EAT-Bundle = [
        main-token : Nested-Token,
-
        detached-claims-sets: {
-
            + tstr => JC<json-wrapped-claims-set,
                         cbor-wrapped-claims-set>
        }
@@ -2287,17 +2285,22 @@ Internet-Draft                     EAT                        April 2022
    claims, those that are passed on to the Relying Party in Attestation
    Results.
 
-   There is not yet any standard format(s) for an Endorsement.  One
-   format that may be used for an Endorsement is an X.509 certificate.
-   Endorsement data like Reference Values and implied claims can be
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 41]
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 41]
 
 Internet-Draft                     EAT                        April 2022
 
 
+   There is not yet any standard format(s) for an Endorsement.  One
+   format that may be used for an Endorsement is an X.509 certificate.
+   Endorsement data like Reference Values and implied claims can be
    carried in X.509 v3 extensions.  In this use, the public key in the
    X.509 certificate becomes the verification key, so identification of
    the Endorsement is also identification of the verification key.
@@ -2340,19 +2343,22 @@ Internet-Draft                     EAT                        April 2022
    several header parameters (x5t, x5u,...) for referencing or carrying
    X.509 certificates any of which may be used.
 
+
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 42]
+
+Internet-Draft                     EAT                        April 2022
+
+
    The X.509 certificate may be an Endorsement and thus carrying
    additional input to the Verifier.  It may be just an X.509
    certificate, not an Endorsement.  The same header parameters are used
    in both cases.  It is up to the attestation system design and the
    Verifier to determine which.
-
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 42]
-
-Internet-Draft                     EAT                        April 2022
-
 
 6.1.3.  CBOR Certificate COSE Header Parameters
 
@@ -2394,6 +2400,16 @@ Internet-Draft                     EAT                        April 2022
    the EAT.  This is in line with the requirements in section 6 on Key
    Identification in JSON Web Signature [RFC7515].
 
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 43]
+
+Internet-Draft                     EAT                        April 2022
+
+
 7.  Profiles
 
    This EAT specification does not gaurantee that implementations of it
@@ -2401,14 +2417,6 @@ Internet-Draft                     EAT                        April 2022
    necessary to accommodate the widely varying use cases.  An EAT
    profile narrows the specification for a specific use case.  An ideal
    EAT profile will guarantee interoperability.
-
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 43]
-
-Internet-Draft                     EAT                        April 2022
-
 
    The profile can be named in the token using the profile claim
    described in Section 4.3.3.
@@ -2449,6 +2457,15 @@ Internet-Draft                     EAT                        April 2022
    indefinite-length arrays/maps or both are allowed.  A good default is
    to allow only definite-length arrays/maps.
 
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 44]
+
+Internet-Draft                     EAT                        April 2022
+
+
    An alternate is to allow both definite and indefinite-length arrays/
    maps.  The decoder should accept either.  Encoders that need to fit
    on very small hardware or be actually implement in hardware can use
@@ -2456,15 +2473,6 @@ Internet-Draft                     EAT                        April 2022
 
    This applies to individual EAT claims, CWT and COSE parts of the
    implementation.
-
-
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 44]
-
-Internet-Draft                     EAT                        April 2022
-
 
 7.2.3.  CBOR String Encoding
 
@@ -2500,6 +2508,20 @@ Internet-Draft                     EAT                        April 2022
    encryption it is likely to be a public key.  The key for encryption
    requires less protection.
 
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 45]
+
+Internet-Draft                     EAT                        April 2022
+
+
 7.2.6.  COSE/JOSE Algorithms
 
    The profile document should list the COSE algorithms that a Verifier
@@ -2512,15 +2534,6 @@ Internet-Draft                     EAT                        April 2022
 
    A Detatched EAT Bundle Section 5 is a special case message that will
    not often be used.  A profile may prohibit its use.
-
-
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 45]
-
-Internet-Draft                     EAT                        April 2022
-
 
 7.2.8.  Verification Key Identification
 
@@ -2555,6 +2568,16 @@ Internet-Draft                     EAT                        April 2022
    The profile can list claims whose presence results in Verification
    failure.
 
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 46]
+
+Internet-Draft                     EAT                        April 2022
+
+
 7.2.13.  Additional Claims
 
    The profile may describe entirely new claims.  These claims can be
@@ -2570,13 +2593,6 @@ Internet-Draft                     EAT                        April 2022
 
    The profile should specify whether the token should be a CWT Tag or
    not.
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 46]
-
-Internet-Draft                     EAT                        April 2022
-
 
    When COSE protection is used, the profile should specify whether COSE
    tags are used or not.  Note that RFC 8392 requires COSE tags be used
@@ -2608,6 +2624,16 @@ Internet-Draft                     EAT                        April 2022
    This document defines CDDL for both CWT and JWT.  This document does
    not change the encoding or semantics of anything in a CWT or JWT.
 
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 47]
+
+Internet-Draft                     EAT                        April 2022
+
+
    A Claims-Set is the central data structure for EAT, CWT and JWT.  It
    holds all the claims and is the structure that is secured by signing
    or other means.  It is not possible to define EAT, CWT, or JWT in
@@ -2622,17 +2648,6 @@ Internet-Draft                     EAT                        April 2022
 
    CDDL for the seven claims defined by [RFC8392] and [RFC7519] is
    included here.
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 47]
-
-Internet-Draft                     EAT                        April 2022
-
 
 8.2.  Encoding Data Types
 
@@ -2668,6 +2683,13 @@ Internet-Draft                     EAT                        April 2022
 
    *  uri -- must be a URI [RFC3986].
 
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 48]
+
+Internet-Draft                     EAT                        April 2022
+
+
    *  oid -- encoded as a string using the well established dotted-
       decimal notation (e.g., the text "1.2.250.1").
 
@@ -2682,13 +2704,6 @@ Internet-Draft                     EAT                        April 2022
    when encoding in JSON.  There is an exception to this for naming
    submodules and detached claims sets in a DEB.  These are strings in
    CBOR.
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 48]
-
-Internet-Draft                     EAT                        April 2022
-
 
    The CDDL in most cases gives both the integer label and the string
    label as it is not convenient to have conditional CDDL for such.
@@ -2722,6 +2737,15 @@ Internet-Draft                     EAT                        April 2022
       not required.  The EAT decoder must accept all forms of number
       serialization.  The EAT encoder may use any form it wishes.
 
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 49]
+
+Internet-Draft                     EAT                        April 2022
+
+
    *  The EAT decoder must accept indefinite length arrays and maps as
       described in section 3.2.2 of [RFC8949].  The EAT encoder may use
       indefinite length arrays and maps if it wishes.
@@ -2735,16 +2759,6 @@ Internet-Draft                     EAT                        April 2022
 
    *  Deterministic encoding described in Section 4.2 of [RFC8949] is
       not required.
-
-
-
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 49]
-
-Internet-Draft                     EAT                        April 2022
-
 
    *  Basic validity described in section 5.3.1 of [RFC8949] must be
       followed.  The EAT encoder must not send duplicate map keys/labels
@@ -2780,6 +2794,14 @@ Internet-Draft                     EAT                        April 2022
 
    sueids-type = {
        + tstr => ueid-type
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 50]
+
+Internet-Draft                     EAT                        April 2022
+
+
    }
 
    $$Claims-Set-Claims //= (
@@ -2794,14 +2816,6 @@ Internet-Draft                     EAT                        April 2022
 
    oemid-random = JC<oemid-random-json, oemid-random-cbor>
    oemid-random-cbor = bstr .size 16
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 50]
-
-Internet-Draft                     EAT                        April 2022
-
-
    oemid-random-json = base64-url-text .size 24
 
 
@@ -2836,6 +2850,14 @@ Internet-Draft                     EAT                        April 2022
    security-level-type = unrestricted /
                          restricted /
                          secure-restricted /
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 51]
+
+Internet-Draft                     EAT                        April 2022
+
+
                          hardware
 
    unrestricted       = JC< "unrestricted",      1>
@@ -2850,14 +2872,6 @@ Internet-Draft                     EAT                        April 2022
 
    debug-status-type = ds-enabled /
                        disabled /
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 51]
-
-Internet-Draft                     EAT                        April 2022
-
-
                        disabled-since-boot /
                        disabled-permanently /
                        disabled-fully-and-permanently
@@ -2868,7 +2882,6 @@ Internet-Draft                     EAT                        April 2022
    disabled-permanently           = JC< "disabled-permanently", 3 >
    disabled-fully-and-permanently = JC< "disabled-fully-and-permanently",
                                          4 >
-
 
    $$Claims-Set-Claims //= (location-label => location-type)
 
@@ -2894,6 +2907,13 @@ Internet-Draft                     EAT                        April 2022
    timestamp         = JC< "timestamp",         8 >
    age               = JC< "age",               9 >
 
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 52]
+
+Internet-Draft                     EAT                        April 2022
+
+
    $$Claims-Set-Claims //= (uptime-label => uint)
 
    $$Claims-Set-Claims //=  (boot-seed-label => binary-data)
@@ -2906,14 +2926,6 @@ Internet-Draft                     EAT                        April 2022
                        registration /
                        provisioning /
                        csr /
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 52]
-
-Internet-Draft                     EAT                        April 2022
-
-
                        pop
 
    generic      = JC< "generic",      1 >
@@ -2951,6 +2963,13 @@ Internet-Draft                     EAT                        April 2022
 
    swevidence-type = [+ $$swevidence-formats]
 
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 53]
+
+Internet-Draft                     EAT                        April 2022
+
+
    coswid-that-is-a-cbor-tag = tagged-coswid<concise-swid-tag>
    $$swevidence-formats /= bytes .cbor coswid-that-is-a-cbor-tag
 
@@ -2962,13 +2981,6 @@ Internet-Draft                     EAT                        April 2022
        result:              verification-result-type,
        ? objective-name:    tstr
    ]
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 53]
-
-Internet-Draft                     EAT                        April 2022
-
 
    verification-result-type = verification-not-run /
                               verification-indeterminate /
@@ -3006,6 +3018,14 @@ Internet-Draft                     EAT                        April 2022
 
    Detached-Submodule-Digest = [
       algorithm : JC< text, int >
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 54]
+
+Internet-Draft                     EAT                        April 2022
+
+
       digest    : binary-data
    ]
 
@@ -3017,17 +3037,7 @@ Internet-Draft                     EAT                        April 2022
 
    Detached-EAT-Bundle = [
        main-token : Nested-Token,
-
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 54]
-
-Internet-Draft                     EAT                        April 2022
-
-
        detached-claims-sets: {
-
            + tstr => JC<json-wrapped-claims-set,
                         cbor-wrapped-claims-set>
        }
@@ -3063,24 +3073,16 @@ Internet-Draft                     EAT                        April 2022
    swresults-label        = JC< "swresults" , TBD >
    odometer-label         = JC< "odometer",   TBD >
 
-8.4.2.  CBOR-Specific CDDL
 
 
 
 
-
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 55]
+Lundblade, et al.        Expires 1 November 2022               [Page 55]
 
 Internet-Draft                     EAT                        April 2022
 
+
+8.4.2.  CBOR-Specific CDDL
 
    EAT-CBOR-Token = $$EAT-CBOR-Tagged-Token / $$EAT-CBOR-Untagged-Token
 
@@ -3131,9 +3133,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-
-
-Lundblade, et al.        Expires 31 October 2022               [Page 56]
+Lundblade, et al.        Expires 1 November 2022               [Page 56]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3189,7 +3189,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 57]
+Lundblade, et al.        Expires 1 November 2022               [Page 57]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3245,7 +3245,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 58]
+Lundblade, et al.        Expires 1 November 2022               [Page 58]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3301,7 +3301,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 59]
+Lundblade, et al.        Expires 1 November 2022               [Page 59]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3357,7 +3357,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 60]
+Lundblade, et al.        Expires 1 November 2022               [Page 60]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3413,7 +3413,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 61]
+Lundblade, et al.        Expires 1 November 2022               [Page 61]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3469,7 +3469,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 62]
+Lundblade, et al.        Expires 1 November 2022               [Page 62]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3525,7 +3525,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 63]
+Lundblade, et al.        Expires 1 November 2022               [Page 63]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3581,7 +3581,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 64]
+Lundblade, et al.        Expires 1 November 2022               [Page 64]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3637,7 +3637,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 65]
+Lundblade, et al.        Expires 1 November 2022               [Page 65]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3693,7 +3693,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 66]
+Lundblade, et al.        Expires 1 November 2022               [Page 66]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3749,7 +3749,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 67]
+Lundblade, et al.        Expires 1 November 2022               [Page 67]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3805,7 +3805,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 68]
+Lundblade, et al.        Expires 1 November 2022               [Page 68]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3861,7 +3861,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 69]
+Lundblade, et al.        Expires 1 November 2022               [Page 69]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3917,7 +3917,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 70]
+Lundblade, et al.        Expires 1 November 2022               [Page 70]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -3973,7 +3973,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 71]
+Lundblade, et al.        Expires 1 November 2022               [Page 71]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4029,7 +4029,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 72]
+Lundblade, et al.        Expires 1 November 2022               [Page 72]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4085,7 +4085,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 73]
+Lundblade, et al.        Expires 1 November 2022               [Page 73]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4141,7 +4141,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 74]
+Lundblade, et al.        Expires 1 November 2022               [Page 74]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4197,7 +4197,7 @@ Appendix A.  Examples
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 75]
+Lundblade, et al.        Expires 1 November 2022               [Page 75]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4253,7 +4253,7 @@ A.1.1.  Simple TEE Attestation
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 76]
+Lundblade, et al.        Expires 1 November 2022               [Page 76]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4309,7 +4309,7 @@ A.1.2.  Submodules for Board and Device
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 77]
+Lundblade, et al.        Expires 1 November 2022               [Page 77]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4365,7 +4365,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 78]
+Lundblade, et al.        Expires 1 November 2022               [Page 78]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4390,6 +4390,174 @@ A.1.3.  EAT Produced by Attestation Hardware Block
    }
 
 A.1.4.  Key / Key Store Attestation
+
+   / This is an EAT payload that describes a simple TEE. /
+
+   {
+       / nonce /           10: h'948f8860d13a463e',
+       / security-level / 261: 3, / secure-restricted /
+       / secure-boot /    262: true,
+       / debug-status /   263: 2, / disabled-since-boot /
+       / manfests /       273: [
+                                  / This is byte-string wrapped      /
+                                  / payload CoSWID. It gives the TEE /
+                                  / software name, the version and   /
+                                  / the  name of the file it is in.  /
+                                  h' da53574944a60064336132340c01016b
+                                     41636d6520544545204f530d65332e31
+                                     2e340282a2181f6b41636d6520544545
+                                     204f53182101a2181f6b41636d652054
+                                     4545204f5318210206a111a118186e61
+                                     636d655f7465655f332e657865'
+                           ]
+   }
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 79]
+
+Internet-Draft                     EAT                        April 2022
+
+
+   / A payload CoSWID created by the SW vendor. All this really does /
+   / is name the TEE SW, its version and lists the one file that     /
+   / makes up the TEE. /
+
+   1398229316({
+       / Unique CoSWID ID /    0: "3a24",
+       / tag-version /        12: 1,
+       / software-name /       1: "Acme TEE OS",
+       / software-version /   13: "3.1.4",
+       / entity /              2: [
+                                      {
+           / entity-name /                31: "Acme TEE OS",
+           / role        /                33: 1 / tag-creator /
+                                      },
+                                      {
+           / entity-name /                31: "Acme TEE OS",
+           / role        /                33: 2 / software-creator /
+                                      }
+                                  ],
+       / payload /                6: {
+           / ...file /                17: {
+               / ...fs-name /             24: "acme_tee_3.exe"
+                                      }
+                                  }
+   })
+
+A.1.5.  Submodules for Board and Device
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 80]
+
+Internet-Draft                     EAT                        April 2022
+
+
+/ This example shows use of submodules to give information  /
+/ about the chip, board and overall device.                 /
+/                                                           /
+/ The main attestation is associated with the chip with the /
+/ CPU and running the main OS. It is what has the keys and  /
+/ produces the token.                                       /
+/                                                           /
+/ The board is made by a different vendor than the chip.    /
+/ Perhaps it is some generic IoT board.                     /
+/                                                           /
+/ The device is some specific appliance that is made by a   /
+/ different vendor than either the chip or the board.       /
+/                                                           /
+/ Here the board and device submodules aren't the typical   /
+/ target environments as described by the RATS architecture /
+/ document, but they are a valid use of submodules.         /
+
+{
+    / nonce /           10: h'948f8860d13a463e8e',
+    / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
+    / HW OEM ID /      258: h'894823', / IEEE OUI format OEM ID /
+    / HW Model ID /    259: h'549dcecc8b987c737b44e40f7c635ce8'
+                              / Hash of chip model name /,
+    / HW Version /     260: ["1.3.4", 1], / Multipartnumeric version /
+    / SW Name /        271: "Acme OS",
+    / SW Version /     272: ["3.5.5", 1],
+    / secure-boot /    262: true,
+    / debug-status /   263: 3, / permanent-disable  /
+    / timestamp (iat) /  6: 1526542894,
+    / security-level / 261: 3, / secure restricted OS /
+    / submods / 266: {
+        / A submodule to hold some claims about the circuit board /
+        "board" :  {
+            / HW OEM ID /   258: h'9bef8787eba13e2c8f6e7cb4b1f4619a',
+            / HW Model ID / 259: h'ee80f5a66c1fb9742999a8fdab930893'
+                                      / Hash of board module name /,
+            / HW Version /  260: ["2.0a", 2] / multipartnumeric+suffix /
+        },
+
+        / A submodule to hold claims about the overall device /
+        "device" :  {
+            / HW OEM ID /   258: 61234, / PEN Format OEM ID /
+            / HW Version /  260: ["4012345123456", 5] / EAN-13 format (barcode) /
+        }
+    }
+}
+
+
+
+
+
+Lundblade, et al.        Expires 1 November 2022               [Page 81]
+
+Internet-Draft                     EAT                        April 2022
+
+
+A.1.6.  EAT Produced by Attestation Hardware Block
+
+   / This is an example of a token produced by a HW block            /
+   / purpose-built for attestation.  Only the nonce claim changes    /
+   / from one attestation to the next as the rest  either come       /
+   / directly from the hardware or from one-time-programmable memory /
+   / (e.g. a fuse). 47 bytes encoded in CBOR (8 byte nonce, 16 byte  /
+   / UEID). /
+
+   {
+       / nonce /           10: h'948f8860d13a463e',
+       / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
+       / OEMID /          258: 64242, / Private Enterprise Number /
+       / security-level / 261: 4, / hardware level security /
+       / secure-boot /    262: true,
+       / debug-status /   263: 3, / disabled-permanently /
+       / HW version /     260: [ "3.1", 1 ] / Type is multipartnumeric /
+   }
+
+A.1.7.  Key / Key Store Attestation
 
    / This is an attestation of a public key and the key store     /
    / implementation that protects and manages it. The key store   /
@@ -4421,7 +4589,7 @@ A.1.4.  Key / Key Store Attestation
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 79]
+Lundblade, et al.        Expires 1 November 2022               [Page 82]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4477,12 +4645,12 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 80]
+Lundblade, et al.        Expires 1 November 2022               [Page 83]
 
 Internet-Draft                     EAT                        April 2022
 
 
-A.1.5.  SW Measurements of an IoT Device
+A.1.8.  SW Measurements of an IoT Device
 
    This is a simple token that might be for and IoT device.  It includes
    CoSWID format measurments of the SW.  The CoSWID is in byte-string
@@ -4533,7 +4701,7 @@ A.1.5.  SW Measurements of an IoT Device
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 81]
+Lundblade, et al.        Expires 1 November 2022               [Page 84]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4589,7 +4757,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 82]
+Lundblade, et al.        Expires 1 November 2022               [Page 85]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4645,7 +4813,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 83]
+Lundblade, et al.        Expires 1 November 2022               [Page 86]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4655,7 +4823,7 @@ Internet-Draft                     EAT                        April 2022
                                }
    })
 
-A.1.6.  Attestation Results in JSON format
+A.1.9.  Attestation Results in JSON format
 
    This is a UJCS format token that might be the output of a Verifier
    that evaluated the IoT Attestation example immediately above.
@@ -4701,7 +4869,7 @@ A.1.6.  Attestation Results in JSON format
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 84]
+Lundblade, et al.        Expires 1 November 2022               [Page 87]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4757,7 +4925,7 @@ A.2.1.  Detached EAT Bundle
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 85]
+Lundblade, et al.        Expires 1 November 2022               [Page 88]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4813,7 +4981,7 @@ B.1.  Collision Probability
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 86]
+Lundblade, et al.        Expires 1 November 2022               [Page 89]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4869,7 +5037,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 87]
+Lundblade, et al.        Expires 1 November 2022               [Page 90]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4925,7 +5093,7 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 88]
+Lundblade, et al.        Expires 1 November 2022               [Page 91]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -4981,7 +5149,7 @@ Appendix C.  EAT Relation to IEEE.802.1AR Secure Device Identity (DevID)
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 89]
+Lundblade, et al.        Expires 1 November 2022               [Page 92]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5037,7 +5205,7 @@ C.2.  How EAT Provides an Equivalent Secure Device Identity
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 90]
+Lundblade, et al.        Expires 1 November 2022               [Page 93]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5093,7 +5261,7 @@ C.4.  Device Identifier Permanence
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 91]
+Lundblade, et al.        Expires 1 November 2022               [Page 94]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5149,7 +5317,7 @@ Appendix D.  CDDL for CWT and JWT
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 92]
+Lundblade, et al.        Expires 1 November 2022               [Page 95]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5205,7 +5373,7 @@ E.3.  From draft-ietf-rats-eat-01
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 93]
+Lundblade, et al.        Expires 1 November 2022               [Page 96]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5261,7 +5429,7 @@ E.6.  From draft-ietf-rats-eat-04
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 94]
+Lundblade, et al.        Expires 1 November 2022               [Page 97]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5317,7 +5485,7 @@ E.11.  From draft-ietf-rats-eat-09
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 95]
+Lundblade, et al.        Expires 1 November 2022               [Page 98]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5373,7 +5541,7 @@ E.12.  From draft-ietf-rats-eat-10
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 96]
+Lundblade, et al.        Expires 1 November 2022               [Page 99]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5429,7 +5597,7 @@ E.14.  From draft-ietf-rats-eat-12
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 97]
+Lundblade, et al.        Expires 1 November 2022              [Page 100]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5485,7 +5653,7 @@ Authors' Addresses
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 98]
+Lundblade, et al.        Expires 1 November 2022              [Page 101]
 
 Internet-Draft                     EAT                        April 2022
 
@@ -5541,4 +5709,4 @@ Internet-Draft                     EAT                        April 2022
 
 
 
-Lundblade, et al.        Expires 31 October 2022               [Page 99]
+Lundblade, et al.        Expires 1 November 2022              [Page 102]

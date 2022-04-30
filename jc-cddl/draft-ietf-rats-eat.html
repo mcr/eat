@@ -830,7 +830,7 @@ address div.right {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Lundblade, et al.</td>
-<td class="center">Expires 31 October 2022</td>
+<td class="center">Expires 1 November 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -843,12 +843,12 @@ address div.right {
 <dd class="internet-draft">draft-ietf-rats-eat-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-04-29" class="published">29 April 2022</time>
+<time datetime="2022-04-30" class="published">30 April 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-10-31">31 October 2022</time></dd>
+<dd class="expires"><time datetime="2022-11-01">1 November 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -896,7 +896,7 @@ CWT and JWT.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 31 October 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1343,10 +1343,19 @@ CWT and JWT.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
                     <p id="section-toc.1-1.13.2.1.2.4.1"><a href="#appendix-A.1.4" class="xref">A.1.4</a>.  <a href="#name-key-key-store-attestation" class="xref">Key / Key Store Attestation</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.5">
-                    <p id="section-toc.1-1.13.2.1.2.5.1"><a href="#appendix-A.1.5" class="xref">A.1.5</a>.  <a href="#name-sw-measurements-of-an-iot-d" class="xref">SW Measurements of an IoT Device</a></p>
+                    <p id="section-toc.1-1.13.2.1.2.5.1"><a href="#appendix-A.1.5" class="xref">A.1.5</a>.  <a href="#name-submodules-for-board-and-dev" class="xref">Submodules for Board and Device</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.6">
-                    <p id="section-toc.1-1.13.2.1.2.6.1"><a href="#appendix-A.1.6" class="xref">A.1.6</a>.  <a href="#name-attestation-results-in-json" class="xref">Attestation Results in JSON format</a></p>
+                    <p id="section-toc.1-1.13.2.1.2.6.1"><a href="#appendix-A.1.6" class="xref">A.1.6</a>.  <a href="#name-eat-produced-by-attestation-" class="xref">EAT Produced by Attestation Hardware Block</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.7">
+                    <p id="section-toc.1-1.13.2.1.2.7.1"><a href="#appendix-A.1.7" class="xref">A.1.7</a>.  <a href="#name-key-key-store-attestation-2" class="xref">Key / Key Store Attestation</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.8">
+                    <p id="section-toc.1-1.13.2.1.2.8.1"><a href="#appendix-A.1.8" class="xref">A.1.8</a>.  <a href="#name-sw-measurements-of-an-iot-d" class="xref">SW Measurements of an IoT Device</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.9">
+                    <p id="section-toc.1-1.13.2.1.2.9.1"><a href="#appendix-A.1.9" class="xref">A.1.9</a>.  <a href="#name-attestation-results-in-json" class="xref">Attestation Results in JSON format</a></p>
 </li>
                 </ul>
 </li>
@@ -1571,13 +1580,13 @@ Some claims explicitly contain objects and messages that may use a different enc
 <p id="section-1.3-2">This specification uses Concise Data Definition Language (CDDL) <span>[<a href="#RFC8610" class="xref">RFC8610</a>]</span> for all definitions.
 The implementor interprets the CDDL to come to either the CBOR or JSON encoding.
 In the case of JSON, Appendix E of <span>[<a href="#RFC8610" class="xref">RFC8610</a>]</span> is followed.
-Additional rules are given in <a href="#jsoninterop" class="xref">Section 8.2.2</a> where Appendix E is insufficient.
-In most cases where the CDDL for CBOR is different than JSON a CDDL Generic named "JC&lt;&gt;" is used.
-It is described in <a href="#CDDL_for_CWT" class="xref">Appendix D</a>.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
-<p id="section-1.3-3">The CWT and JWT specifications were authored before CDDL was available and did not use CDDL.
+Additional rules are given in <a href="#jsoninterop" class="xref">Section 8.2.2</a> where Appendix E is insufficient.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
+<p id="section-1.3-3">In most cases where the CDDL for CBOR is different than JSON a CDDL Generic named "JC&lt;&gt;" is used.
+It is described in <a href="#CDDL_for_CWT" class="xref">Appendix D</a>.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
+<p id="section-1.3-4">The CWT and JWT specifications were authored before CDDL was available and did not use CDDL.
 This specification includes a CDDL definition of most of what is defined in <span>[<a href="#RFC8392" class="xref">RFC8392</a>]</span>.
 Similarly, this specification includes CDDL for most of what is defined in <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span>.
-These definitions are in <a href="#CDDL_for_CWT" class="xref">Appendix D</a> and are not normative.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
+These definitions are in <a href="#CDDL_for_CWT" class="xref">Appendix D</a> and are not normative.<a href="#section-1.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operating-model-and-rats-architecture">
@@ -2294,7 +2303,6 @@ disabled-since-boot            = JC&lt; "disabled-since-boot", 2 &gt;
 disabled-permanently           = JC&lt; "disabled-permanently", 3 &gt;
 disabled-fully-and-permanently = JC&lt; "disabled-fully-and-permanently",
                                       4 &gt;
-
 </pre><a href="#section-4.2.10.5-2" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3128,9 +3136,7 @@ DEB-Untagged-Message = Detached-EAT-Bundle
 
 Detached-EAT-Bundle = [
     main-token : Nested-Token,
-
     detached-claims-sets: {
-
         + tstr =&gt; JC&lt;json-wrapped-claims-set,
                      cbor-wrapped-claims-set&gt;
     }
@@ -3664,7 +3670,6 @@ disabled-permanently           = JC&lt; "disabled-permanently", 3 &gt;
 disabled-fully-and-permanently = JC&lt; "disabled-fully-and-permanently",
                                       4 &gt;
 
-
 $$Claims-Set-Claims //= (location-label =&gt; location-type)
 
 location-type = {
@@ -3797,9 +3802,7 @@ DEB-Untagged-Message = Detached-EAT-Bundle
 
 Detached-EAT-Bundle = [
     main-token : Nested-Token,
-
     detached-claims-sets: {
-
         + tstr =&gt; JC&lt;json-wrapped-claims-set,
                      cbor-wrapped-claims-set&gt;
     }
@@ -5035,6 +5038,153 @@ It is shown this way because the payload is all the claims, the most interesting
           </h4>
 <div class="alignLeft art-text artwork" id="appendix-A.1.4-1">
 <pre>
+/ This is an EAT payload that describes a simple TEE. /
+
+{
+    / nonce /           10: h'948f8860d13a463e',
+    / security-level / 261: 3, / secure-restricted /
+    / secure-boot /    262: true,
+    / debug-status /   263: 2, / disabled-since-boot /
+    / manfests /       273: [
+                               / This is byte-string wrapped      /
+                               / payload CoSWID. It gives the TEE /
+                               / software name, the version and   /
+                               / the  name of the file it is in.  /
+                               h' da53574944a60064336132340c01016b
+                                  41636d6520544545204f530d65332e31
+                                  2e340282a2181f6b41636d6520544545
+                                  204f53182101a2181f6b41636d652054
+                                  4545204f5318210206a111a118186e61
+                                  636d655f7465655f332e657865'
+                        ]
+}
+
+
+</pre><a href="#appendix-A.1.4-1" class="pilcrow">¶</a>
+</div>
+<div class="alignLeft art-text artwork" id="appendix-A.1.4-2">
+<pre>
+/ A payload CoSWID created by the SW vendor. All this really does /
+/ is name the TEE SW, its version and lists the one file that     /
+/ makes up the TEE. /
+
+1398229316({
+    / Unique CoSWID ID /    0: "3a24",
+    / tag-version /        12: 1,
+    / software-name /       1: "Acme TEE OS",
+    / software-version /   13: "3.1.4",
+    / entity /              2: [
+                                   {
+        / entity-name /                31: "Acme TEE OS",
+        / role        /                33: 1 / tag-creator /
+                                   },
+                                   {
+        / entity-name /                31: "Acme TEE OS",
+        / role        /                33: 2 / software-creator /
+                                   }
+                               ],
+    / payload /                6: {
+        / ...file /                17: {
+            / ...fs-name /             24: "acme_tee_3.exe"
+                                   }
+                               }
+})
+</pre><a href="#appendix-A.1.4-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="submodules-for-board-and-device-1">
+<section id="appendix-A.1.5">
+          <h4 id="name-submodules-for-board-and-dev">
+<a href="#appendix-A.1.5" class="section-number selfRef">A.1.5. </a><a href="#name-submodules-for-board-and-dev" class="section-name selfRef">Submodules for Board and Device</a>
+          </h4>
+<div class="alignLeft art-text artwork" id="appendix-A.1.5-1">
+<pre>
+/ This example shows use of submodules to give information  /
+/ about the chip, board and overall device.                 /
+/                                                           /
+/ The main attestation is associated with the chip with the /
+/ CPU and running the main OS. It is what has the keys and  /
+/ produces the token.                                       /
+/                                                           /
+/ The board is made by a different vendor than the chip.    /
+/ Perhaps it is some generic IoT board.                     /
+/                                                           /
+/ The device is some specific appliance that is made by a   /
+/ different vendor than either the chip or the board.       /
+/                                                           /
+/ Here the board and device submodules aren't the typical   /
+/ target environments as described by the RATS architecture /
+/ document, but they are a valid use of submodules.         /
+
+{
+    / nonce /           10: h'948f8860d13a463e8e',
+    / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
+    / HW OEM ID /      258: h'894823', / IEEE OUI format OEM ID /
+    / HW Model ID /    259: h'549dcecc8b987c737b44e40f7c635ce8'
+                              / Hash of chip model name /,
+    / HW Version /     260: ["1.3.4", 1], / Multipartnumeric version /
+    / SW Name /        271: "Acme OS",
+    / SW Version /     272: ["3.5.5", 1],
+    / secure-boot /    262: true,
+    / debug-status /   263: 3, / permanent-disable  /
+    / timestamp (iat) /  6: 1526542894,
+    / security-level / 261: 3, / secure restricted OS /
+    / submods / 266: {
+        / A submodule to hold some claims about the circuit board /
+        "board" :  {
+            / HW OEM ID /   258: h'9bef8787eba13e2c8f6e7cb4b1f4619a',
+            / HW Model ID / 259: h'ee80f5a66c1fb9742999a8fdab930893'
+                                      / Hash of board module name /,
+            / HW Version /  260: ["2.0a", 2] / multipartnumeric+suffix /
+        },
+
+        / A submodule to hold claims about the overall device /
+        "device" :  {
+            / HW OEM ID /   258: 61234, / PEN Format OEM ID /
+            / HW Version /  260: ["4012345123456", 5] / EAN-13 format (barcode) /
+        }
+    }
+}
+</pre><a href="#appendix-A.1.5-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="eat-produced-by-attestation-hardware-block-1">
+<section id="appendix-A.1.6">
+          <h4 id="name-eat-produced-by-attestation-">
+<a href="#appendix-A.1.6" class="section-number selfRef">A.1.6. </a><a href="#name-eat-produced-by-attestation-" class="section-name selfRef">EAT Produced by Attestation Hardware Block</a>
+          </h4>
+<div class="alignLeft art-text artwork" id="appendix-A.1.6-1">
+<pre>
+/ This is an example of a token produced by a HW block            /
+/ purpose-built for attestation.  Only the nonce claim changes    /
+/ from one attestation to the next as the rest  either come       /
+/ directly from the hardware or from one-time-programmable memory /
+/ (e.g. a fuse). 47 bytes encoded in CBOR (8 byte nonce, 16 byte  /
+/ UEID). /
+
+{
+    / nonce /           10: h'948f8860d13a463e',
+    / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
+    / OEMID /          258: 64242, / Private Enterprise Number /
+    / security-level / 261: 4, / hardware level security /
+    / secure-boot /    262: true,
+    / debug-status /   263: 3, / disabled-permanently /
+    / HW version /     260: [ "3.1", 1 ] / Type is multipartnumeric /
+}
+
+</pre><a href="#appendix-A.1.6-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="key-key-store-attestation-1">
+<section id="appendix-A.1.7">
+          <h4 id="name-key-key-store-attestation-2">
+<a href="#appendix-A.1.7" class="section-number selfRef">A.1.7. </a><a href="#name-key-key-store-attestation-2" class="section-name selfRef">Key / Key Store Attestation</a>
+          </h4>
+<div class="alignLeft art-text artwork" id="appendix-A.1.7-1">
+<pre>
 / This is an attestation of a public key and the key store     /
 / implementation that protects and manages it. The key store   /
 / implementation is in a security-oriented execution           /
@@ -5111,19 +5261,19 @@ It is shown this way because the payload is all the claims, the most interesting
 }
 
 
-</pre><a href="#appendix-A.1.4-1" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1.7-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sw-measurements-of-an-iot-device">
-<section id="appendix-A.1.5">
+<section id="appendix-A.1.8">
           <h4 id="name-sw-measurements-of-an-iot-d">
-<a href="#appendix-A.1.5" class="section-number selfRef">A.1.5. </a><a href="#name-sw-measurements-of-an-iot-d" class="section-name selfRef">SW Measurements of an IoT Device</a>
+<a href="#appendix-A.1.8" class="section-number selfRef">A.1.8. </a><a href="#name-sw-measurements-of-an-iot-d" class="section-name selfRef">SW Measurements of an IoT Device</a>
           </h4>
-<p id="appendix-A.1.5-1">This is a simple token that might be for and IoT device.
+<p id="appendix-A.1.8-1">This is a simple token that might be for and IoT device.
 It includes CoSWID format measurments of the SW.
-The CoSWID is in byte-string wrapped in the token and also shown in diagnostic form.<a href="#appendix-A.1.5-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1.5-2">
+The CoSWID is in byte-string wrapped in the token and also shown in diagnostic form.<a href="#appendix-A.1.8-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1.8-2">
 <pre>
 / This EAT payload is for an IoT device with a TEE. The attestation /
 / is produced by the TEE. There is a submodule for the IoT OS (the  /
@@ -5170,9 +5320,9 @@ The CoSWID is in byte-string wrapped in the token and also shown in diagnostic f
                         }
 }
 
-</pre><a href="#appendix-A.1.5-2" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1.8-2" class="pilcrow">¶</a>
 </div>
-<div class="alignLeft art-text artwork" id="appendix-A.1.5-3">
+<div class="alignLeft art-text artwork" id="appendix-A.1.8-3">
 <pre>
 / An evidence CoSWID created for the "Acme R-IoT-OS" created by /
 / the "Acme Base Attester" (both fictious names).  It provides  /
@@ -5226,22 +5376,22 @@ The CoSWID is in byte-string wrapped in the token and also shown in diagnostic f
                                 ]
                             }
 })
-</pre><a href="#appendix-A.1.5-3" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1.8-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="attestation-results-in-json-format">
-<section id="appendix-A.1.6">
+<section id="appendix-A.1.9">
           <h4 id="name-attestation-results-in-json">
-<a href="#appendix-A.1.6" class="section-number selfRef">A.1.6. </a><a href="#name-attestation-results-in-json" class="section-name selfRef">Attestation Results in JSON format</a>
+<a href="#appendix-A.1.9" class="section-number selfRef">A.1.9. </a><a href="#name-attestation-results-in-json" class="section-name selfRef">Attestation Results in JSON format</a>
           </h4>
-<p id="appendix-A.1.6-1">This is a UJCS format token that might be the output of a Verifier that evaluated the IoT Attestation example immediately above.<a href="#appendix-A.1.6-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.1.6-2">This particular Verifier knows enough about the TEE Attester to be able to pass claims like security level directly through to the Relying Party.
+<p id="appendix-A.1.9-1">This is a UJCS format token that might be the output of a Verifier that evaluated the IoT Attestation example immediately above.<a href="#appendix-A.1.9-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1.9-2">This particular Verifier knows enough about the TEE Attester to be able to pass claims like security level directly through to the Relying Party.
 The Verifier also knows the Reference Values for the measured SW components and is able to check them.
 It informs the Relying Party that they were correct in the swresults claim.
-"Trustus Verifications" is the name of the services that verifies the SW component measurements.<a href="#appendix-A.1.6-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.1.6-3">This UJCS is identical to JSON-encoded Claims-Set that could be a JWT payload.<a href="#appendix-A.1.6-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1.6-4">
+"Trustus Verifications" is the name of the services that verifies the SW component measurements.<a href="#appendix-A.1.9-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.1.9-3">This UJCS is identical to JSON-encoded Claims-Set that could be a JWT payload.<a href="#appendix-A.1.9-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1.9-4">
 <pre>
 {
     "nonce" : "lI+IYNE6Rj4=",
@@ -5266,7 +5416,7 @@ It informs the Relying Party that they were correct in the swresults claim.
             ]
        ]
 }
-</pre><a href="#appendix-A.1.6-4" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1.9-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
