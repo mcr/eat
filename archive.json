@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-04-29T23:00:38.103290+00:00",
+  "timestamp": "2022-05-02T21:33:55.378171+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -2739,12 +2739,22 @@
       "author": "cyberphone",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "wontfix"
+      ],
       "body": "Related issue: https://github.com/ietf-rats-wg/eat/issues/157\r\nRelated I-D: https://datatracker.ietf.org/doc/draft-ietf-cbor-file-magic/\r\n\r\nA very active W3C group called Verified Credentials (VCs) are using attestations for delivering claims regarding individuals.  VC containers are identified as such by URLs featured in a dedicated JSON/JSON-LD property called @context (https://www.w3.org/TR/vc-data-model/#contexts).  When sent over HTTP, VCs use a static media type since the @context is supposed to tell the consumer what to expect.  This is similar to XML schemas and Namespaces.  Another W3C effort, PaymentRequest uses URLs (https://www.w3.org/TR/payment-request/#dom-paymentmethoddata-supportedmethods) for identifying custom payment handlers.\r\n\r\nIt is not entirely obvious how you translate this methodology to CBOR.  The following represents a concrete proposal intended to limit the need for multiple and over time probably diverging practices.  Since the scope of this issue is universal it is not limited to EAT. However, EAT represents a possible adopter.\r\n\r\n## High Level Description\r\n\r\n- CBOR data is enclosed by a _fixed_ top-level tag holding a URI or OID which are supposed to uniquely identify the \"schema\" (content specification) of the embedded data (payload).\r\n- When such objects are transported over HTTP, the media type MUST be set to `application/cbor`.   That is, the proposed tag has _precedence_ over other possible media types associated with the payload.\r\n\r\n<table><tr><td>Since objects using <i>self-contained type identifiers</i> are distinguishable from each other they can also be <i>embedded in other objects</i> in an interoperable and extensible way.</td></tr></table> \r\n\r\nIf applied to https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-11 the following changes seem logical:\r\n- 601() and similar application-specific tags would be replaced by the proposed construct.\r\n- `profile-name` would be removed.\r\n\r\n## In More Detail\r\n\r\nTBD211([_Type Id_, _CBOR data_])\r\n\r\nThis CBOR tag extends major type 6 and presumes a 2-element array holding a type identifier and associated data.  For designs intended for external use, type identifiers are RECOMMENDED to be represented by `bstr` or `tstr` where `bstr` SHOULD be coded as _absolute_ OIDs according to RFC9090 while `tstr` SHOULD be coded as _absolute_ URLs, preferably pointing to a document describing the object.\r\n\r\nThe data (payload) portion of the tag is any valid CBOR object, only constrained by its specification given by the type identifier.\r\n\r\n## Example\r\n\r\nAssume that you have an object like\r\n```code\r\n{\r\n  1: \"Hello CBOR World!\",\r\n  2: Infinity\r\n}\r\n```\r\nthat is defined in a document located at `https://example.com/cbor-hello`.\r\n\r\nAfter extending it with the proposed tag:\r\n```code\r\nTBD211([\"https://example.com/cbor-hello\", {\r\n  1: \"Hello CBOR World!\",\r\n  2: Infinity\r\n}])\r\n```\r\n\r\nIn binary/hex:\r\n```code\r\nD8 D3                                   # tag(211)\r\n   82                                   # array(2)\r\n      78 1E                             # text(30)\r\n         68747470733A2F2F6578616D706C652E636F6D2F63626F722D68656C6C6F # \"https://example.com/cbor-hello\"\r\n      A2                                # map(2)\r\n         01                             # unsigned(1)\r\n         71                             # text(17)\r\n            48656C6C6F2043424F5220576F726C6421 # \"Hello CBOR World!\"\r\n         02                             # unsigned(2)\r\n         F9 7C00                        # primitive(31744)\r\n```\r\n\r\n## Parameterized Object Types\r\nAlthough NOT RECOMMENDED, this specification does not \"outlaw\" parameterized type identifiers like the following:\r\n\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TBD211([[_Main Type Id_, _Parameters_...], _CBOR data_])\r\n\r\nHowever, in most real-world scenarios, an _extension scheme_ in the actual object is probably a better solution.\r\n\r\n### Related Discussion\r\nAnyway, whatever parameterization or extension scheme you use, it often comes with interoperability issues.   One way to combine extensions with a more agile ecosystem where not all object producers and consumers are at the same level, is making the latter announce their capabilities through _public discovery services_.  Then an object producer can determine what to send _before_ making a request, as well as concluding that the consumer isn't compatible with the producer's current requirements.",
       "createdAt": "2022-02-09T07:38:16Z",
-      "updatedAt": "2022-02-12T11:01:59Z",
+      "updatedAt": "2022-05-02T15:27:24Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">When such objects are transported over HTTP, the media type MUST be set to application/cbor. That is, the proposed tag has precedence over other possible media types associated with the payload.\r\n\r\nAs per IETF 113 consensus decision, all normative references to UCCS will be removed.  Therefore transmission of an EAT as straight CBOR or JSON is not permitted going forward (exception being a token type DEB, which may or may not be included in the final RFC).  JWT and CWT media types would be more applicable along with their corresponding tags.",
+          "createdAt": "2022-05-02T15:27:15Z",
+          "updatedAt": "2022-05-02T15:27:15Z"
+        }
+      ]
     },
     {
       "number": 168,
@@ -2755,10 +2765,12 @@
       "author": "cyberphone",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "wontfix"
+      ],
       "body": "F.Y.I. only, feel free to ignore this.\r\n\r\nThe three EAT serialization formats\r\n- JSON\r\n- CBOR standard\r\n- CBOR for constrained devices\r\n\r\nprovide flexibility but also makes EAT error-prone and difficult to deal with by verifiers.  There is IMO no point using JSON for this kind of application (which it certainly wasn't designed for either).\r\n\r\nThen we have the two CBOR solutions.  Or as it seems, a _multitude_ of solutions, where each profile _may_ specify its serialization requirements.\r\n\r\nGiven my background in embedded programming using extremely constrained devices like Intel 8051 and Motorola 6801, I don't see any problems _generating_ CBOR using preferred serialization.  Although I don't have the complete picture, I would be surprised if constrained devices would _consume_ EAT objects, and even if they do, preferred serialization would not be a disadvantage since you don't _have_ to verify compliance.\r\n\r\nThere is no need to sort CBOR maps, you just create data in the proper order, or use a pre-defined template and fill in the blanks.\r\n\r\nThe following Java code shows deterministic generation of `integers` (also used by `tstr`, `bstr`, `array`, and `map`):\r\n\r\n```java\r\nbyte[] encodeTagAndN(int majorType, long n) {\r\n    // Note: n is actually an UNSIGNED long\r\n    int modifier = (int) n;\r\n    int length = 0;\r\n    if (n < 0 || n > 23) {\r\n        modifier = 27;\r\n        length = 8;\r\n        while (((MASK_LOWER_32 << ((length / 2) * 8)) & n) == 0) {\r\n            modifier--;\r\n            length >>= 1;\r\n        }\r\n    }\r\n    byte[] encoded = new byte[length + 1];\r\n    encoded[0] = (byte)(majorType | modifier);\r\n    while (length > 0) {\r\n        encoded[length--] = (byte)n;\r\n        n >>>= 8;\r\n    }\r\n    return encoded;\r\n}\r\n```\r\nIn the unlikely (?) case you would need floating point data in EAT objects, preferred serialization would require about twice the code above, but it is still quite simple, only requiring bit-shuffling and integer math.\r\n\r\nUPDATE: After taking a deeper look into the matter, it seems that the primary issue rather must be COSE, since it puts the payload in a `tstr`, which requires RAM buffering unless infinite-length encoding and pre-hashing is used.  Enveloped signatures and pre-hashing conserve RAM as well as making preferred serialization a viable alternative for just about any imaginable device.",
       "createdAt": "2022-02-18T13:58:44Z",
-      "updatedAt": "2022-02-21T16:26:59Z",
+      "updatedAt": "2022-05-02T15:59:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -2774,6 +2786,20 @@
           "body": "A (wanted) side-effect of using preferred serialization is that it permits the use of enveloped signatures making the structure of signed objects more logical and easier to understand.\r\n\r\nCWT: https://datatracker.ietf.org/doc/html/rfc8392#appendix-A.3\r\n\r\n```cbor\r\n18([h'a10126', {\r\n    4: h'4173796d6d65747269634543445341323536'\r\n}, h'a70175636f61703a2f2f61732e6578616d706c652e636f6d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e636f6d041a5612aeb0051a5610d9f0061a5610d9f007420b71', h'5427c1ff28d23fbad1f29c4c7c6a555e601d6fa29f9179bc3d7438bacaca5acd08c8d4d4f96131680c429a01f85951ecee743a52b9b63632c57209120e1c9e30'])\r\n```\r\n\r\nThe very same object using an enveloped signature:\r\n```cbor\r\n18({\r\n    1: \"coap://as.example.com\",\r\n    2: \"erikw\",\r\n    3: \"coap://light.example.com\",\r\n    4: 1444064944,\r\n    5: 1443944944,\r\n    6: 1443944944,\r\n    7: h'0b71',\r\n    / Signature container /\r\n    -1: {\r\n      / alg = ES256 /\r\n      1: -7,\r\n      / kid /\r\n      3: h'4173796d6d65747269634543445341323536',\r\n      / signature value /\r\n      7: h'e1e1a3bda070b586be0e9b95e6e5ccae4bcfb44726aa3f6b5e7bbc81d2193f439b6c6b84962c27eb4796e17dd6ecd028026a8e351bed3f9be95c96447e3fd262'\r\n    }\r\n})\r\n```\r\n\r\nThere is nothing particularly innovative or controversial about this suggestion; X.509 certificates, which represent a very widely used variant of signed objects, seem to work fine in spite of not burying the certified data (claims) inside of a blob.  That is, this is a time-proven concept.  However,  CBOR preferred serialization is considerably simpler and more \"RAM-friendly\" than ASN.1 DER since CBOR only requires items in a map or array to be concatenated.\r\n\r\nAn unexpected feature is that this scheme enables a signature to be added as a last element while the hash is collected during the production of the actual content.   This works at least for RSA and ECDSA algorithms.\r\n\r\nArmed with preferred serialization, signature validation becomes very simple:\r\n```java\r\n/**\r\n * Validates signed CBOR map.\r\n * <p>\r\n * This method presumes that <code>signedObject</code> holds\r\n * an enveloped signature according to CSF.\r\n * </p>\r\n * \r\n * @param key Key in map holding signature\r\n * @param signedObject Signed CBOR map object\r\n * @return The signed object\r\n * @throws IOException\r\n * @throws GeneralSecurityException\r\n */\r\npublic CBORMap validate(CBORObject key, CBORMap signedObject) throws IOException, \r\n                                                                     GeneralSecurityException {\r\n    // Fetch signature object\r\n    CBORMap signatureObject = signedObject.getObject(key).getMap();\r\n\r\n    // Get the signature value and remove it from the (map) object.\r\n    byte[] signatureValue = signatureObject.readByteStringAndRemoveKey(SIGNATURE_LABEL);\r\n\r\n    // Fetch optional keyId.\r\n    CBORObject optionalKeyId = signatureObject.hasKey(KEY_ID_LABEL) ?\r\n                     signatureObject.getObject(KEY_ID_LABEL).scan() : null;\r\n\r\n    // Call algorithm specific validator. The code below presumes that internalEncode()\r\n    // returns a deterministic representation of the signed CBOR data.\r\n    coreValidation(signatureObject,\r\n                   signatureObject.getObject(ALGORITHM_LABEL).getInt(),\r\n                   optionalKeyId, \r\n                   signatureValue,\r\n                   signedObject.internalEncode());\r\n\r\n    // Check that nothing \"extra\" was supplied.\r\n    signatureObject.checkForUnread();\r\n\r\n    // Restore object.\r\n    signatureObject.setObject(SIGNATURE_LABEL, new CBORByteString(signatureValue));\r\n    \r\n    // Return it as well.\r\n    return signedObject;\r\n}\r\n```",
           "createdAt": "2022-02-19T07:49:06Z",
           "updatedAt": "2022-02-21T16:26:59Z"
+        },
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This issue seems to be broader than EAT, so am affixing a 'wontfix' label but won't close it.  That being said, why is canonicalization not acceptable (https://datatracker.ietf.org/doc/html/rfc8152#section-14)?",
+          "createdAt": "2022-05-02T15:18:07Z",
+          "updatedAt": "2022-05-02T15:18:07Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It is true that there are several ways CBOR could be encoded and they might not always interoperate. For example, use of indefinite length strings might cause trouble.\r\n\r\nHowever, as Giri said this is a general things about CBOR not specific to EAT. Or said another way, EAT is largely neutral on this just like COSE, CWT and CBOR itself. EAT retains this encoding flexibility.\r\n\r\nWhat EAT does beyond all these others is discuss the issue explicitly and puts forth profiles to address it.\r\n\r\nI also think the JSON support is valuable as about 95% of the world uses JSON and about 5% uses CBOR. CBOR is a weird mystery to many. Having a JSON standard for attestation will really help promote attestation.\r\n\r\nI would like to close this issue.",
+          "createdAt": "2022-05-02T15:59:04Z",
+          "updatedAt": "2022-05-02T15:59:04Z"
         }
       ]
     },
@@ -2836,6 +2862,56 @@
           "body": "Addressed in #175",
           "createdAt": "2022-04-07T17:15:04Z",
           "updatedAt": "2022-04-07T17:15:04Z"
+        }
+      ]
+    },
+    {
+      "number": 177,
+      "id": "I_kwDOCEWCXc5I1UY-",
+      "title": "Use content or media type for Manifest and SWMeasurements",
+      "url": "https://github.com/ietf-rats-wg/eat/issues/177",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "wontfix"
+      ],
+      "body": "The idea in EAT is to carry formats like Coswid and Corim for Manifests and SWResults. A way to identify their type is needed. Right now CBOR tags are used, but MIME type or Coap content type is probably better.",
+      "createdAt": "2022-04-30T22:45:22Z",
+      "updatedAt": "2022-05-02T15:14:31Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Any proposal for new media types or subtypes should have a justification why the existing CWT media type is insufficient.  \r\n\r\nIf a subtype is being proposed for Corim/etc., then there should be a specific proposal and examples on how the subtypes are being conveyed.  I would suggest a POST example.",
+          "createdAt": "2022-04-30T23:50:18Z",
+          "updatedAt": "2022-04-30T23:50:18Z"
+        }
+      ]
+    },
+    {
+      "number": 178,
+      "id": "I_kwDOCEWCXc5I5eWL",
+      "title": "Remove all normative references to UCCS",
+      "url": "https://github.com/ietf-rats-wg/eat/issues/178",
+      "state": "OPEN",
+      "author": "gmandyam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As per Working Group consensus decision at IETF 113.  Starting with Sec. 1.2.",
+      "createdAt": "2022-05-02T15:28:14Z",
+      "updatedAt": "2022-05-02T15:48:12Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "#176",
+          "createdAt": "2022-05-02T15:47:32Z",
+          "updatedAt": "2022-05-02T15:48:12Z"
         }
       ]
     }
@@ -6289,10 +6365,10 @@
       ],
       "body": "Relates to https://github.com/ietf-rats-wg/architecture/issues/293 and https://github.com/ietf-rats-wg/architecture/pull/294",
       "createdAt": "2021-04-10T19:47:01Z",
-      "updatedAt": "2021-10-07T19:52:38Z",
+      "updatedAt": "2022-04-29T23:14:54Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "79e0e208b558a094e60c0c7a1870af65aca48f8c",
+      "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "layered",
       "headRefOid": "855d1aabebd8e0e7ea130dcb2bc91cd2feaf090d",
@@ -7435,10 +7511,10 @@
       "labels": [],
       "body": "",
       "createdAt": "2021-12-03T18:20:39Z",
-      "updatedAt": "2021-12-03T18:20:39Z",
+      "updatedAt": "2022-04-29T23:14:53Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "3c0eb487d01676bea7ea16c918bcfe9cedd8af6a",
+      "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "resultcode2",
       "headRefOid": "2b3ceb0d9204e488d6bd0277905f4b89fe352a31",
@@ -7519,10 +7595,10 @@
       ],
       "body": "",
       "createdAt": "2021-12-22T20:55:16Z",
-      "updatedAt": "2022-01-13T20:13:46Z",
+      "updatedAt": "2022-04-29T23:14:53Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "9c5d1b8e371d9d05a935f260164a365fea99bc0b",
+      "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "hwclass",
       "headRefOid": "e394ba6af48dd68edc0619d90bfcf810f1bda277",
@@ -7661,10 +7737,10 @@
       "labels": [],
       "body": "Non-critical claims; make the document a little shorter.",
       "createdAt": "2022-01-13T20:12:14Z",
-      "updatedAt": "2022-01-25T19:59:49Z",
+      "updatedAt": "2022-04-29T23:14:53Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "bc8d3c79cfe696e40a26108396697500bb6c2a57",
+      "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "rm_claims",
       "headRefOid": "fa3e8a7c0d6eda0d2a97d96d14f7849dea92e17a",
@@ -8049,10 +8125,10 @@
       "labels": [],
       "body": "From mailing list comment by MCR.\r\n\r\nLaurence Lundblade <lgl@island-resort.com> wrote:\r\n- It is claiming the lowest level possible (as a warning)\r\n\r\nI think that this is the key part that makes it useful, even when self-asserted.\r\n\r\nIt is saying, \"I am *least* THIS vulnerable\",\r\n         not \"I am at *most* THIS secure\".\r\n",
       "createdAt": "2022-01-30T18:53:07Z",
-      "updatedAt": "2022-01-31T03:56:46Z",
+      "updatedAt": "2022-04-29T23:14:53Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "76722d0ef25c0cd7b54e42b59431bfb9b238863f",
+      "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "sl1",
       "headRefOid": "ef70fe7c2a4b1352863cd355fc661bf6e371ccba",
@@ -8347,6 +8423,32 @@
       "mergeCommit": {
         "oid": "37eb1857258c0dcef61154a0e390fd350705398d"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 176,
+      "id": "PR_kwDOCEWCXc43Gupj",
+      "title": "Use JC<> Generic for Java vs CBOR; remove UCCS reference...",
+      "url": "https://github.com/ietf-rats-wg/eat/pull/176",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-04-29T23:06:57Z",
+      "updatedAt": "2022-05-02T15:47:00Z",
+      "baseRepository": "ietf-rats-wg/eat",
+      "baseRefName": "master",
+      "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
+      "headRepository": "ietf-rats-wg/eat",
+      "headRefName": "jc-cddl",
+      "headRefOid": "fd1561eb7d9fa172acfd3911e0b049333c78ef21",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
