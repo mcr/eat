@@ -233,22 +233,22 @@ Internet-Draft                     EAT                          May 2022
      C.3.  An X.509 Format EAT . . . . . . . . . . . . . . . . . . .  94
      C.4.  Device Identifier Permanence  . . . . . . . . . . . . . .  94
    Appendix D.  CDDL for CWT and JWT . . . . . . . . . . . . . . . .  95
-   Appendix E.  Changes from Previous Drafts . . . . . . . . . . . .  96
-     E.1.  From draft-rats-eat-01  . . . . . . . . . . . . . . . . .  96
-     E.2.  From draft-mandyam-rats-eat-00  . . . . . . . . . . . . .  96
-     E.3.  From draft-ietf-rats-eat-01 . . . . . . . . . . . . . . .  96
+   Appendix E.  Changes from Previous Drafts . . . . . . . . . . . .  97
+     E.1.  From draft-rats-eat-01  . . . . . . . . . . . . . . . . .  97
+     E.2.  From draft-mandyam-rats-eat-00  . . . . . . . . . . . . .  97
+     E.3.  From draft-ietf-rats-eat-01 . . . . . . . . . . . . . . .  97
      E.4.  From draft-ietf-rats-eat-02 . . . . . . . . . . . . . . .  97
-     E.5.  From draft-ietf-rats-eat-03 . . . . . . . . . . . . . . .  97
-     E.6.  From draft-ietf-rats-eat-04 . . . . . . . . . . . . . . .  97
-     E.7.  From draft-ietf-rats-eat-05 . . . . . . . . . . . . . . .  98
-     E.8.  From draft-ietf-rats-eat-06 . . . . . . . . . . . . . . .  98
-     E.9.  From draft-ietf-rats-eat-07 . . . . . . . . . . . . . . .  98
-     E.10. From draft-ietf-rats-eat-08 . . . . . . . . . . . . . . .  98
-     E.11. From draft-ietf-rats-eat-09 . . . . . . . . . . . . . . .  98
+     E.5.  From draft-ietf-rats-eat-03 . . . . . . . . . . . . . . .  98
+     E.6.  From draft-ietf-rats-eat-04 . . . . . . . . . . . . . . .  98
+     E.7.  From draft-ietf-rats-eat-05 . . . . . . . . . . . . . . .  99
+     E.8.  From draft-ietf-rats-eat-06 . . . . . . . . . . . . . . .  99
+     E.9.  From draft-ietf-rats-eat-07 . . . . . . . . . . . . . . .  99
+     E.10. From draft-ietf-rats-eat-08 . . . . . . . . . . . . . . .  99
+     E.11. From draft-ietf-rats-eat-09 . . . . . . . . . . . . . . .  99
      E.12. From draft-ietf-rats-eat-10 . . . . . . . . . . . . . . .  99
-     E.13. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . . 100
-     E.14. From draft-ietf-rats-eat-12 . . . . . . . . . . . . . . . 100
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 101
+     E.13. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . . 101
+     E.14. From draft-ietf-rats-eat-12 . . . . . . . . . . . . . . . 101
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 102
 
 1.  Introduction
 
@@ -5282,6 +5282,48 @@ Appendix D.  CDDL for CWT and JWT
    This however is NOT a normative or standard definition of CWT or JWT
    in CDDL.  The prose in CWT and JWT remain the normative definition.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 4 November 2022               [Page 95]
+
+Internet-Draft                     EAT                          May 2022
+
+
+   ; This is replicated from draft-ietf-rats-uccs
+
    Claims-Set = {
        * $$Claims-Set-Claims
        * Claim-Label .feature "extended-claims-label" => any
@@ -5315,13 +5357,6 @@ Appendix D.  CDDL for CWT and JWT
    ; This doesn't produce erroneous error messages
    JC<J,C> = J .feature "json" / C .feature "cbor"
 
-
-
-Lundblade, et al.        Expires 4 November 2022               [Page 95]
-
-Internet-Draft                     EAT                          May 2022
-
-
    ; A JWT message is either a JWS or JWE in compact serialization form
    ; with the payload a Claims-Set. Compact serialization is the
    ; protected headers, payload and signature, each b64url encoded and
@@ -5330,6 +5365,18 @@ Internet-Draft                     EAT                          May 2022
 
    JWT-Message = text .regexp \
        "[A-Za-z0-9_=-]+\.[A-Za-z0-9_=-]+\.[A-Za-z0-9_=-]+"
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 4 November 2022               [Page 96]
+
+Internet-Draft                     EAT                          May 2022
+
 
    ; This is some CDDL describing a CWT at the top level This is
    ; not normative. RFC 8392 is the normative definition of CWT.
@@ -5371,13 +5418,6 @@ E.3.  From draft-ietf-rats-eat-01
 
    *  Minor spelling and other fixes
 
-
-
-Lundblade, et al.        Expires 4 November 2022               [Page 96]
-
-Internet-Draft                     EAT                          May 2022
-
-
    *  Add the nonce claim, clarify jti claim
 
 E.4.  From draft-ietf-rats-eat-02
@@ -5385,6 +5425,14 @@ E.4.  From draft-ietf-rats-eat-02
    *  Roll all EUIs back into one UEID type
 
    *  UEIDs can be one of three lengths, 128, 192 and 256.
+
+
+
+
+Lundblade, et al.        Expires 4 November 2022               [Page 97]
+
+Internet-Draft                     EAT                          May 2022
+
 
    *  Added appendix justifying UEID design and size.
 
@@ -5426,20 +5474,21 @@ E.6.  From draft-ietf-rats-eat-04
    *  Rename debug-disable to debug-status; clarify that it is not
       extensible
 
-
-
-
-Lundblade, et al.        Expires 4 November 2022               [Page 97]
-
-Internet-Draft                     EAT                          May 2022
-
-
    *  Security level claim is not extensible
 
    *  Improve specification of location claim and added a location
       privacy section
 
    *  Add intended use claim
+
+
+
+
+
+Lundblade, et al.        Expires 4 November 2022               [Page 98]
+
+Internet-Draft                     EAT                          May 2022
+
 
 E.7.  From draft-ietf-rats-eat-05
 
@@ -5483,17 +5532,19 @@ E.11.  From draft-ietf-rats-eat-09
    *  Add string labels non-claim labels for use with JSON (e.g. labels
       for members of location claim)
 
-
-
-Lundblade, et al.        Expires 4 November 2022               [Page 98]
-
-Internet-Draft                     EAT                          May 2022
-
-
    *  EAN-13 HW versions are no longer a separate claim.  Now they are
       folded in as a CoSWID version scheme.
 
 E.12.  From draft-ietf-rats-eat-10
+
+
+
+
+
+Lundblade, et al.        Expires 4 November 2022               [Page 99]
+
+Internet-Draft                     EAT                          May 2022
+
 
    *  Hardware version is made into an array of two rather than two
       claims
@@ -5538,19 +5589,18 @@ E.12.  From draft-ietf-rats-eat-10
 
    *  OEM ID is specifically for HW, not for SW
 
-
-
-
-Lundblade, et al.        Expires 4 November 2022               [Page 99]
-
-Internet-Draft                     EAT                          May 2022
-
-
    *  HW OEM ID can now be a PEN
 
    *  HW OEM ID can now be a 128-bit random number
 
    *  Expand the examples section
+
+
+
+Lundblade, et al.        Expires 4 November 2022              [Page 100]
+
+Internet-Draft                     EAT                          May 2022
+
 
    *  Add software and version claims as easy / JSON alternative to
       CoSWID
@@ -5593,15 +5643,6 @@ E.14.  From draft-ietf-rats-eat-12
    *  Make use of the JC<> generic to express CDDL for both JSON and
       CBOR
 
-
-
-
-
-Lundblade, et al.        Expires 4 November 2022              [Page 100]
-
-Internet-Draft                     EAT                          May 2022
-
-
    *  Reorganize claims into 4 sections, particularly claims about the
       entity and about the token
 
@@ -5609,6 +5650,13 @@ Internet-Draft                     EAT                          May 2022
 
    *  Clarify relationship of claims in evidence to results when
       forwarding
+
+
+
+Lundblade, et al.        Expires 4 November 2022              [Page 101]
+
+Internet-Draft                     EAT                          May 2022
+
 
    *  Clarify manufacturer switching UEID types
 
@@ -5651,19 +5699,20 @@ Authors' Addresses
    Email: mandyam@qti.qualcomm.com
 
 
-
-
-Lundblade, et al.        Expires 4 November 2022              [Page 101]
-
-Internet-Draft                     EAT                          May 2022
-
-
    Jeremy O'Donoghue
    Qualcomm Technologies Inc.
    279 Farnborough Road
    Farnborough
    GU14 7LS
    United Kingdom
+
+
+
+
+Lundblade, et al.        Expires 4 November 2022              [Page 102]
+
+Internet-Draft                     EAT                          May 2022
+
 
    Phone: +44 1252 363189
    Email: jodonogh@qti.qualcomm.com
@@ -5709,4 +5758,11 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 4 November 2022              [Page 102]
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 4 November 2022              [Page 103]
