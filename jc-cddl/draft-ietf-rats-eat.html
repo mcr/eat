@@ -826,11 +826,11 @@ address div.right {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">EAT</td>
-<td class="right">April 2022</td>
+<td class="right">May 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Lundblade, et al.</td>
-<td class="center">Expires 1 November 2022</td>
+<td class="center">Expires 4 November 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -843,12 +843,12 @@ address div.right {
 <dd class="internet-draft">draft-ietf-rats-eat-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-04-30" class="published">30 April 2022</time>
+<time datetime="2022-05-03" class="published">3 May 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-11-01">1 November 2022</time></dd>
+<dd class="expires"><time datetime="2022-11-04">4 November 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -896,7 +896,7 @@ CWT and JWT.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1731,8 +1731,8 @@ Other token formats using other methods of protection may be defined outside thi
 See <a href="#CDDL_for_CWT" class="xref">Appendix D</a> for the CDDL definitions of a CWT and JWT.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">Nesting of EATs is allowed and defined in <a href="#Nested-Token" class="xref">Section 4.2.19.1.2</a>.
 This nesting includes nesting of a token that is a different format than the enclosing token.
-The definition of Nested-Token makes use of the CDDL defined in this section.
-When new token formats are defined, there means for identification as a nested token MUST also be defined.<a href="#section-3-6" class="pilcrow">¶</a></p>
+The definition of Nested-Token references the CDDL defined in this section.
+When new token formats are defined, the means for identification in a nested token MUST also be defined.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div id="section-3-7">
 <pre class="lang-CDDL sourcecode">
 EAT-CBOR-Token = $$EAT-CBOR-Tagged-Token / $$EAT-CBOR-Untagged-Token
@@ -2803,15 +2803,9 @@ JSON-Token-Inside-CBOR-Token = tstr
 </dd>
                   <dd class="break"></dd>
 <dt id="section-4.2.19.1.2.2-4.5">
-"UJCS":  </dt>
-                  <dd style="margin-left: 1.5em" id="section-4.2.19.1.2.2-4.6">
-                    <p id="section-4.2.19.1.2.2-4.6.1">The second array item MUST be a UJCS-Message as defined in this document.<a href="#section-4.2.19.1.2.2-4.6.1" class="pilcrow">¶</a></p>
-</dd>
-                  <dd class="break"></dd>
-<dt id="section-4.2.19.1.2.2-4.7">
 "DEB":  </dt>
-                  <dd style="margin-left: 1.5em" id="section-4.2.19.1.2.2-4.8">
-                    <p id="section-4.2.19.1.2.2-4.8.1">The second array item MUST be a JSON-encoded Detached EAT Bundle as defined in this document.<a href="#section-4.2.19.1.2.2-4.8.1" class="pilcrow">¶</a></p>
+                  <dd style="margin-left: 1.5em" id="section-4.2.19.1.2.2-4.6">
+                    <p id="section-4.2.19.1.2.2-4.6.1">The second array item MUST be a JSON-encoded Detached EAT Bundle as defined in this document.<a href="#section-4.2.19.1.2.2-4.6.1" class="pilcrow">¶</a></p>
 </dd>
                 <dd class="break"></dd>
 </dl>
@@ -2829,11 +2823,10 @@ It is an error if the CBOR is not a tag.<a href="#section-4.2.19.1.2.2-7" class=
 Nested-Token = JSON-Nested-Token
 
 JSON-Nested-Token = [
-   type : "JWT" / "CBOR" / "UJCS" / "DEB",
+   type : "JWT" / "CBOR" / "DEB",
    nested-token : JWT-Message /
                   CBOR-Token-Inside-JSON-Token /
-                  Detached-EAT-Bundle /
-                  UJCS-Message
+                  Detached-EAT-Bundle
 ]
 
 CBOR-Token-Inside-JSON-Token = base64-url-text
@@ -2872,12 +2865,12 @@ It contains two data items, an algorithm identifier and a byte string containing
 In CBOR the none of other submodule types are arrays.<a href="#section-4.2.19.1.3-7" class="pilcrow">¶</a></p>
 <p id="section-4.2.19.1.3-8">When decoding a JSON format token, a little more work is required because both the nested token and detached digest types are an array.
 To distinguish the nested token from the detached digest, the first element in the array is examined.
-If it is "JWT", "UJCS" or "DEB", the the submodule is a nested token.
+If it is "JWT" or "DEB", then the submodule is a nested token.
 Otherwise it will contain an algorithm identifier and is a detached digest.<a href="#section-4.2.19.1.3-8" class="pilcrow">¶</a></p>
 <p id="section-4.2.19.1.3-9">A DEB, described in <a href="#DEB" class="xref">Section 5</a>, may be used to convey detached claims sets and the token with their detached digests.
 EAT, however, doesn't require use of a DEB.
 Any other protocols may be used to convey detached claims sets and the token with their detached digests.
-Note that since detached Claims-Sets are usually signed, protocols conveying them must make sure they are not modified in transit.<a href="#section-4.2.19.1.3-9" class="pilcrow">¶</a></p>
+Note that since detached Claims-Sets are signed, protocols conveying them must make sure they are not modified in transit.<a href="#section-4.2.19.1.3-9" class="pilcrow">¶</a></p>
 <div id="section-4.2.19.1.3-10">
 <pre class="lang-CDDL sourcecode">
 Detached-Submodule-Digest = [
@@ -3895,11 +3888,10 @@ EAT-JSON-Token-Formats /= DEB-Messages
 Nested-Token = JSON-Nested-Token
 
 JSON-Nested-Token = [
-   type : "JWT" / "CBOR" / "UJCS" / "DEB",
+   type : "JWT" / "CBOR" / "DEB",
    nested-token : JWT-Message /
                   CBOR-Token-Inside-JSON-Token /
-                  Detached-EAT-Bundle /
-                  UJCS-Message
+                  Detached-EAT-Bundle
 ]
 
 CBOR-Token-Inside-JSON-Token = base64-url-text
@@ -5385,13 +5377,12 @@ The CoSWID is in byte-string wrapped in the token and also shown in diagnostic f
           <h4 id="name-attestation-results-in-json">
 <a href="#appendix-A.1.9" class="section-number selfRef">A.1.9. </a><a href="#name-attestation-results-in-json" class="section-name selfRef">Attestation Results in JSON format</a>
           </h4>
-<p id="appendix-A.1.9-1">This is a UJCS format token that might be the output of a Verifier that evaluated the IoT Attestation example immediately above.<a href="#appendix-A.1.9-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1.9-1">This is a JSON-format payload that might be the output of a Verifier that evaluated the IoT Attestation example immediately above.<a href="#appendix-A.1.9-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.1.9-2">This particular Verifier knows enough about the TEE Attester to be able to pass claims like security level directly through to the Relying Party.
 The Verifier also knows the Reference Values for the measured SW components and is able to check them.
 It informs the Relying Party that they were correct in the swresults claim.
 "Trustus Verifications" is the name of the services that verifies the SW component measurements.<a href="#appendix-A.1.9-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.1.9-3">This UJCS is identical to JSON-encoded Claims-Set that could be a JWT payload.<a href="#appendix-A.1.9-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1.9-4">
+<div class="alignLeft art-text artwork" id="appendix-A.1.9-3">
 <pre>
 {
     "nonce" : "lI+IYNE6Rj4=",
@@ -5416,7 +5407,7 @@ It informs the Relying Party that they were correct in the swresults claim.
             ]
        ]
 }
-</pre><a href="#appendix-A.1.9-4" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1.9-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
