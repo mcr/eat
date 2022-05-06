@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-05T19:53:06.397344+00:00",
+  "timestamp": "2022-05-06T19:37:54.046186+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -8464,13 +8464,13 @@
       "labels": [],
       "body": "Address #177. \r\n\r\nPrevious text was broken for JSON tokens and this seems like a much better and more universal design.",
       "createdAt": "2022-05-02T21:34:28Z",
-      "updatedAt": "2022-05-02T21:34:28Z",
+      "updatedAt": "2022-05-06T19:37:17Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "CoAP",
-      "headRefOid": "8315a3ac5547a6e5fab1181ea5d5e9a0488b65f9",
+      "headRefOid": "9eb924a10e46070d1b28d53ac12c2a85129296d7",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
