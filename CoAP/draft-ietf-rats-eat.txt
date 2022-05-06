@@ -1489,12 +1489,12 @@ Internet-Draft                     EAT                          May 2022
    on the entity.  The contents of this claim do not originate from the
    software manufacturer.
 
-   This claim uses the same mechanism for identification of the type of
-   the swevidence as is used for the type of the manifest in the
-   manifests claim.  See the discussion above in the manifests claim.
+   This claim can be a [CoSWID].  When the CoSWID format is used, it
+   MUST be evidence CoSWIDs, not payload CoSWIDS.
 
-   When the [CoSWID] format is used, it MUST be evidence CoSWIDs, not
-   payload CoSWIDS.
+   Formats other than CoSWID can be used.  The identification of format
+   is by CoAP Content Format, the same as the manifests claim in
+   Section 3.2.16.
 
 
 

@@ -2382,7 +2382,7 @@ dloa-type = [
 </div>
 </section>
 </div>
-<div id="the-software-manifests-claim-manifests">
+<div id="manifests">
 <section id="section-3.2.16">
           <h4 id="name-the-software-manifests-clai">
 <a href="#section-3.2.16" class="section-number selfRef">3.2.16. </a><a href="#name-the-software-manifests-clai" class="section-name selfRef">The Software Manifests Claim (manifests)</a>
@@ -2446,9 +2446,10 @@ base64-url-text = text
 <p id="section-3.2.17-1">This claim contains descriptions, lists, evidence or measurements of the software that exists on the entity.
 The defining characteristic of this claim is that its contents are created by processes on the entity that inventory, measure or otherwise characterize the software on the entity.
 The contents of this claim do not originate from the software manufacturer.<a href="#section-3.2.17-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.17-2">This claim uses the same mechanism for identification of the type of the swevidence as is used for the type of the manifest in the manifests claim.
-See the discussion above in the manifests claim.<a href="#section-3.2.17-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.17-3">When the <span>[<a href="#CoSWID" class="xref">CoSWID</a>]</span> format is used, it MUST be evidence CoSWIDs, not payload CoSWIDS.<a href="#section-3.2.17-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.17-2">This claim can be a <span>[<a href="#CoSWID" class="xref">CoSWID</a>]</span>.
+When the CoSWID format is used, it MUST be evidence CoSWIDs, not payload CoSWIDS.<a href="#section-3.2.17-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.17-3">Formats other than CoSWID can be used.
+The identification of format is by CoAP Content Format, the same as the manifests claim in <a href="#manifests" class="xref">Section 3.2.16</a>.<a href="#section-3.2.17-3" class="pilcrow">¶</a></p>
 <div id="section-3.2.17-4">
 <pre class="lang-CDDL sourcecode">
 $$claims-set-claims //= (
