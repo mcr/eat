@@ -5,9 +5,9 @@
 RATS Working Group                                          L. Lundblade
 Internet-Draft                                       Security Theory LLC
 Intended status: Standards Track                              G. Mandyam
-Expires: 6 November 2022                                   J. O'Donoghue
+Expires: 9 November 2022                                   J. O'Donoghue
                                               Qualcomm Technologies Inc.
-                                                              5 May 2022
+                                                              8 May 2022
 
 
                    The Entity Attestation Token (EAT)
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 November 2022.
+   This Internet-Draft will expire on 9 November 2022.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Lundblade, et al.        Expires 6 November 2022                [Page 1]
+Lundblade, et al.        Expires 9 November 2022                [Page 1]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -76,7 +76,7 @@ Table of Contents
    2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .  10
    3.  Top-Level Token Definition  . . . . . . . . . . . . . . . . .  11
    4.  The Claims  . . . . . . . . . . . . . . . . . . . . . . . . .  12
-     4.1.  Nonce Claim (nonce) . . . . . . . . . . . . . . . . . . .  12
+     4.1.  Nonce Claim (nonce) . . . . . . . . . . . . . . . . . . .  13
      4.2.  Claims Describing the Entity  . . . . . . . . . . . . . .  13
        4.2.1.  Universal Entity ID Claim (ueid)  . . . . . . . . . .  13
        4.2.2.  Semi-permanent UEIDs (SUEIDs) . . . . . . . . . . . .  16
@@ -109,14 +109,14 @@ Table of Contents
 
 
 
-Lundblade, et al.        Expires 6 November 2022                [Page 2]
+Lundblade, et al.        Expires 9 November 2022                [Page 2]
 
 Internet-Draft                     EAT                          May 2022
 
 
-         4.2.18.2.  Objective  . . . . . . . . . . . . . . . . . . .  29
+         4.2.18.2.  Objective  . . . . . . . . . . . . . . . . . . .  30
          4.2.18.3.  Results  . . . . . . . . . . . . . . . . . . . .  30
-         4.2.18.4.  Objective Name . . . . . . . . . . . . . . . . .  30
+         4.2.18.4.  Objective Name . . . . . . . . . . . . . . . . .  31
        4.2.19. Submodules (submods)  . . . . . . . . . . . . . . . .  31
          4.2.19.1.  Submodule Types  . . . . . . . . . . . . . . . .  32
          4.2.19.2.  No Inheritance . . . . . . . . . . . . . . . . .  36
@@ -161,21 +161,21 @@ Internet-Draft                     EAT                          May 2022
        8.2.1.  Common Data Types . . . . . . . . . . . . . . . . . .  47
        8.2.2.  JSON Interoperability . . . . . . . . . . . . . . . .  48
        8.2.3.  Labels  . . . . . . . . . . . . . . . . . . . . . . .  48
-     8.3.  CBOR Interoperability . . . . . . . . . . . . . . . . . .  48
+     8.3.  CBOR Interoperability . . . . . . . . . . . . . . . . . .  49
 
 
 
-Lundblade, et al.        Expires 6 November 2022                [Page 3]
+Lundblade, et al.        Expires 9 November 2022                [Page 3]
 
 Internet-Draft                     EAT                          May 2022
 
 
        8.3.1.  EAT Constrained Device Serialization  . . . . . . . .  49
-     8.4.  Collected CDDL  . . . . . . . . . . . . . . . . . . . . .  49
+     8.4.  Collected CDDL  . . . . . . . . . . . . . . . . . . . . .  50
        8.4.1.  Payload CDDL  . . . . . . . . . . . . . . . . . . . .  50
-       8.4.2.  CBOR-Specific CDDL  . . . . . . . . . . . . . . . . .  55
+       8.4.2.  CBOR-Specific CDDL  . . . . . . . . . . . . . . . . .  56
        8.4.3.  JSON-Specific CDDL  . . . . . . . . . . . . . . . . .  56
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  56
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  57
      9.1.  Reuse of CBOR and JSON Web Token (CWT and JWT) Claims
            Registries  . . . . . . . . . . . . . . . . . . . . . . .  57
      9.2.  Claim Characteristics . . . . . . . . . . . . . . . . . .  57
@@ -202,54 +202,56 @@ Internet-Draft                     EAT                          May 2022
    12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  70
      12.1.  Normative References . . . . . . . . . . . . . . . . . .  70
      12.2.  Informative References . . . . . . . . . . . . . . . . .  73
-   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  75
+   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  76
      A.1.  Payload Examples  . . . . . . . . . . . . . . . . . . . .  76
        A.1.1.  Simple TEE Attestation  . . . . . . . . . . . . . . .  76
-       A.1.2.  Submodules for Board and Device . . . . . . . . . . .  77
-       A.1.3.  EAT Produced by Attestation Hardware Block  . . . . .  79
-       A.1.4.  Key / Key Store Attestation . . . . . . . . . . . . .  79
-       A.1.5.  Submodules for Board and Device . . . . . . . . . . .  80
-       A.1.6.  EAT Produced by Attestation Hardware Block  . . . . .  82
-       A.1.7.  Key / Key Store Attestation . . . . . . . . . . . . .  82
-       A.1.8.  SW Measurements of an IoT Device  . . . . . . . . . .  84
-       A.1.9.  Attestation Results in JSON format  . . . . . . . . .  87
-     A.2.  Full Token Examples . . . . . . . . . . . . . . . . . . .  87
-       A.2.1.  Basic CWT Example . . . . . . . . . . . . . . . . . .  87
-       A.2.2.  Detached EAT Bundle . . . . . . . . . . . . . . . . .  88
-   Appendix B.  UEID Design Rationale  . . . . . . . . . . . . . . .  90
-     B.1.  Collision Probability . . . . . . . . . . . . . . . . . .  90
+       A.1.2.  Submodules for Board and Device . . . . . . . . . . .  78
+       A.1.3.  EAT Produced by Attestation Hardware Block  . . . . .  80
+       A.1.4.  Key / Key Store Attestation . . . . . . . . . . . . .  80
+       A.1.5.  Submodules for Board and Device . . . . . . . . . . .  82
+       A.1.6.  EAT Produced by Attestation Hardware Block  . . . . .  84
+       A.1.7.  Key / Key Store Attestation . . . . . . . . . . . . .  84
+       A.1.8.  SW Measurements of an IoT Device  . . . . . . . . . .  86
+       A.1.9.  Attestation Results in JSON format  . . . . . . . . .  88
+       A.1.10. JSON-encoded Token with Sumodules . . . . . . . . . .  89
+     A.2.  Full Token Examples . . . . . . . . . . . . . . . . . . .  90
+       A.2.1.  Basic CWT Example . . . . . . . . . . . . . . . . . .  90
+       A.2.2.  Detached EAT Bundle . . . . . . . . . . . . . . . . .  91
+       A.2.3.  JSON-encoded Detached EAT Bundle  . . . . . . . . . .  93
 
 
 
-Lundblade, et al.        Expires 6 November 2022                [Page 4]
+Lundblade, et al.        Expires 9 November 2022                [Page 4]
 
 Internet-Draft                     EAT                          May 2022
 
 
-     B.2.  No Use of UUID  . . . . . . . . . . . . . . . . . . . . .  93
+   Appendix B.  UEID Design Rationale  . . . . . . . . . . . . . . .  93
+     B.1.  Collision Probability . . . . . . . . . . . . . . . . . .  93
+     B.2.  No Use of UUID  . . . . . . . . . . . . . . . . . . . . .  96
    Appendix C.  EAT Relation to IEEE.802.1AR Secure Device Identity
-           (DevID) . . . . . . . . . . . . . . . . . . . . . . . . .  93
-     C.1.  DevID Used With EAT . . . . . . . . . . . . . . . . . . .  94
-     C.2.  How EAT Provides an Equivalent Secure Device Identity . .  94
-     C.3.  An X.509 Format EAT . . . . . . . . . . . . . . . . . . .  95
-     C.4.  Device Identifier Permanence  . . . . . . . . . . . . . .  95
-   Appendix D.  CDDL for CWT and JWT . . . . . . . . . . . . . . . .  96
-   Appendix E.  Changes from Previous Drafts . . . . . . . . . . . .  98
-     E.1.  From draft-rats-eat-01  . . . . . . . . . . . . . . . . .  98
-     E.2.  From draft-mandyam-rats-eat-00  . . . . . . . . . . . . .  98
-     E.3.  From draft-ietf-rats-eat-01 . . . . . . . . . . . . . . .  98
-     E.4.  From draft-ietf-rats-eat-02 . . . . . . . . . . . . . . .  98
-     E.5.  From draft-ietf-rats-eat-03 . . . . . . . . . . . . . . .  99
-     E.6.  From draft-ietf-rats-eat-04 . . . . . . . . . . . . . . .  99
-     E.7.  From draft-ietf-rats-eat-05 . . . . . . . . . . . . . . . 100
-     E.8.  From draft-ietf-rats-eat-06 . . . . . . . . . . . . . . . 100
-     E.9.  From draft-ietf-rats-eat-07 . . . . . . . . . . . . . . . 100
-     E.10. From draft-ietf-rats-eat-08 . . . . . . . . . . . . . . . 100
-     E.11. From draft-ietf-rats-eat-09 . . . . . . . . . . . . . . . 100
-     E.12. From draft-ietf-rats-eat-10 . . . . . . . . . . . . . . . 100
-     E.13. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . . 102
-     E.14. From draft-ietf-rats-eat-12 . . . . . . . . . . . . . . . 102
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 103
+           (DevID) . . . . . . . . . . . . . . . . . . . . . . . . .  97
+     C.1.  DevID Used With EAT . . . . . . . . . . . . . . . . . . .  97
+     C.2.  How EAT Provides an Equivalent Secure Device Identity . .  98
+     C.3.  An X.509 Format EAT . . . . . . . . . . . . . . . . . . .  98
+     C.4.  Device Identifier Permanence  . . . . . . . . . . . . . .  99
+   Appendix D.  CDDL for CWT and JWT . . . . . . . . . . . . . . . .  99
+   Appendix E.  Changes from Previous Drafts . . . . . . . . . . . . 101
+     E.1.  From draft-rats-eat-01  . . . . . . . . . . . . . . . . . 101
+     E.2.  From draft-mandyam-rats-eat-00  . . . . . . . . . . . . . 101
+     E.3.  From draft-ietf-rats-eat-01 . . . . . . . . . . . . . . . 102
+     E.4.  From draft-ietf-rats-eat-02 . . . . . . . . . . . . . . . 102
+     E.5.  From draft-ietf-rats-eat-03 . . . . . . . . . . . . . . . 102
+     E.6.  From draft-ietf-rats-eat-04 . . . . . . . . . . . . . . . 102
+     E.7.  From draft-ietf-rats-eat-05 . . . . . . . . . . . . . . . 103
+     E.8.  From draft-ietf-rats-eat-06 . . . . . . . . . . . . . . . 103
+     E.9.  From draft-ietf-rats-eat-07 . . . . . . . . . . . . . . . 103
+     E.10. From draft-ietf-rats-eat-08 . . . . . . . . . . . . . . . 103
+     E.11. From draft-ietf-rats-eat-09 . . . . . . . . . . . . . . . 103
+     E.12. From draft-ietf-rats-eat-10 . . . . . . . . . . . . . . . 104
+     E.13. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . . 105
+     E.14. From draft-ietf-rats-eat-12 . . . . . . . . . . . . . . . 106
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 106
 
 1.  Introduction
 
@@ -265,6 +267,21 @@ Internet-Draft                     EAT                          May 2022
    [RFC7159].  EAT is an extension to CBOR Web Token (CWT) [RFC8392] and
    JSON Web Token (JWT) [RFC7519].
 
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022                [Page 5]
+
+Internet-Draft                     EAT                          May 2022
+
+
    The claims set is secured in transit with the same mechanisms used by
    CWT and JWT, in particular CBOR Object Signing and Encryption (COSE)
    [RFC8152] and JSON Object Signing and Encryption (JOSE) [RFC7515]
@@ -274,13 +291,6 @@ Internet-Draft                     EAT                          May 2022
    provisioned for the purpose of attestation.  It is the use of this
    key material that make the claims set "attested" rather than just
    some parameters sent to the relying party by the device.
-
-
-
-Lundblade, et al.        Expires 6 November 2022                [Page 5]
-
-Internet-Draft                     EAT                          May 2022
-
 
    EAT is focused on authenticating, identifying and characterizing
    implementations where implementations are devices, chips, hardware,
@@ -320,6 +330,14 @@ Internet-Draft                     EAT                          May 2022
 
    An entity is an implementation in hardware, software or both.
 
+
+
+
+Lundblade, et al.        Expires 9 November 2022                [Page 6]
+
+Internet-Draft                     EAT                          May 2022
+
+
    An entity is the same as the Attester Target Environment defined in
    RATS Architecture.
 
@@ -330,13 +348,6 @@ Internet-Draft                     EAT                          May 2022
    refers to a person or organization.
 
    An entity is never a server or a service.
-
-
-
-Lundblade, et al.        Expires 6 November 2022                [Page 6]
-
-Internet-Draft                     EAT                          May 2022
-
 
    An entity may be the whole device or it may be a subsystem, a
    subsystem of a subsystem and so on.  EAT allows claims to be
@@ -375,6 +386,14 @@ Internet-Draft                     EAT                          May 2022
    An EAT is primarily a claims set about an entity based on one of the
    following:
 
+
+
+
+Lundblade, et al.        Expires 9 November 2022                [Page 7]
+
+Internet-Draft                     EAT                          May 2022
+
+
    *  CBOR Web Token (CWT) [RFC8392]
 
    *  JSON Web Token (JWT) [RFC7519]
@@ -386,14 +405,6 @@ Internet-Draft                     EAT                          May 2022
    This specification extends those specifications by defining
    additional claims for attestation.  This specification also describes
    the notion of a "profile" that can narrow the definition of an EAT,
-
-
-
-Lundblade, et al.        Expires 6 November 2022                [Page 7]
-
-Internet-Draft                     EAT                          May 2022
-
-
    ensure interoperability and fill in details for specific usage
    scenarios.  This specification also adds some considerations for
    registration of future EAT-related claims.
@@ -428,6 +439,17 @@ Internet-Draft                     EAT                          May 2022
    objects and messages that may use a different encoding than the
    enclosing EAT.
 
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022                [Page 8]
+
+Internet-Draft                     EAT                          May 2022
+
+
    This specification uses Concise Data Definition Language (CDDL)
    [RFC8610] for all definitions.  The implementor interprets the CDDL
    to come to either the CBOR or JSON encoding.  In the case of JSON,
@@ -442,13 +464,6 @@ Internet-Draft                     EAT                          May 2022
    definition of most of what is defined in [RFC8392].  Similarly, this
    specification includes CDDL for most of what is defined in [RFC7519].
    These definitions are in Appendix D and are not normative.
-
-
-
-Lundblade, et al.        Expires 6 November 2022                [Page 8]
-
-Internet-Draft                     EAT                          May 2022
-
 
 1.4.  Operating Model and RATS Architecture
 
@@ -482,6 +497,15 @@ Internet-Draft                     EAT                          May 2022
    Any claim defined in this document or in the IANA CWT or JWT registry
    may be used in Attestation Evidence or Attestation Results.
 
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022                [Page 9]
+
+Internet-Draft                     EAT                          May 2022
+
+
    The relationship of claims in Attestation Results to Attestation
    Evidence is fundamentally governed by the Verifier and the Verifier's
    Policy.
@@ -493,18 +517,6 @@ Internet-Draft                     EAT                          May 2022
    measurements in Attestation Evidence may be compared to Reference
    Values the results of which are represented as a simple pass/fail in
    Attestation Results.
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022                [Page 9]
-
-Internet-Draft                     EAT                          May 2022
-
 
    It is also possible that some claims in the Attestation Evidence will
    be forwarded unmodified to the Relying Party in Attestation Results.
@@ -542,6 +554,14 @@ Internet-Draft                     EAT                          May 2022
       represented as pair with a value and either a name or key to
       identify it.
 
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 10]
+
+Internet-Draft                     EAT                          May 2022
+
+
    Claim Name:  A unique text string that identifies the claim.  It is
       used as the claim name for JSON encoding.
 
@@ -552,15 +572,6 @@ Internet-Draft                     EAT                          May 2022
 
    CWT/JWT Claims Set:  The CBOR map or JSON object that contains the
       claims conveyed by the CWT or JWT.
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 10]
-
-Internet-Draft                     EAT                          May 2022
-
 
    This document reuses terminology from RATS Architecure
    [RATS.Architecture]
@@ -600,6 +611,13 @@ Internet-Draft                     EAT                          May 2022
    Set about an entity or some number of entities.  An EAT MUST always
    contains a Claims-Set.
 
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 11]
+
+Internet-Draft                     EAT                          May 2022
+
+
    An EAT may be encoded in CBOR or JSON as defined here.  While not
    encouraged, other documents may define EAT encoding in other formats.
 
@@ -610,13 +628,6 @@ Internet-Draft                     EAT                          May 2022
    This document also defines the Detatched EAT Bundle Section 5, a
    bundle of some detached Claims-Sets and CWTs or JWTs that provide
    protection for the detached Claims-Set.
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 11]
-
-Internet-Draft                     EAT                          May 2022
-
 
    The following CDDL defines the top-levels of an EAT token as a socket
    indicating future token formats may be defined.  See Appendix D for
@@ -638,8 +649,8 @@ Internet-Draft                     EAT                          May 2022
 
    EAT-JSON-Token = $$EAT-JSON-Token-Formats
 
-   EAT-JSON-Token-Formats /= JWT-Message
-   EAT-JSON-Token-Formats /= DEB-Messages
+   $$EAT-JSON-Token-Formats /= JWT-Message
+   $$EAT-JSON-Token-Formats /= DEB-Untagged-Message
 
 4.  The Claims
 
@@ -655,6 +666,14 @@ Internet-Draft                     EAT                          May 2022
    Section 8 on encoding, the CDDL groups turn into CBOR map entries and
    JSON name/value pairs.
 
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 12]
+
+Internet-Draft                     EAT                          May 2022
+
+
    Each claim described has a unique text string and integer that
    identifies it.  CBOR encoded tokens MUST use only the integer for
    Claim Keys.  JSON encoded tokens MUST use only the text string for
@@ -666,13 +685,6 @@ Internet-Draft                     EAT                          May 2022
    nonces are allowed to accommodate multistage verification and
    consumption.  See the extensive discussion on attestation freshness
    in Appendix A of RATS Architecture [RATS.Architecture]
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 12]
-
-Internet-Draft                     EAT                          May 2022
-
 
    This defines the nonce claim for registration in the IANA CWT claims
    registry.  This is equivalent to the JWT nonce claim that is already
@@ -710,6 +722,14 @@ Internet-Draft                     EAT                          May 2022
    systems, as tokens are intended to be embedded in many different
    protocols and systems.  No two products anywhere, even in completely
    different industries made by two different manufacturers in two
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 13]
+
+Internet-Draft                     EAT                          May 2022
+
+
    different countries should have the same UEID (if they are not global
    and universal in this way, then Relying Parties receiving them will
    have to track other characteristics of the entity to keep entities
@@ -718,17 +738,6 @@ Internet-Draft                     EAT                          May 2022
    There are privacy considerations for UEIDs.  See Section 10.1.
 
    The UEID is permanent.  It MUST never change for a given entity.
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 13]
-
-Internet-Draft                     EAT                          May 2022
-
 
    A UEID is constructed of a single type byte followed by the bytes
    that are the identifier.  Several types are allowed to accommodate
@@ -772,16 +781,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 14]
+Lundblade, et al.        Expires 9 November 2022               [Page 14]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -837,7 +837,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 15]
+Lundblade, et al.        Expires 9 November 2022               [Page 15]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -893,7 +893,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 16]
+Lundblade, et al.        Expires 9 November 2022               [Page 16]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -949,7 +949,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 17]
+Lundblade, et al.        Expires 9 November 2022               [Page 17]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1005,7 +1005,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 18]
+Lundblade, et al.        Expires 9 November 2022               [Page 18]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1061,7 +1061,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 19]
+Lundblade, et al.        Expires 9 November 2022               [Page 19]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1072,7 +1072,7 @@ Internet-Draft                     EAT                          May 2022
 
    hardware-version-type = [
        version:  tstr,
-       scheme:  $version-scheme
+       ? scheme:  $version-scheme
    ]
 
 4.2.6.  Software Name Claim
@@ -1093,8 +1093,8 @@ Internet-Draft                     EAT                          May 2022
    $$Claims-Set-Claims //= (sw-version-label => sw-version-type)
 
    sw-version-type = [
-       version:  tstr,
-       scheme:  $version-scheme
+       version:  tstr
+       ? scheme:  $version-scheme
    ]
 
 4.2.8.  The Security Level Claim (security-level)
@@ -1117,7 +1117,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 20]
+Lundblade, et al.        Expires 9 November 2022               [Page 20]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1173,7 +1173,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 21]
+Lundblade, et al.        Expires 9 November 2022               [Page 21]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1229,7 +1229,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 22]
+Lundblade, et al.        Expires 9 November 2022               [Page 22]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1285,7 +1285,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 23]
+Lundblade, et al.        Expires 9 November 2022               [Page 23]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1341,7 +1341,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 24]
+Lundblade, et al.        Expires 9 November 2022               [Page 24]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1356,7 +1356,7 @@ Internet-Draft                     EAT                          May 2022
        ? altitude-accuracy => number,
        ? heading => number,
        ? speed => number,
-       ? timestamp => ~time-int,
+       ? timestamp => general-time-int,
        ? age => uint
    }
 
@@ -1397,7 +1397,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 25]
+Lundblade, et al.        Expires 9 November 2022               [Page 25]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1438,7 +1438,7 @@ Internet-Draft                     EAT                          May 2022
    )
 
    dloa-type = [
-       dloa_registrar: ~uri
+       dloa_registrar: general-uri
        dloa_platform_label: text
        ? dloa_application_label: text
    ]
@@ -1453,7 +1453,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 26]
+Lundblade, et al.        Expires 9 November 2022               [Page 26]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1479,62 +1479,60 @@ Internet-Draft                     EAT                          May 2022
 
    This claim allows multiple formats for the manifest.  For example,
    the manifest may be a CBOR-format CoSWID, an XML-format SWID or
-   other.  Identification of the type of manifest is always by a CBOR
-   tag.  In many cases, for examples CoSWID, a tag will already be
-   registered with IANA.  If not, a tag MUST be registered.  It can be
-   in the first-come-first-served space which has minimal requirements
-   for registration.
+   other.  Identification of the type of manifest is always by a CoAP
+   Content-Format integer [RFC7252].  If there is no CoAP identifier
+   registered for the manifest format, one should be registered, perhaps
+   in the experimental or first-come-first-served range.
 
-   The claim is an array of one or more manifests.  To facilitate hand
-   off of the manifest to a decoding library, each manifest is contained
-   in a byte string.  This occurs for CBOR-format manifests as well as
-   non-CBOR format manifests.
+   This claim MUST be an array of one or more manifests.  Each manifest
+   in the claim MUST be an array of two.  The first item in the array of
+   two MUST be an integer CoAP Content-Format identifier.  The second
+   item is MUST be the actual manifest.
 
-   If a particular manifest type uses CBOR encoding, then the item in
-   the array for it MUST be a byte string that contains a CBOR tag.  The
-   EAT decoder must decode the byte string and then the CBOR within it
-   to find the tag number to identify the type of manifest.  The
-   contents of the byte string is then handed to the particular manifest
-   processor for that type of manifest.  CoSWID and SUIT manifest are
-   examples of this.
+   In CBOR-encoded EATs the manifest, whatever format it is, MUST be
+   placed in a byte string.
 
-   If a particular manifest type does not use CBOR encoding, then the
-   item in the array for it MUST be a CBOR tag that contains a byte
-   string.  The EAT decoder uses the tag to identify the processor for
-   that type of manifest.  The contents of the tag, the byte string, are
-   handed to the manifest processor.  Note that a byte string is used to
-   contain the manifest whether it is a text based format or not.  An
-   example of this is an XML format ISO/IEC 19770 SWID.
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 27]
-
-Internet-Draft                     EAT                          May 2022
-
-
-   It is not possible to describe the above requirements in CDDL, so the
-   type for an individual manifest is any in the CDDL below.  The above
-   text sets the encoding requirement.
+   In JSON-format tokens the manifest, whatever format it is, MUST be
+   placed in a text string.  When a non-text format manifest like a
+   CBOR-encoded CoSWID is put in a JSON-encoded token, the manifest MUST
+   be base-64 encoded.
 
    This claim allows for multiple manifests in one token since multiple
    software packages are likely to be present.  The multiple manifests
-   MAY be of multiple formats.  In some cases EAT submodules may be used
-   instead of the array structure in this claim for multiple manifests.
+   MAY be of different formats.  In some cases EAT submodules may be
+   used instead of the array structure in this claim for multiple
+   manifests.
 
    When the [CoSWID] format is used, it MUST be a payload CoSWID, not an
    evidence CoSWID.
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 27]
+
+Internet-Draft                     EAT                          May 2022
+
 
    $$Claims-Set-Claims //= (
        manifests-label => manifests-type
    )
 
-   manifests-type = [+ $$manifest-formats]
+   manifests-type = [+ manifest-format]
 
-   coswid-that-is-a-cbor-tag-xx = tagged-coswid<concise-swid-tag>
+   manifest-format = [
+       content-type:   uint,
+       content-format: JC< $$manifest-body-json,
+                           $$manifest-body-cbor >
+   ]
 
-   $$manifest-formats /= bytes .cbor coswid-that-is-a-cbor-tag-xx
+   $$manifest-body-cbor /= bytes .cbor untagged-coswid
+   $$manifest-body-json /= base64-url-text
+
+   $$manifest-body-cbor /= bytes .cbor SUIT_Envelope
+   $$manifest-body-json /= base64-url-text
+
+   suit-directive-process-dependency = 19
 
 4.2.17.  The Software Evidence Claim (swevidence)
 
@@ -1545,30 +1543,47 @@ Internet-Draft                     EAT                          May 2022
    on the entity.  The contents of this claim do not originate from the
    software manufacturer.
 
-   This claim uses the same mechanism for identification of the type of
-   the swevidence as is used for the type of the manifest in the
-   manifests claim.  It also uses the same byte string based mechanism
-   for containing the claim and easing the hand off to a processing
-   library.  See the discussion above in the manifests claim.
+   This claim can be a [CoSWID].  When the CoSWID format is used, it
+   MUST be evidence CoSWIDs, not payload CoSWIDS.
 
-   When the [CoSWID] format is used, it MUST be evidence CoSWIDs, not
-   payload CoSWIDS.
+   Formats other than CoSWID can be used.  The identification of format
+   is by CoAP Content Format, the same as the manifests claim in
+   Section 4.2.16.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 28]
+
+Internet-Draft                     EAT                          May 2022
+
 
    $$Claims-Set-Claims //= (
        swevidence-label => swevidence-type
    )
 
-   swevidence-type = [+ $$swevidence-formats]
+   swevidence-type = [+ swevidence-format]
 
-   coswid-that-is-a-cbor-tag = tagged-coswid<concise-swid-tag>
-   $$swevidence-formats /= bytes .cbor coswid-that-is-a-cbor-tag
+   swevidence-format = [
+       content-type:   uint,
+       content-format: JC< $$swevidence-body-json,
+                           $$swevidence-body-cbor >
+   ]
 
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 28]
-
-Internet-Draft                     EAT                          May 2022
-
+   $$swevidence-body-cbor /= bytes .cbor untagged-coswid
+   $$swevidence-body-json /= base64-url-text
 
 4.2.18.  The SW Measurement Results Claim (swresults)
 
@@ -1599,6 +1614,18 @@ Internet-Draft                     EAT                          May 2022
    schemes or systems.  It may be the name of a commercial product or
    such.
 
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 29]
+
+Internet-Draft                     EAT                          May 2022
+
+
 4.2.18.2.  Objective
 
    This roughly characterizes the coverage of the software measurement
@@ -1618,14 +1645,6 @@ Internet-Draft                     EAT                          May 2022
       system or administrative account
 
    5 -- system-libs:  Refers to all of the system libraries that are
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 29]
-
-Internet-Draft                     EAT                          May 2022
-
-
       broadly shared and used by applications and such
 
    6 -- partial:  Some other partial set of the software
@@ -1653,34 +1672,20 @@ Internet-Draft                     EAT                          May 2022
       some, but not all, measurements compared correctly to Reference
       Values
 
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 30]
+
+Internet-Draft                     EAT                          May 2022
+
+
 4.2.18.4.  Objective Name
 
    This is a free-form text string that describes the objective.  For
    example, "Linux kernel" or "Facebook App"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 30]
-
-Internet-Draft                     EAT                          May 2022
-
 
    $$Claims-Set-Claims //= ( swresults-label => [ + swresult-type ] )
 
@@ -1725,18 +1730,16 @@ Internet-Draft                     EAT                          May 2022
    for low-power audio and video playback.  It may have multiple
    security-oriented subsystems like a TEE and a Secure Element.
 
-   The claims for a subsystem can be grouped together in a submodule or
-   submod.
 
 
 
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 31]
+Lundblade, et al.        Expires 9 November 2022               [Page 31]
 
 Internet-Draft                     EAT                          May 2022
 
+
+   The claims for a subsystem can be grouped together in a submodule or
+   submod.
 
    The submods are in a single map/object, one entry per submodule.
    There is only one submods map/object in a token.  It is identified by
@@ -1786,10 +1789,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 32]
+Lundblade, et al.        Expires 9 November 2022               [Page 32]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1845,7 +1845,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 33]
+Lundblade, et al.        Expires 9 November 2022               [Page 33]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1901,7 +1901,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 34]
+Lundblade, et al.        Expires 9 November 2022               [Page 34]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1957,7 +1957,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 35]
+Lundblade, et al.        Expires 9 November 2022               [Page 35]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2013,7 +2013,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 36]
+Lundblade, et al.        Expires 9 November 2022               [Page 36]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2069,7 +2069,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 37]
+Lundblade, et al.        Expires 9 November 2022               [Page 37]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2090,7 +2090,7 @@ Internet-Draft                     EAT                          May 2022
    Note that this is named "eat_profile" for JWT and is distinct from
    the already registered "profile" claim in the JWT claims registry.
 
-   $$Claims-Set-Claims //= (profile-label => ~uri / ~oid)
+   $$Claims-Set-Claims //= (profile-label => general-uri / general-oid)
 
 4.3.4.  The Intended Use Claim (intended-use)
 
@@ -2125,7 +2125,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 38]
+Lundblade, et al.        Expires 9 November 2022               [Page 38]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2181,7 +2181,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 39]
+Lundblade, et al.        Expires 9 November 2022               [Page 39]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2237,7 +2237,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 40]
+Lundblade, et al.        Expires 9 November 2022               [Page 40]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2293,7 +2293,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 41]
+Lundblade, et al.        Expires 9 November 2022               [Page 41]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2349,7 +2349,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 42]
+Lundblade, et al.        Expires 9 November 2022               [Page 42]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2405,7 +2405,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 43]
+Lundblade, et al.        Expires 9 November 2022               [Page 43]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2461,7 +2461,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 44]
+Lundblade, et al.        Expires 9 November 2022               [Page 44]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2517,7 +2517,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 45]
+Lundblade, et al.        Expires 9 November 2022               [Page 45]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2573,7 +2573,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 46]
+Lundblade, et al.        Expires 9 November 2022               [Page 46]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2629,7 +2629,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 47]
+Lundblade, et al.        Expires 9 November 2022               [Page 47]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2637,11 +2637,15 @@ Internet-Draft                     EAT                          May 2022
    Unless expliclity indicated, URIs are not the URI tag defined in
    [RFC8949].  They are just text strings that contain a URI.
 
-   time-int = #6.1(int)
+   general-time-int = JC<int, #6.1(int)>
 
    binary-data = JC<base64-url-text, bstr>
 
    base64-url-text = tstr .regexp "[A-Za-z0-9_=-]+"
+
+   general-oid = JC<text, bstr>
+
+   general-uri = text
 
 8.2.2.  JSON Interoperability
 
@@ -2676,19 +2680,21 @@ Internet-Draft                     EAT                          May 2022
    The CDDL in most cases gives both the integer label and the string
    label as it is not convenient to have conditional CDDL for such.
 
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 48]
+
+Internet-Draft                     EAT                          May 2022
+
+
 8.3.  CBOR Interoperability
 
    CBOR allows data items to be serialized in more than one form.  If
    the sender uses a form that the receiver can't decode, there will not
    be interoperability.
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 48]
-
-Internet-Draft                     EAT                          May 2022
-
 
    This specification gives no blanket requirements to narrow CBOR
    serialization for all uses of EAT.  This allows individual uses to
@@ -2731,20 +2737,16 @@ Internet-Draft                     EAT                          May 2022
       followed.  The EAT encoder must not send duplicate map keys/labels
       or invalid UTF-8 strings.
 
-8.4.  Collected CDDL
 
 
 
 
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 49]
+Lundblade, et al.        Expires 9 November 2022               [Page 49]
 
 Internet-Draft                     EAT                          May 2022
 
+
+8.4.  Collected CDDL
 
 8.4.1.  Payload CDDL
 
@@ -2760,11 +2762,15 @@ Internet-Draft                     EAT                          May 2022
    token can be nested inside a JSON token and vice versa.  Nested-Token
    is defined in the following sections.
 
-   time-int = #6.1(int)
+   general-time-int = JC<int, #6.1(int)>
 
    binary-data = JC<base64-url-text, bstr>
 
    base64-url-text = tstr .regexp "[A-Za-z0-9_=-]+"
+
+   general-oid = JC<text, bstr>
+
+   general-uri = text
 
    $$Claims-Set-Claims //= (ueid-label => ueid-type)
 
@@ -2788,6 +2794,14 @@ Internet-Draft                     EAT                          May 2022
 
    oemid-random = JC<oemid-random-json, oemid-random-cbor>
    oemid-random-cbor = bstr .size 16
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 50]
+
+Internet-Draft                     EAT                          May 2022
+
+
    oemid-random-json = base64-url-text .size 24
 
 
@@ -2795,16 +2809,9 @@ Internet-Draft                     EAT                          May 2022
        hardware-version-label => hardware-version-type
    )
 
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 50]
-
-Internet-Draft                     EAT                          May 2022
-
-
    hardware-version-type = [
        version:  tstr,
-       scheme:  $version-scheme
+       ? scheme:  $version-scheme
    ]
 
    $$Claims-Set-Claims //= (
@@ -2819,8 +2826,8 @@ Internet-Draft                     EAT                          May 2022
    $$Claims-Set-Claims //= (sw-version-label => sw-version-type)
 
    sw-version-type = [
-       version:  tstr,
-       scheme:  $version-scheme
+       version:  tstr
+       ? scheme:  $version-scheme
    ]
 
    $$Claims-Set-Claims //=
@@ -2843,6 +2850,14 @@ Internet-Draft                     EAT                          May 2022
 
    debug-status-type = ds-enabled /
                        disabled /
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 51]
+
+Internet-Draft                     EAT                          May 2022
+
+
                        disabled-since-boot /
                        disabled-permanently /
                        disabled-fully-and-permanently
@@ -2850,14 +2865,6 @@ Internet-Draft                     EAT                          May 2022
    ds-enabled                     = JC< "enabled", 0 >
    disabled                       = JC< "disabled", 1 >
    disabled-since-boot            = JC< "disabled-since-boot", 2 >
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 51]
-
-Internet-Draft                     EAT                          May 2022
-
-
    disabled-permanently           = JC< "disabled-permanently", 3 >
    disabled-fully-and-permanently = JC< "disabled-fully-and-permanently",
                                          4 >
@@ -2872,7 +2879,7 @@ Internet-Draft                     EAT                          May 2022
        ? altitude-accuracy => number,
        ? heading => number,
        ? speed => number,
-       ? timestamp => ~time-int,
+       ? timestamp => general-time-int,
        ? age => uint
    }
 
@@ -2900,51 +2907,74 @@ Internet-Draft                     EAT                          May 2022
                        csr /
                        pop
 
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 52]
+
+Internet-Draft                     EAT                          May 2022
+
+
    generic      = JC< "generic",      1 >
    registration = JC< "registration", 2 >
    provisioning = JC< "provisioning", 3 >
    csr          = JC< "csr",          4 >
    pop          = JC< "pop",          5 >
 
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 52]
-
-Internet-Draft                     EAT                          May 2022
-
-
    $$Claims-Set-Claims //= (
        dloas-label => [ + dloa-type ]
    )
 
    dloa-type = [
-       dloa_registrar: ~uri
+       dloa_registrar: general-uri
        dloa_platform_label: text
        ? dloa_application_label: text
    ]
 
-   $$Claims-Set-Claims //= (profile-label => ~uri / ~oid)
+   $$Claims-Set-Claims //= (profile-label => general-uri / general-oid)
 
    $$Claims-Set-Claims //= (
        manifests-label => manifests-type
    )
 
-   manifests-type = [+ $$manifest-formats]
+   manifests-type = [+ manifest-format]
 
-   coswid-that-is-a-cbor-tag-xx = tagged-coswid<concise-swid-tag>
+   manifest-format = [
+       content-type:   uint,
+       content-format: JC< $$manifest-body-json,
+                           $$manifest-body-cbor >
+   ]
 
-   $$manifest-formats /= bytes .cbor coswid-that-is-a-cbor-tag-xx
+   $$manifest-body-cbor /= bytes .cbor untagged-coswid
+   $$manifest-body-json /= base64-url-text
 
+   $$manifest-body-cbor /= bytes .cbor SUIT_Envelope
+   $$manifest-body-json /= base64-url-text
+
+   suit-directive-process-dependency = 19
 
    $$Claims-Set-Claims //= (
        swevidence-label => swevidence-type
    )
 
-   swevidence-type = [+ $$swevidence-formats]
+   swevidence-type = [+ swevidence-format]
 
-   coswid-that-is-a-cbor-tag = tagged-coswid<concise-swid-tag>
-   $$swevidence-formats /= bytes .cbor coswid-that-is-a-cbor-tag
+   swevidence-format = [
+       content-type:   uint,
+       content-format: JC< $$swevidence-body-json,
+                           $$swevidence-body-cbor >
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 53]
+
+Internet-Draft                     EAT                          May 2022
+
+
+   ]
+
+   $$swevidence-body-cbor /= bytes .cbor untagged-coswid
+   $$swevidence-body-json /= base64-url-text
+
 
    $$Claims-Set-Claims //= ( swresults-label => [ + swresult-type ] )
 
@@ -2962,14 +2992,6 @@ Internet-Draft                     EAT                          May 2022
                               partially-verified
 
    verification-not-run       = JC< "verification-not-run",       1 >
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 53]
-
-Internet-Draft                     EAT                          May 2022
-
-
    verification-indeterminate = JC< "verification-indeterminate", 2 >
    verification-failed        = JC< "verification-failed",        3 >
    fully-verified             = JC< "fully-verified",             4 >
@@ -2997,6 +3019,13 @@ Internet-Draft                     EAT                          May 2022
 
 
 
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 54]
+
+Internet-Draft                     EAT                          May 2022
+
+
    Detached-Submodule-Digest = [
       algorithm : JC< text, int >
       digest    : binary-data
@@ -3017,14 +3046,6 @@ Internet-Draft                     EAT                          May 2022
    ]
 
    json-wrapped-claims-set = base64-url-text
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 54]
-
-Internet-Draft                     EAT                          May 2022
-
 
    cbor-wrapped-claims-set = bstr .cbor Claims-Set
 
@@ -3054,33 +3075,14 @@ Internet-Draft                     EAT                          May 2022
    swresults-label        = JC< "swresults" , TBD >
    odometer-label         = JC< "odometer",   TBD >
 
-8.4.2.  CBOR-Specific CDDL
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 55]
+Lundblade, et al.        Expires 9 November 2022               [Page 55]
 
 Internet-Draft                     EAT                          May 2022
 
+
+8.4.2.  CBOR-Specific CDDL
 
    EAT-CBOR-Token = $$EAT-CBOR-Tagged-Token / $$EAT-CBOR-Untagged-Token
 
@@ -3110,8 +3112,8 @@ Internet-Draft                     EAT                          May 2022
 
    EAT-JSON-Token = $$EAT-JSON-Token-Formats
 
-   EAT-JSON-Token-Formats /= JWT-Message
-   EAT-JSON-Token-Formats /= DEB-Messages
+   $$EAT-JSON-Token-Formats /= JWT-Message
+   $$EAT-JSON-Token-Formats /= DEB-Untagged-Message
 
 
    Nested-Token = JSON-Nested-Token
@@ -3125,18 +3127,18 @@ Internet-Draft                     EAT                          May 2022
 
    CBOR-Token-Inside-JSON-Token = base64-url-text
 
-9.  IANA Considerations
 
 
 
 
 
 
-
-Lundblade, et al.        Expires 6 November 2022               [Page 56]
+Lundblade, et al.        Expires 9 November 2022               [Page 56]
 
 Internet-Draft                     EAT                          May 2022
 
+
+9.  IANA Considerations
 
 9.1.  Reuse of CBOR and JSON Web Token (CWT and JWT) Claims Registries
 
@@ -3187,9 +3189,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 57]
+Lundblade, et al.        Expires 9 November 2022               [Page 57]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3245,7 +3245,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 58]
+Lundblade, et al.        Expires 9 November 2022               [Page 58]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3301,7 +3301,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 59]
+Lundblade, et al.        Expires 9 November 2022               [Page 59]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3357,7 +3357,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 60]
+Lundblade, et al.        Expires 9 November 2022               [Page 60]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3413,7 +3413,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 61]
+Lundblade, et al.        Expires 9 November 2022               [Page 61]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3469,7 +3469,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 62]
+Lundblade, et al.        Expires 9 November 2022               [Page 62]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3525,7 +3525,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 63]
+Lundblade, et al.        Expires 9 November 2022               [Page 63]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3581,7 +3581,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 64]
+Lundblade, et al.        Expires 9 November 2022               [Page 64]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3637,7 +3637,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 65]
+Lundblade, et al.        Expires 9 November 2022               [Page 65]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3693,7 +3693,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 66]
+Lundblade, et al.        Expires 9 November 2022               [Page 66]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3749,7 +3749,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 67]
+Lundblade, et al.        Expires 9 November 2022               [Page 67]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3805,7 +3805,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 68]
+Lundblade, et al.        Expires 9 November 2022               [Page 68]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3861,7 +3861,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 69]
+Lundblade, et al.        Expires 9 November 2022               [Page 69]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3917,7 +3917,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 70]
+Lundblade, et al.        Expires 9 November 2022               [Page 70]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3973,7 +3973,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 71]
+Lundblade, et al.        Expires 9 November 2022               [Page 71]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3986,6 +3986,11 @@ Internet-Draft                     EAT                          May 2022
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
+
+   [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
+              Application Protocol (CoAP)", RFC 7252,
+              DOI 10.17487/RFC7252, June 2014,
+              <https://www.rfc-editor.org/info/rfc7252>.
 
    [RFC7515]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web
               Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, May
@@ -4021,18 +4026,17 @@ Internet-Draft                     EAT                          May 2022
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
-              "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
-              May 2018, <https://www.rfc-editor.org/info/rfc8392>.
 
 
 
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 72]
+Lundblade, et al.        Expires 9 November 2022               [Page 72]
 
 Internet-Draft                     EAT                          May 2022
 
+
+   [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
+              "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
+              May 2018, <https://www.rfc-editor.org/info/rfc8392>.
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
@@ -4073,6 +4077,19 @@ Internet-Draft                     EAT                          May 2022
               "Birthday attack",
               <https://en.wikipedia.org/wiki/Birthday_attack.>.
 
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 73]
+
+Internet-Draft                     EAT                          May 2022
+
+
    [CBOR.Cert.Draft]
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
@@ -4080,15 +4097,6 @@ Internet-Draft                     EAT                          May 2022
               ietf-cose-cbor-encoded-cert-03, 10 January 2022,
               <https://www.ietf.org/archive/id/draft-ietf-cose-cbor-
               encoded-cert-03.txt>.
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 73]
-
-Internet-Draft                     EAT                          May 2022
-
 
    [Common.Criteria]
               "Common Criteria for Information Technology Security
@@ -4130,6 +4138,14 @@ Internet-Draft                     EAT                          May 2022
               <https://standards.ieee.org/content/dam/ieee-
               standards/standards/web/documents/tutorials/eui.pdf>.
 
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 74]
+
+Internet-Draft                     EAT                          May 2022
+
+
    [OUI.Lookup]
               "IEEE Registration Authority Assignments",
               <https://regauth.standards.ieee.org/standards-ra-web/pub/
@@ -4138,14 +4154,6 @@ Internet-Draft                     EAT                          May 2022
    [RATS.Architecture]
               Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote Attestation Procedures Architecture", Work
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 74]
-
-Internet-Draft                     EAT                          May 2022
-
-
               in Progress, Internet-Draft, draft-ietf-rats-architecture-
               15, 8 February 2022, <https://www.ietf.org/archive/id/
               draft-ietf-rats-architecture-15.txt>.
@@ -4182,6 +4190,18 @@ Internet-Draft                     EAT                          May 2022
               2nd Edition", January 2018, <https://www.w3.org/TR/
               geolocation-API/#coordinates_interface>.
 
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 75]
+
+Internet-Draft                     EAT                          May 2022
+
+
 Appendix A.  Examples
 
    Most examples are shown as just a Claims-Set that would be a payload
@@ -4190,17 +4210,6 @@ Appendix A.  Examples
    showing full tokens makes it harder to show the claims.
 
    Some examples of full tokens are also given.
-
-   TODO: describe cddl validation
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 75]
-
-Internet-Draft                     EAT                          May 2022
-
 
    WARNING: These examples use tag and label numbers not yet assigned by
    IANA.
@@ -4212,6 +4221,43 @@ A.1.1.  Simple TEE Attestation
    This is a simple attestation of a TEE that includes a manifest that
    is a payload CoSWID to describe the TEE's software.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 76]
+
+Internet-Draft                     EAT                          May 2022
+
+
    / This is an EAT payload that describes a simple TEE. /
 
    {
@@ -4220,16 +4266,34 @@ A.1.1.  Simple TEE Attestation
        / secure-boot /    262: true,
        / debug-status /   263: 2, / disabled-since-boot /
        / manfests /       273: [
+                              [
+                                  121, / CoAP Content ID. A     /
+                                       / made up one until one  /
+                                       / is assigned for CoSWID /
+
                                   / This is byte-string wrapped      /
                                   / payload CoSWID. It gives the TEE /
                                   / software name, the version and   /
                                   / the  name of the file it is in.  /
-                                  h' da53574944a60064336132340c01016b
+                                  / {0: "3a24",                      /
+                                  /  12: 1,                          /
+                                  /   1: "Acme TEE OS",              /
+                                  /  13: "3.1.4",                    /
+                                  /   2: [{31: "Acme TEE OS", 33: 1}, /
+                                  /       {31: "Acme TEE OS", 33: 2}], /
+                                  /   6: {                           /
+                                  /       17: {                      /
+                                  /           24: "acme_tee_3.exe"   /
+                                  /       }                          /
+                                  /    }                             /
+                                  /  }                               /
+                                  h' a60064336132340c01016b
                                      41636d6520544545204f530d65332e31
                                      2e340282a2181f6b41636d6520544545
                                      204f53182101a2181f6b41636d652054
                                      4545204f5318210206a111a118186e61
                                      636d655f7465655f332e657865'
+                               ]
                            ]
    }
 
@@ -4245,15 +4309,7 @@ A.1.1.  Simple TEE Attestation
 
 
 
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 76]
+Lundblade, et al.        Expires 9 November 2022               [Page 77]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4309,7 +4365,7 @@ A.1.2.  Submodules for Board and Device
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 77]
+Lundblade, et al.        Expires 9 November 2022               [Page 78]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4365,7 +4421,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 78]
+Lundblade, et al.        Expires 9 November 2022               [Page 79]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4391,6 +4447,41 @@ A.1.3.  EAT Produced by Attestation Hardware Block
 
 A.1.4.  Key / Key Store Attestation
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 80]
+
+Internet-Draft                     EAT                          May 2022
+
+
    / This is an EAT payload that describes a simple TEE. /
 
    {
@@ -4399,16 +4490,34 @@ A.1.4.  Key / Key Store Attestation
        / secure-boot /    262: true,
        / debug-status /   263: 2, / disabled-since-boot /
        / manfests /       273: [
+                              [
+                                  121, / CoAP Content ID. A     /
+                                       / made up one until one  /
+                                       / is assigned for CoSWID /
+
                                   / This is byte-string wrapped      /
                                   / payload CoSWID. It gives the TEE /
                                   / software name, the version and   /
                                   / the  name of the file it is in.  /
-                                  h' da53574944a60064336132340c01016b
+                                  / {0: "3a24",                      /
+                                  /  12: 1,                          /
+                                  /   1: "Acme TEE OS",              /
+                                  /  13: "3.1.4",                    /
+                                  /   2: [{31: "Acme TEE OS", 33: 1}, /
+                                  /       {31: "Acme TEE OS", 33: 2}], /
+                                  /   6: {                           /
+                                  /       17: {                      /
+                                  /           24: "acme_tee_3.exe"   /
+                                  /       }                          /
+                                  /    }                             /
+                                  /  }                               /
+                                  h' a60064336132340c01016b
                                      41636d6520544545204f530d65332e31
                                      2e340282a2181f6b41636d6520544545
                                      204f53182101a2181f6b41636d652054
                                      4545204f5318210206a111a118186e61
                                      636d655f7465655f332e657865'
+                               ]
                            ]
    }
 
@@ -4421,7 +4530,10 @@ A.1.4.  Key / Key Store Attestation
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 79]
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 81]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4477,7 +4589,7 @@ A.1.5.  Submodules for Board and Device
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 80]
+Lundblade, et al.        Expires 9 November 2022               [Page 82]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4533,7 +4645,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 81]
+Lundblade, et al.        Expires 9 November 2022               [Page 83]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4585,19 +4697,23 @@ A.1.7.  Key / Key Store Attestation
        / secure-boot /    262: true,
        / debug-status /   263: 2, / disabled-since-boot /
        / manifests /      273: [
-                                   h'da53574944a600683762623334383766
+                                   [ 121, / CoAP Content ID. A      /
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 82]
+Lundblade, et al.        Expires 9 November 2022               [Page 84]
 
 Internet-Draft                     EAT                          May 2022
 
 
-                                     0c000169436172626f6e6974650d6331
-                                     2e320e0102a2181f75496e6475737472
-                                     69616c204175746f6d6174696f6e1821
-                                     02'
+                                          / made up one until one   /
+                                          / is assigned for CoSWID  /
+                                     h'a600683762623334383766
+                                       0c000169436172626f6e6974650d6331
+                                       2e320e0102a2181f75496e6475737472
+                                       69616c204175746f6d6174696f6e1821
+                                       02'
+                                    ]
                                     / Above is an encoded CoSWID     /
                                     / with the following data        /
                                     /   SW Name: "Carbonite"         /
@@ -4624,30 +4740,35 @@ Internet-Draft                     EAT                          May 2022
               / security-level / 261: 1, / unrestricted /
               / secure-boot /    262: true,
               / manifests /      273: [
-                                       h'da53574944a600687337
+                                   [ 121, / CoAP Content ID. A      /
+                                          / made up one until one   /
+                                          / is assigned for CoSWID  /
+                                       h'a600687337
                                          6537346b78380c000168
                                          44726f6964204f530d65
                                          52322e44320e0302a218
                                          1F75496E647573747269
                                          616c204175746f6d6174
                                          696f6e182102'
-                                        / Above is an encoded CoSWID /
-                                        / with the following data:   /
-                                        /   SW Name: "Droid OS"      /
-                                        /   SW Vers: "R2.D2"         /
-                                        /   SW Creator:              /
-                                        /     "Industrial Automation"/
+                                     ]
+                                     / Above is an encoded CoSWID /
+                                     / with the following data:   /
+                                     /   SW Name: "Droid OS"      /
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 85]
+
+Internet-Draft                     EAT                          May 2022
+
+
+                                     /   SW Vers: "R2.D2"         /
+                                     /   SW Creator:              /
+                                     /     "Industrial Automation"/
                                   ]
                               }
                           }
    }
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 83]
-
-Internet-Draft                     EAT                          May 2022
 
 
 A.1.8.  SW Measurements of an IoT Device
@@ -4656,111 +4777,64 @@ A.1.8.  SW Measurements of an IoT Device
    CoSWID format measurments of the SW.  The CoSWID is in byte-string
    wrapped in the token and also shown in diagnostic form.
 
+  / This EAT payload is for an IoT device with a TEE. The attestation /
+  / is produced by the TEE. There is a submodule for the IoT OS (the  /
+  / main OS of the IoT device that is not as secure as the TEE). The  /
+  / submodule contains claims for the IoT OS. The TEE also measures   /
+  / the IoT OS and puts the measurements in the submodule.            /
+
+  {
+      / nonce /           10: h'948f8860d13a463e',
+      / security-level / 261: 3, / secure-restricted /
+      / secure-boot /    262: true,
+      / debug-status /   263: 2, / disabled-since-boot /
+      / OEMID /          258: h'8945ad', / IEEE CID based /
+      / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
+      / sumods /         266: {
+                              "OS" : {
+          / security-level /     261: 2, / restricted /
+          / secure-boot /        262: true,
+          / debug-status /       263: 2, / disabled-since-boot /
+          / swevidence /         274: [
+                                     [
+                                         121, / CoAP Content ID. A     /
+                                              / made up one until one  /
+                                              / is assigned for CoSWID /
+
+                                      / This is a byte-string wrapped /
+                                      / evidence CoSWID. It has       /
+                                      / hashes of the main files of   /
+                                      / the IoT OS.  /
+                                      h'a600663463613234350c
+                                        17016d41636d6520522d496f542d4f
+                                        530d65332e312e3402a2181f724163
+                                        6d6520426173652041747465737465
+                                        7218210103a11183a318187161636d
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 84]
+Lundblade, et al.        Expires 9 November 2022               [Page 86]
 
 Internet-Draft                     EAT                          May 2022
 
 
-   / This EAT payload is for an IoT device with a TEE. The attestation /
-   / is produced by the TEE. There is a submodule for the IoT OS (the  /
-   / main OS of the IoT device that is not as secure as the TEE). The  /
-   / submodule contains claims for the IoT OS. The TEE also measures   /
-   / the IoT OS and puts the measurements in the submodule.            /
-
-   {
-       / nonce /           10: h'948f8860d13a463e',
-       / security-level / 261: 3, / secure-restricted /
-       / secure-boot /    262: true,
-       / debug-status /   263: 2, / disabled-since-boot /
-       / OEMID /          258: h'8945ad', / IEEE CID based /
-       / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
-       / sumods /         266: {
-                               "OS" : {
-           / security-level /     261: 2, / restricted /
-           / secure-boot /        262: true,
-           / debug-status /       263: 2, / disabled-since-boot /
-           / swevidence /         274: [
-                                       / This is a byte-string wrapped /
-                                       / evidence CoSWID. It has       /
-                                       / hashes of the main files of   /
-                                       / the IoT OS.  /
-                                       h'da53574944a600663463613234350c
-                                         17016d41636d6520522d496f542d4f
-                                         530d65332e312e3402a2181f724163
-                                         6d6520426173652041747465737465
-                                         7218210103a11183a318187161636d
-                                         655f725f696f745f6f732e65786514
-                                         1a0044b349078201582005f6b327c1
-                                         73b4192bd2c3ec248a292215eab456
-                                         611bf7a783e25c1782479905a31818
-                                         6d7265736f75726365732e72736314
-                                         1a000c38b10782015820c142b9aba4
-                                         280c4bb8c75f716a43c99526694caa
-                                         be529571f5569bb7dc542f98a31818
-                                         6a636f6d6d6f6e2e6c6962141a0023
-                                         3d3b0782015820a6a9dcdfb3884da5
-                                         f884e4e1e8e8629958c2dbc7027414
-                                         43a913e34de9333be6'
-                                   ]
-                               }
-                           }
-   }
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 85]
-
-Internet-Draft                     EAT                          May 2022
-
+                                        655f725f696f745f6f732e65786514
+                                        1a0044b349078201582005f6b327c1
+                                        73b4192bd2c3ec248a292215eab456
+                                        611bf7a783e25c1782479905a31818
+                                        6d7265736f75726365732e72736314
+                                        1a000c38b10782015820c142b9aba4
+                                        280c4bb8c75f716a43c99526694caa
+                                        be529571f5569bb7dc542f98a31818
+                                        6a636f6d6d6f6e2e6c6962141a0023
+                                        3d3b0782015820a6a9dcdfb3884da5
+                                        f884e4e1e8e8629958c2dbc7027414
+                                        43a913e34de9333be6'
+                                      ]
+                                  ]
+                              }
+                          }
+  }
 
    / An evidence CoSWID created for the "Acme R-IoT-OS" created by /
    / the "Acme Base Attester" (both fictious names).  It provides  /
@@ -4792,6 +4866,14 @@ Internet-Draft                     EAT                          May 2022
                                        {
                / ...fs-name /              24: "resources.rsc",
                / ...size    /              20: 800945,
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 87]
+
+Internet-Draft                     EAT                          May 2022
+
+
                / ...hash    /               7: [
                                                  1, / SHA-256 /
                                                 h'c142b9aba4280c4b
@@ -4810,14 +4892,6 @@ Internet-Draft                     EAT                          May 2022
                                                   58c2dbc702741443
                                                   a913e34de9333be6'
                                             ]
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 86]
-
-Internet-Draft                     EAT                          May 2022
-
-
                                        }
                                    ]
                                }
@@ -4836,22 +4910,38 @@ A.1.9.  Attestation Results in JSON format
    "Trustus Verifications" is the name of the services that verifies the
    SW component measurements.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 88]
+
+Internet-Draft                     EAT                          May 2022
+
+
    {
-       "nonce" : "lI+IYNE6Rj4=",
+       "nonce" :    "lI-IYNE6Rj4=",
        "seclevel" : "secure-restricted",
-       "secboot" : true,
-       "dbgstat" : "disabled-since-boot",
-       "OEMID" : "iUWt",
-       "UEID" : "AZj1Ck/2wFhhyIYNE6Y4",
-       "submods" : {
-           "seclevel" : "restricted",
-           "secboot" : true,
-           "dbgstat" : "disabled-since-boot",
-           "swname" : "Acme R-IoT-OS",
-           "sw-version" : [
+       "secboot" :  true,
+       "dbgstat" :  "disabled-since-boot",
+       "oemid" :    "iUWt",
+       "ueid" :     "AZj1Ck_2wFhhyIYNE6Y4",
+       "swname" :   "Acme R-IoT-OS",
+       "swversion" : [
                "3.1.4"
            ],
-           "swresults" : [
+       "swresults" : [
                [
                    "Trustus Verifications",
                    "all",
@@ -4860,19 +4950,75 @@ A.1.9.  Attestation Results in JSON format
           ]
    }
 
+A.1.10.  JSON-encoded Token with Sumodules
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 89]
+
+Internet-Draft                     EAT                          May 2022
+
+
+{
+    "nonce":    "lI-IYNE6Rj6O",
+    "ueid":     "AJj1Ck_2wFhhyIYNE6Y46g==",
+    "secboot":  true,
+    "dbgstat":  "disabled-permanently",
+    "iat":      1526542894,
+    "seclevel": "secure-restricted",
+    "submods": {
+        "Android App Foo" :  {
+            "seclevel": "unrestricted"
+        },
+
+        "Secure Element Eat" : [
+            "CBOR",
+            "2D3ShEOhASagWGaoCkiUj4hg0TpGPhkBAFABmPUKT_bAWGHIhg0TpjjqGQECGfryGQEFBBkBBvUZAQcDGQEEgmMzLjEBGQEKoWNURUWCL1gg5c-V_ST6txRGdC3VjUPa4XjlX-K5QpGpKRCC_8JjWgtYQPaQywOIZ3-mJKN3X9fLxOhAnsmBa-MvpHRzOw-Ywn-67bvJljuctezAPD41s6_At7NbSV3qwJlxIuqGfwe41es="
+        ],
+
+        "Linux Android": {
+            "seclevel": "unrestricted"
+        },
+
+        "Subsystem J": [
+            "JWT",
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKLUF0dGVzdGVyIiwiaWF0IjoxNjUxNzc0ODY4LCJleHAiOm51bGwsImF1ZCI6IiIsInN1YiI6IiJ9.gjw4nFMhLpJUuPXvMPzK1GMjhyJq2vWXg1416XKszwQ"
+        ]
+    }
+}
+
 A.2.  Full Token Examples
 
 A.2.1.  Basic CWT Example
 
    This is a simple ECDSA signed CWT-format token.
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 87]
-
-Internet-Draft                     EAT                          May 2022
-
 
    / This is a full CWT-format token with a very simple payloal. /
    / The main structure visible here is that of the COSE_Sign1.  /
@@ -4886,6 +5032,15 @@ Internet-Draft                     EAT                          May 2022
          A07417391243A79C478562D285612E292C622162
          AB233787'                                   / signature /
    ] ) )
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 90]
+
+Internet-Draft                     EAT                          May 2022
+
 
 A.2.2.  Detached EAT Bundle
 
@@ -4925,63 +5080,76 @@ A.2.2.  Detached EAT Bundle
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 88]
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 91]
 
 Internet-Draft                     EAT                          May 2022
 
 
-   / This is a detached EAT bundle (DEB) tag.  /
+/ This is a detached EAT bundle (DEB) tag.  /
+/ Note that 602, the tag identifying a DEB is not yet registered with IANA /
 
-   602([
+602([
 
-       / First part is a full EAT token with claims like nonce and /
-       / UEID. Most importantly, it includes a submodule that is a /
-       / detached digest which is the hash of the "TEE" claims set /
-       / in the next section.                                      /
-       h'D83DD28443A10126A05866A80A48948F8860D13A463E1901
-         00500198F50A4FF6C05861C8860D13A638EA19010219FAF2
-         19010504190106F5190107031901048263332E310119010A
-         A163544545822F5820E5CF95FD24FAB71446742DD58D43DA
-         E178E55FE2B94291A9291082FFC2635A0B5840F690CB0388
-         677FA624A3775FD7CBC4E8409EC9816BE32FA474733B0F98
-         C27FBAEDBBC9963B9CB5ECC03C3E35B3AFC0B7B35B495DEA
-         C0997122EA867F07B8D5EB',
-       {
-          / A CBOR-encoded byte-string wrapped EAT claims-set. It /
-          / contains claims suitable for a TEE                    /
-          "TEE" : h'a50a48948f8860d13a463e19010503190106f519
-                    01070219011181585dda53574944a60064336132
-                    340c01016b41636d6520544545204f530d65332e
-                    312e340282a2181f6b41636d6520544545204f53
-                    182101a2181f6b41636d6520544545204f531821
-                    0206a111a118186e61636d655f7465655f332e65
-                    7865'
-       }
-    ])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    / First part is a full EAT token with claims like nonce and /
+    / UEID. Most importantly, it includes a submodule that is a /
+    / detached digest which is the hash of the "TEE" claims set /
+    / in the next section. The COSE payload follows:            /
+    / { /
+    /      10: h'948F8860D13A463E', /
+    /     256: h'0198F50A4FF6C05861C8860D13A638EA', /
+    /     258: 64242, /
+    /     261: 4,  /
+    /     262: true, /
+    /     263: 3, /
+    /     260: ["3.1", 1], /
+    /     266: { /
+    /         "TEE": [ /
+    /             -16, /
+    /              h'E5CF95FD24FAB71446742DD58D43DAE1 /
+    /                78E55FE2B94291A9291082FFC2635A0B' /
+    /         ] /
+    /     } /
+    /   }  /
+    h'D83DD28443A10126A05866A80A48948F8860D13A463E1901
+      00500198F50A4FF6C05861C8860D13A638EA19010219FAF2
+      19010504190106F5190107031901048263332E310119010A
+      A163544545822F5820E5CF95FD24FAB71446742DD58D43DA
+      E178E55FE2B94291A9291082FFC2635A0B5840F690CB0388
+      677FA624A3775FD7CBC4E8409EC9816BE32FA474733B0F98
+      C27FBAEDBBC9963B9CB5ECC03C3E35B3AFC0B7B35B495DEA
+      C0997122EA867F07B8D5EB',
+    {
+       / A CBOR-encoded byte-string wrapped EAT claims-set. It /
+       / contains claims suitable for a TEE                    /
+       "TEE" : h'a50a48948f8860d13a463e19010503190106
+                 f519010702190111818218795858a6006433
+                 6132340c01016b41636d6520544545204f53
+                 0d65332e312e340282a2181f6b41636d6520
+                 544545204f53182101a2181f6b41636d6520
+                 544545204f5318210206a111a118186e6163
+                 6d655f7465655f332e657865'
+    }
+ ])
 
 
 
 
-Lundblade, et al.        Expires 6 November 2022               [Page 89]
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 92]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5010,6 +5178,23 @@ Internet-Draft                     EAT                          May 2022
                                }
    }
 
+A.2.3.  JSON-encoded Detached EAT Bundle
+
+   In this bundle there are two detached Claims-Sets, "CS1" and "CS2".
+   The JWT at the start of the bundle has detached signature submodules
+   with hashes of "CS1" and "CS2".  TODO: make the JWT actually be
+   correct verifiable JWT.
+
+[
+    [ "JWT",
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKLUF0dGVzdGVyIiwiaWF0IjoxNjUxNzc0ODY4LCJleHAiOm51bGwsImF1ZCI6IiIsInN1YiI6IiJ9.gjw4nFMhLpJUuPXvMPzK1GMjhyJq2vWXg1416XKszwQ"
+    ],
+    {
+        "CS1": "ewogICAgICAgICAgICAibm9uY2UiOiAgICAgImxJK0lZTkU2Umo2TyIsCiAgICAgICAgICAgICJpYXQiOiAgICAgIDE1MjY1NDI4OTQKICAgICAgICAgfQo=",
+        "CS2": "ewogICAgICAgICAgICAibm9uY2UiOiAgICJsSStJWU5FNlJqNk8iLAogICAgICAgICAgICAiaWF0IjogICAgIDE1MjY1NDI4OTQKICAgICAgICB9"
+    }
+]
+
 Appendix B.  UEID Design Rationale
 
 B.1.  Collision Probability
@@ -5017,6 +5202,13 @@ B.1.  Collision Probability
    This calculation is to determine the probability of a collision of
    UEIDs given the total possible entity population and the number of
    entities in a particular entity management database.
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 93]
+
+Internet-Draft                     EAT                          May 2022
+
 
    Three different sized databases are considered.  The number of
    devices per person roughly models non-personal devices such as
@@ -5033,14 +5225,6 @@ B.1.  Collision Probability
    The 100 quadrillion datadbase is highly speculative perhaps involving
    nanorobots for every person, livestock animal and domesticated bird.
    It is included to round out the analysis.
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 90]
-
-Internet-Draft                     EAT                          May 2022
-
 
    Note that the items counted here certainly do not have IP address and
    are not individually connected to the network.  They may be connected
@@ -5070,6 +5254,18 @@ Internet-Draft                     EAT                          May 2022
 
    The proper formula for the collision calculation is
 
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 94]
+
+Internet-Draft                     EAT                          May 2022
+
+
       p = 1 - e^{-k^2/(2n)}
 
       p   Collision Probability
@@ -5088,15 +5284,6 @@ Internet-Draft                     EAT                          May 2022
       p  Collision Probability
       n  Total population based on number of bits in UEID
       k  Population in a database
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 91]
-
-Internet-Draft                     EAT                          May 2022
-
 
    +=====================+==============+==============+==============+
    | Database Size       | 128-bit UEID | 192-bit UEID | 256-bit UEID |
@@ -5127,6 +5314,14 @@ Internet-Draft                     EAT                          May 2022
    probability of a collision based on there being one tenth the number
    of states per year as the number of records in the database.
 
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 95]
+
+Internet-Draft                     EAT                          May 2022
+
+
      t = 1 / ((k / 10) * p)
 
      t  Time until a collision
@@ -5145,14 +5340,6 @@ Internet-Draft                     EAT                          May 2022
    +---------------------+--------------+--------------+--------------+
 
                                  Table 7
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 92]
-
-Internet-Draft                     EAT                          May 2022
-
 
    Clearly, 128 bits is enough for the near future thus the requirement
    that UEIDs be a minimum of 128 bits.
@@ -5184,6 +5371,13 @@ B.2.  No Use of UUID
    complexity.  It also slightly reduces the number of actual bits with
    entropy.
 
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 96]
+
+Internet-Draft                     EAT                          May 2022
+
+
    UUIDs seem to have been designed for scenarios where the implementor
    does not have full control over the environment and uniqueness has to
    be constructed from identifiers at hand.  UEID takes the view that
@@ -5202,14 +5396,6 @@ Appendix C.  EAT Relation to IEEE.802.1AR Secure Device Identity (DevID)
    stored, protected and accessed using a DevID Module.  A particular
    level of defense against attack that should be achieved to be a DevID
    is defined.  The intent is that IDevIDs and LDevIDs are used with an
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 93]
-
-Internet-Draft                     EAT                          May 2022
-
-
    open set of network protocols for authentication and such.  In these
    protocols the DevID secret is used to sign a nonce or similar to
    proof the association of the DevID certificates with the device.
@@ -5240,6 +5426,14 @@ C.1.  DevID Used With EAT
    In this case the EAT and the DevID are likely to both provide a
    device identifier (e.g. a serial number).  In the EAT it is the UEID
    (or SUEID).  In the DevID (used as an endorsement), it is a device
+
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 97]
+
+Internet-Draft                     EAT                          May 2022
+
+
    serial number included in the subject field of the DevID certificate.
    It is probably a good idea in this use for them to be the same serial
    number or for the UEID to be a hash of the DevID serial number.
@@ -5257,14 +5451,6 @@ C.2.  How EAT Provides an Equivalent Secure Device Identity
    also signs the nonce that gives freshness at this time.  Since these
    claims are signed for every EAT generated, they can include things
    that vary over time like GPS location.
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 94]
-
-Internet-Draft                     EAT                          May 2022
-
 
    DevID secures the device identity fields by having them signed by the
    manufacturer of the device sign them into a certificate.  That
@@ -5297,6 +5483,13 @@ C.3.  An X.509 Format EAT
    protocol that has a nonce or equivalent.  The EAT here is not being
    used as the protocol to interact with the rely party.
 
+
+
+Lundblade, et al.        Expires 9 November 2022               [Page 98]
+
+Internet-Draft                     EAT                          May 2022
+
+
 C.4.  Device Identifier Permanence
 
    In terms of permanence, an IDevID is similar to a UEID in that they
@@ -5311,16 +5504,6 @@ C.4.  Device Identifier Permanence
    described this way because [IEEE.802.1AR] is oriented around the
    definition of an implementation with a particular level of defense
    against attack.
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 95]
-
-Internet-Draft                     EAT                          May 2022
-
 
    EAT is not defined around a particular implementation and must work
    on a range of devices that have a range of defenses against attack.
@@ -5358,22 +5541,7 @@ Appendix D.  CDDL for CWT and JWT
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 96]
+Lundblade, et al.        Expires 9 November 2022               [Page 99]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5387,12 +5555,15 @@ Internet-Draft                     EAT                          May 2022
    Claim-Label = int / text
    string-or-uri = text
 
+   ; TODO: see if there a way to use ~time
+   general-time =  integer; JC<integer, ~time>
+
    $$Claims-Set-Claims //= ( iss-claim-label => string-or-uri  )
    $$Claims-Set-Claims //= ( sub-claim-label => string-or-uri  )
    $$Claims-Set-Claims //= ( aud-claim-label => string-or-uri  )
-   $$Claims-Set-Claims //= ( exp-claim-label => ~time )
-   $$Claims-Set-Claims //= ( nbf-claim-label => ~time )
-   $$Claims-Set-Claims //= ( iat-claim-label => ~time )
+   $$Claims-Set-Claims //= ( exp-claim-label => general-time )
+   $$Claims-Set-Claims //= ( nbf-claim-label => general-time )
+   $$Claims-Set-Claims //= ( iat-claim-label => general-time )
    $$Claims-Set-Claims //= ( cti-claim-label => bytes )
 
    iss-claim-label = JC<"iss", 1>
@@ -5413,26 +5584,42 @@ Internet-Draft                     EAT                          May 2022
    ; This doesn't produce erroneous error messages
    JC<J,C> = J .feature "json" / C .feature "cbor"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022              [Page 100]
+
+Internet-Draft                     EAT                          May 2022
+
+
    ; A JWT message is either a JWS or JWE in compact serialization form
    ; with the payload a Claims-Set. Compact serialization is the
    ; protected headers, payload and signature, each b64url encoded and
    ; separated by a ".". This CDDL simply matches top-level syntax of of
    ; a JWS or JWE since it is not possible to do more in CDDL.
 
-   JWT-Message = text .regexp \
-       "[A-Za-z0-9_=-]+\.[A-Za-z0-9_=-]+\.[A-Za-z0-9_=-]+"
+   JWT-Message = text .regexp "[A-Za-z0-9_=-]+\.[A-Za-z0-9_=-]+\.[A-Za-z0-9_=-]+"
+
+   ; The nonce was added to JWT in the IANA registry after the publication of
+   ; RFC 7519
+   ; TODO: what about multiple nonces in JSON?
+   ; TODO: add reference to IANA and OpenID (or such document that defines nonce)
+   $$Claims-Set-Claims //=
+       (nonce-label => nonce-type / [ 2* nonce-type ])
+   nonce-type = text
 
 
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 97]
-
-Internet-Draft                     EAT                          May 2022
-
+   ; TODO: nonce-label for JSON should probably be here
 
    ; This is some CDDL describing a CWT at the top level This is
    ; not normative. RFC 8392 is the normative definition of CWT.
@@ -5464,6 +5651,13 @@ E.2.  From draft-mandyam-rats-eat-00
 
    *  Separate information and data model using CDDL.
 
+
+
+Lundblade, et al.        Expires 9 November 2022              [Page 101]
+
+Internet-Draft                     EAT                          May 2022
+
+
    *  Say an EAT is a CWT or JWT
 
    *  Use a map to structure the boot_state and location claims
@@ -5481,14 +5675,6 @@ E.4.  From draft-ietf-rats-eat-02
    *  Roll all EUIs back into one UEID type
 
    *  UEIDs can be one of three lengths, 128, 192 and 256.
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 98]
-
-Internet-Draft                     EAT                          May 2022
-
 
    *  Added appendix justifying UEID design and size.
 
@@ -5521,6 +5707,13 @@ E.6.  From draft-ietf-rats-eat-04
 
    *  Clarify tag usage when nesting tokens
 
+
+
+Lundblade, et al.        Expires 9 November 2022              [Page 102]
+
+Internet-Draft                     EAT                          May 2022
+
+
    *  Add section on key inclusion
 
    *  Add hardware version claims
@@ -5536,15 +5729,6 @@ E.6.  From draft-ietf-rats-eat-04
       privacy section
 
    *  Add intended use claim
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022               [Page 99]
-
-Internet-Draft                     EAT                          May 2022
-
 
 E.7.  From draft-ietf-rats-eat-05
 
@@ -5578,6 +5762,14 @@ E.11.  From draft-ietf-rats-eat-09
 
    *  Added section on use for Evidence and Attestation Results
 
+
+
+
+Lundblade, et al.        Expires 9 November 2022              [Page 103]
+
+Internet-Draft                     EAT                          May 2022
+
+
    *  Fill in the key ID and endorsements identificaiton section
 
    *  Remove origination claim as it is replaced by key IDs and
@@ -5592,15 +5784,6 @@ E.11.  From draft-ietf-rats-eat-09
       folded in as a CoSWID version scheme.
 
 E.12.  From draft-ietf-rats-eat-10
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022              [Page 100]
-
-Internet-Draft                     EAT                          May 2022
-
 
    *  Hardware version is made into an array of two rather than two
       claims
@@ -5636,6 +5819,13 @@ Internet-Draft                     EAT                          May 2022
 
    *  Clearly separate CDDL for JSON and CBOR-specific data items
 
+
+
+Lundblade, et al.        Expires 9 November 2022              [Page 104]
+
+Internet-Draft                     EAT                          May 2022
+
+
    *  Define UJCS (unsigned JWTs)
 
    *  Add CDDL for a general Claims-Set used by UCCS, UJCS, CWT, JWT and
@@ -5650,13 +5840,6 @@ Internet-Draft                     EAT                          May 2022
    *  HW OEM ID can now be a 128-bit random number
 
    *  Expand the examples section
-
-
-
-Lundblade, et al.        Expires 6 November 2022              [Page 101]
-
-Internet-Draft                     EAT                          May 2022
-
 
    *  Add software and version claims as easy / JSON alternative to
       CoSWID
@@ -5692,6 +5875,13 @@ E.13.  From draft-ietf-rats-eat-11
 
    *  Add boot odometer claim
 
+
+
+Lundblade, et al.        Expires 9 November 2022              [Page 105]
+
+Internet-Draft                     EAT                          May 2022
+
+
    *  Add privacy considerations for replay protection
 
 E.14.  From draft-ietf-rats-eat-12
@@ -5706,13 +5896,6 @@ E.14.  From draft-ietf-rats-eat-12
 
    *  Clarify relationship of claims in evidence to results when
       forwarding
-
-
-
-Lundblade, et al.        Expires 6 November 2022              [Page 102]
-
-Internet-Draft                     EAT                          May 2022
-
 
    *  Clarify manufacturer switching UEID types
 
@@ -5737,12 +5920,22 @@ Internet-Draft                     EAT                          May 2022
    *  (Large reorganization of the document build and example
       verification makefile)
 
+   *  Use CoAP content format ID to distinguish manifest and evidence
+      formats instead of CBOR tag
+
 Authors' Addresses
 
    Laurence Lundblade
    Security Theory LLC
 
    Email: lgl@securitytheory.com
+
+
+
+
+Lundblade, et al.        Expires 9 November 2022              [Page 106]
+
+Internet-Draft                     EAT                          May 2022
 
 
    Giridhar Mandyam
@@ -5761,14 +5954,6 @@ Authors' Addresses
    Farnborough
    GU14 7LS
    United Kingdom
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022              [Page 103]
-
-Internet-Draft                     EAT                          May 2022
-
 
    Phone: +44 1252 363189
    Email: jodonogh@qti.qualcomm.com
@@ -5804,21 +5989,4 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lundblade, et al.        Expires 6 November 2022              [Page 104]
+Lundblade, et al.        Expires 9 November 2022              [Page 107]
