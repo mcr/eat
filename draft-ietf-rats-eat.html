@@ -826,11 +826,11 @@ address div.right {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">EAT</td>
-<td class="right">April 2022</td>
+<td class="right">May 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Lundblade, et al.</td>
-<td class="center">Expires 31 October 2022</td>
+<td class="center">Expires 9 November 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -843,12 +843,12 @@ address div.right {
 <dd class="internet-draft">draft-ietf-rats-eat-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-04-29" class="published">29 April 2022</time>
+<time datetime="2022-05-08" class="published">8 May 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-10-31">31 October 2022</time></dd>
+<dd class="expires"><time datetime="2022-11-09">9 November 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -896,7 +896,7 @@ CWT and JWT.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 31 October 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1420,6 +1420,9 @@ CWT and JWT.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.14">
                 <p id="section-toc.1-1.16.2.14.1"><a href="#appendix-D.14" class="xref">D.14</a>. <a href="#name-from-draft-ietf-rats-eat-11-2" class="xref">From draft-ietf-rats-eat-11</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.15">
+                <p id="section-toc.1-1.16.2.15.1"><a href="#appendix-D.15" class="xref">D.15</a>. <a href="#name-from-draft-ietf-rats-eat-11-3" class="xref">From draft-ietf-rats-eat-11</a></p>
 </li>
             </ul>
 </li>
@@ -2382,7 +2385,7 @@ dloa-type = [
 </div>
 </section>
 </div>
-<div id="the-software-manifests-claim-manifests">
+<div id="manifests">
 <section id="section-3.2.16">
           <h4 id="name-the-software-manifests-clai">
 <a href="#section-3.2.16" class="section-number selfRef">3.2.16. </a><a href="#name-the-software-manifests-clai" class="section-name selfRef">The Software Manifests Claim (manifests)</a>
@@ -2397,41 +2400,44 @@ When such manifests are put into this claim, the manufacturer's signature SHOULD
 For example, the manifest might be a CoSWID signed by the software manufacturer, in which case the full signed CoSWID should be put in this claim.<a href="#section-3.2.16-2" class="pilcrow">¶</a></p>
 <p id="section-3.2.16-3">This claim allows multiple formats for the manifest.
 For example, the manifest may be a CBOR-format CoSWID, an XML-format SWID or other.
-Identification of the type of manifest is always by a CBOR tag.
-In many cases, for examples CoSWID, a tag will already be registered with IANA.
-If not, a tag MUST be registered.
-It can be in the first-come-first-served space which has minimal requirements for registration.<a href="#section-3.2.16-3" class="pilcrow">¶</a></p>
-<p id="section-3.2.16-4">The claim is an array of one or more manifests.
-To facilitate hand off of the manifest to a decoding library, each manifest is contained in a byte string.
-This occurs for CBOR-format manifests as well as non-CBOR format manifests.<a href="#section-3.2.16-4" class="pilcrow">¶</a></p>
-<p id="section-3.2.16-5">If a particular manifest type uses CBOR encoding, then the item in the array for it MUST be a byte string that contains a CBOR tag.
-The EAT decoder must decode the byte string and then the CBOR within it to find the tag number to identify the type of manifest.
-The contents of the byte string is then handed to the particular manifest processor for that type of manifest.
-CoSWID and SUIT manifest are examples of this.<a href="#section-3.2.16-5" class="pilcrow">¶</a></p>
-<p id="section-3.2.16-6">If a particular manifest type does not use CBOR encoding, then the item in the array for it MUST be a CBOR tag that contains a byte string.
-The EAT decoder uses the tag to identify the processor for that type of manifest.
-The contents of the tag, the byte string, are handed to the manifest processor.
-Note that a byte string is used to contain the manifest whether it is a text based format or not.
-An example of this is an XML format ISO/IEC 19770 SWID.<a href="#section-3.2.16-6" class="pilcrow">¶</a></p>
-<p id="section-3.2.16-7">It is not possible to describe the above requirements in CDDL, so the type for an individual manifest is any in the CDDL below.
-The above text sets the encoding requirement.<a href="#section-3.2.16-7" class="pilcrow">¶</a></p>
-<p id="section-3.2.16-8">This claim allows for multiple manifests in one token since multiple software packages are likely to be present.
-The multiple manifests MAY be of multiple formats.
-In some cases EAT submodules may be used instead of the array structure in this claim for multiple manifests.<a href="#section-3.2.16-8" class="pilcrow">¶</a></p>
-<p id="section-3.2.16-9">When the <span>[<a href="#CoSWID" class="xref">CoSWID</a>]</span> format is used, it MUST be a payload CoSWID, not an evidence CoSWID.<a href="#section-3.2.16-9" class="pilcrow">¶</a></p>
-<div id="section-3.2.16-10">
+Identification of the type of manifest is always by a CoAP Content-Format integer <span>[<a href="#RFC7252" class="xref">RFC7252</a>]</span>.
+If there is no CoAP identifier registered for the manifest format, one should be registered, perhaps in the experimental or first-come-first-served range.<a href="#section-3.2.16-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.16-4">This claim MUST be an array of one or more manifests.
+Each manifest in the claim MUST be an array of two.
+The first item in the array of two MUST be an integer CoAP Content-Format identifier.
+The second item is MUST be the actual manifest.<a href="#section-3.2.16-4" class="pilcrow">¶</a></p>
+<p id="section-3.2.16-5">In CBOR-encoded EATs the manifest, whatever format it is, MUST be placed in a byte string.<a href="#section-3.2.16-5" class="pilcrow">¶</a></p>
+<p id="section-3.2.16-6">In JSON-format tokens the manifest, whatever format it is, MUST be placed in a text string.
+When a non-text format manifest like a CBOR-encoded CoSWID is put in a JSON-encoded token, the manifest MUST be base-64 encoded.<a href="#section-3.2.16-6" class="pilcrow">¶</a></p>
+<p id="section-3.2.16-7">This claim allows for multiple manifests in one token since multiple software packages are likely to be present.
+The multiple manifests MAY be of different formats.
+In some cases EAT submodules may be used instead of the array structure in this claim for multiple manifests.<a href="#section-3.2.16-7" class="pilcrow">¶</a></p>
+<p id="section-3.2.16-8">When the <span>[<a href="#CoSWID" class="xref">CoSWID</a>]</span> format is used, it MUST be a payload CoSWID, not an evidence CoSWID.<a href="#section-3.2.16-8" class="pilcrow">¶</a></p>
+<div id="section-3.2.16-9">
 <pre class="lang-CDDL sourcecode">
 $$claims-set-claims //= (
     manifests-label =&gt; manifests-type
 )
 
-manifests-type = [+ $$manifest-formats]
+manifests-type = [+ manifest-format]
 
-coswid-that-is-a-cbor-tag-xx = tagged-coswid&lt;concise-swid-tag&gt;
+manifest-format = [
+    content-type:   uint,
+    content-format: $$manifest-body-json .feature "J" /
+                    $$manifest-body-cbor .feature "C"
+]
 
-$$manifest-formats /= bytes .cbor coswid-that-is-a-cbor-tag-xx
+$$manifest-body-cbor /= bytes .cbor untagged-coswid
+$$manifest-body-json /= base64-url-text
 
-</pre><a href="#section-3.2.16-10" class="pilcrow">¶</a>
+$$manifest-body-cbor /= bytes .cbor SUIT_Envelope
+$$manifest-body-json /= base64-url-text
+
+suit-directive-process-dependency = 19
+
+base64-url-text = text
+
+</pre><a href="#section-3.2.16-9" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2443,20 +2449,27 @@ $$manifest-formats /= bytes .cbor coswid-that-is-a-cbor-tag-xx
 <p id="section-3.2.17-1">This claim contains descriptions, lists, evidence or measurements of the software that exists on the entity.
 The defining characteristic of this claim is that its contents are created by processes on the entity that inventory, measure or otherwise characterize the software on the entity.
 The contents of this claim do not originate from the software manufacturer.<a href="#section-3.2.17-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.17-2">This claim uses the same mechanism for identification of the type of the swevidence as is used for the type of the manifest in the manifests claim.
-It also uses the same byte string based mechanism for containing the claim and easing the hand off to a processing library.
-See the discussion above in the manifests claim.<a href="#section-3.2.17-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.17-3">When the <span>[<a href="#CoSWID" class="xref">CoSWID</a>]</span> format is used, it MUST be evidence CoSWIDs, not payload CoSWIDS.<a href="#section-3.2.17-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.17-2">This claim can be a <span>[<a href="#CoSWID" class="xref">CoSWID</a>]</span>.
+When the CoSWID format is used, it MUST be evidence CoSWIDs, not payload CoSWIDS.<a href="#section-3.2.17-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.17-3">Formats other than CoSWID can be used.
+The identification of format is by CoAP Content Format, the same as the manifests claim in <a href="#manifests" class="xref">Section 3.2.16</a>.<a href="#section-3.2.17-3" class="pilcrow">¶</a></p>
 <div id="section-3.2.17-4">
 <pre class="lang-CDDL sourcecode">
 $$claims-set-claims //= (
     swevidence-label =&gt; swevidence-type
 )
 
-swevidence-type = [+ $$swevidence-formats]
+swevidence-type = [+ swevidence-format]
 
-coswid-that-is-a-cbor-tag = tagged-coswid&lt;concise-swid-tag&gt;
-$$swevidence-formats /= bytes .cbor coswid-that-is-a-cbor-tag
+swevidence-format = [
+    content-type:   uint,
+    content-format: $$swevidence-body-json .feature "J" /
+                    $$swevidence-body-cbor .feature "C"
+]
+
+$$swevidence-body-cbor /= bytes .cbor untagged-coswid
+$$swevidence-body-json /= base64-url-text
+
 </pre><a href="#section-3.2.17-4" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3711,21 +3724,40 @@ $$claims-set-claims //= (
     manifests-label =&gt; manifests-type
 )
 
-manifests-type = [+ $$manifest-formats]
+manifests-type = [+ manifest-format]
 
-coswid-that-is-a-cbor-tag-xx = tagged-coswid&lt;concise-swid-tag&gt;
+manifest-format = [
+    content-type:   uint,
+    content-format: $$manifest-body-json .feature "J" /
+                    $$manifest-body-cbor .feature "C"
+]
 
-$$manifest-formats /= bytes .cbor coswid-that-is-a-cbor-tag-xx
+$$manifest-body-cbor /= bytes .cbor untagged-coswid
+$$manifest-body-json /= base64-url-text
+
+$$manifest-body-cbor /= bytes .cbor SUIT_Envelope
+$$manifest-body-json /= base64-url-text
+
+suit-directive-process-dependency = 19
+
+base64-url-text = text
 
 
 $$claims-set-claims //= (
     swevidence-label =&gt; swevidence-type
 )
 
-swevidence-type = [+ $$swevidence-formats]
+swevidence-type = [+ swevidence-format]
 
-coswid-that-is-a-cbor-tag = tagged-coswid&lt;concise-swid-tag&gt;
-$$swevidence-formats /= bytes .cbor coswid-that-is-a-cbor-tag
+swevidence-format = [
+    content-type:   uint,
+    content-format: $$swevidence-body-json .feature "J" /
+                    $$swevidence-body-cbor .feature "C"
+]
+
+$$swevidence-body-cbor /= bytes .cbor untagged-coswid
+$$swevidence-body-json /= base64-url-text
+
 
 $$claims-set-claims //= (swresults-label =&gt; [ + swresult-type ])
 
@@ -4757,6 +4789,10 @@ the EAT they are consuming.<a href="#section-11.3-3" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">RFC 7159</span>, <span class="seriesInfo">DOI 10.17487/RFC7159</span>, <time datetime="2014-03" class="refDate">March 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7159">https://www.rfc-editor.org/info/rfc7159</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7252">[RFC7252]</dt>
+        <dd>
+<span class="refAuthor">Shelby, Z.</span>, <span class="refAuthor">Hartke, K.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"The Constrained Application Protocol (CoAP)"</span>, <span class="seriesInfo">RFC 7252</span>, <span class="seriesInfo">DOI 10.17487/RFC7252</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7252">https://www.rfc-editor.org/info/rfc7252</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC7515">[RFC7515]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515">https://www.rfc-editor.org/info/rfc7515</a>&gt;</span>. </dd>
@@ -5170,11 +5206,15 @@ Since the signature covers the digest from the TEE that Claims-Set is also secur
     / secure-boot /    262: true,
     / debug-status /   263: 2, / disabled-since-boot /
     / manifests /      273: [
-                                h'da53574944a600683762623334383766
-                                  0c000169436172626f6e6974650d6331
-                                  2e320e0102a2181f75496e6475737472
-                                  69616c204175746f6d6174696f6e1821
-                                  02'
+                                [ 121, / CoAP Content ID. A      /
+                                       / made up one until one   /
+                                       / is assigned for CoSWID  /
+                                  h'a600683762623334383766
+                                    0c000169436172626f6e6974650d6331
+                                    2e320e0102a2181f75496e6475737472
+                                    69616c204175746f6d6174696f6e1821
+                                    02'
+                                 ]
                                  / Above is an encoded CoSWID     /
                                  / with the following data        /
                                  /   SW Name: "Carbonite"         /
@@ -5201,19 +5241,23 @@ Since the signature covers the digest from the TEE that Claims-Set is also secur
            / security-level / 261: 1, / unrestricted /
            / secure-boot /    262: true,
            / manifests /      273: [
-                                    h'da53574944a600687337
+                                [ 121, / CoAP Content ID. A      /
+                                       / made up one until one   /
+                                       / is assigned for CoSWID  /
+                                    h'a600687337
                                       6537346b78380c000168
                                       44726f6964204f530d65
                                       52322e44320e0302a218
                                       1F75496E647573747269
                                       616c204175746f6d6174
                                       696f6e182102'
-                                     / Above is an encoded CoSWID /
-                                     / with the following data:   /
-                                     /   SW Name: "Droid OS"      /
-                                     /   SW Vers: "R2.D2"         /
-                                     /   SW Creator:              /
-                                     /     "Industrial Automation"/
+                                  ]
+                                  / Above is an encoded CoSWID /
+                                  / with the following data:   /
+                                  /   SW Name: "Droid OS"      /
+                                  /   SW Vers: "R2.D2"         /
+                                  /   SW Creator:              /
+                                  /     "Industrial Automation"/
                                ]
                            }
                        }
@@ -5983,6 +6027,17 @@ there can be more tha one of them<a href="#appendix-D.4-1.4" class="pilcrow">¶<
           <li class="normal" id="appendix-D.14-1.3">Clarify relationship of claims in evidence to results when forwarding<a href="#appendix-D.14-1.3" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="appendix-D.14-1.4">Clarify manufacturer switching UEID types<a href="#appendix-D.14-1.4" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+<div id="from-draft-ietf-rats-eat-11-2">
+<section id="appendix-D.15">
+        <h3 id="name-from-draft-ietf-rats-eat-11-3">
+<a href="#appendix-D.15" class="section-number selfRef">D.15. </a><a href="#name-from-draft-ietf-rats-eat-11-3" class="section-name selfRef">From draft-ietf-rats-eat-11</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-D.15-1.1">Use CoAP content format ID to distinguish manifest and evidence formats instead of CBOR tag<a href="#appendix-D.15-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
