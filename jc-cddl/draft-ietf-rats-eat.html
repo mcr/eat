@@ -3483,9 +3483,11 @@ In JSON tokens OIDs are a text string in the common form of "nn.nn.nn...".<a hre
 They are just text strings that contain a URI.<a href="#section-8.2.1-3" class="pilcrow">¶</a></p>
 <div id="section-8.2.1-4">
 <pre class="lang-CDDL sourcecode">
-general-time-int = JC&lt;int, #6.1(int)&gt;
+time-int = #6.1(int)
 
-binary-data = JC&lt;base64-url-text, bstr&gt;
+general-time-int = JC&lt; int, ~time-int &gt;
+
+binary-data = JC&lt; base64-url-text, bstr&gt;
 
 base64-url-text = tstr .regexp "[A-Za-z0-9_=-]+"
 
@@ -3493,7 +3495,7 @@ general-oid = JC&lt; json-oid, ~oid &gt;
 
 json-oid = tstr .regexp "[0-9\.]+"
 
-general-uri = text
+general-uri = JC&lt; text, ~uri &gt;
 </pre><a href="#section-8.2.1-4" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3598,9 +3600,11 @@ Nested-Token is the one place that that a CBOR token can be nested inside a JSON
 Nested-Token is defined in the following sections.<a href="#section-8.4.1-2" class="pilcrow">¶</a></p>
 <div id="section-8.4.1-3">
 <pre class="lang-CDDL sourcecode">
-general-time-int = JC&lt;int, #6.1(int)&gt;
+time-int = #6.1(int)
 
-binary-data = JC&lt;base64-url-text, bstr&gt;
+general-time-int = JC&lt; int, ~time-int &gt;
+
+binary-data = JC&lt; base64-url-text, bstr&gt;
 
 base64-url-text = tstr .regexp "[A-Za-z0-9_=-]+"
 
@@ -3608,7 +3612,7 @@ general-oid = JC&lt; json-oid, ~oid &gt;
 
 json-oid = tstr .regexp "[0-9\.]+"
 
-general-uri = text
+general-uri = JC&lt; text, ~uri &gt;
 
 $$Claims-Set-Claims //= (ueid-label =&gt; ueid-type)
 

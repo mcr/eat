@@ -160,7 +160,7 @@ Internet-Draft                     EAT                          May 2022
      8.2.  Encoding Data Types . . . . . . . . . . . . . . . . . . .  47
        8.2.1.  Common Data Types . . . . . . . . . . . . . . . . . .  47
        8.2.2.  JSON Interoperability . . . . . . . . . . . . . . . .  48
-       8.2.3.  Labels  . . . . . . . . . . . . . . . . . . . . . . .  48
+       8.2.3.  Labels  . . . . . . . . . . . . . . . . . . . . . . .  49
      8.3.  CBOR Interoperability . . . . . . . . . . . . . . . . . .  49
 
 
@@ -2641,9 +2641,11 @@ Internet-Draft                     EAT                          May 2022
    Unless expliclity indicated, URIs are not the URI tag defined in
    [RFC8949].  They are just text strings that contain a URI.
 
-   general-time-int = JC<int, #6.1(int)>
+   time-int = #6.1(int)
 
-   binary-data = JC<base64-url-text, bstr>
+   general-time-int = JC< int, ~time-int >
+
+   binary-data = JC< base64-url-text, bstr>
 
    base64-url-text = tstr .regexp "[A-Za-z0-9_=-]+"
 
@@ -2651,7 +2653,7 @@ Internet-Draft                     EAT                          May 2022
 
    json-oid = tstr .regexp "[0-9\.]+"
 
-   general-uri = text
+   general-uri = JC< text, ~uri >
 
 8.2.2.  JSON Interoperability
 
@@ -2675,13 +2677,11 @@ Internet-Draft                     EAT                          May 2022
    variance between CBOR and JSON.  The first argument is the CDDL for
    JSON and the second is CDDL for CBOR.
 
-8.2.3.  Labels
 
-   Map labels, including Claims-Keys and Claim-Names, and enumerated-
-   type values are always integers when encoding in CBOR and strings
-   when encoding in JSON.  There is an exception to this for naming
-   submodules and detached claims sets in a DEB.  These are strings in
-   CBOR.
+
+
+
+
 
 
 
@@ -2689,6 +2689,14 @@ Lundblade, et al.       Expires 10 November 2022               [Page 48]
 
 Internet-Draft                     EAT                          May 2022
 
+
+8.2.3.  Labels
+
+   Map labels, including Claims-Keys and Claim-Names, and enumerated-
+   type values are always integers when encoding in CBOR and strings
+   when encoding in JSON.  There is an exception to this for naming
+   submodules and detached claims sets in a DEB.  These are strings in
+   CBOR.
 
    The CDDL in most cases gives both the integer label and the string
    label as it is not convenient to have conditional CDDL for such.
@@ -2730,14 +2738,6 @@ Internet-Draft                     EAT                          May 2022
       in section 3.2.3 of [RFC8949].  The EAT encoder may use indefinite
       length strings if it wishes.
 
-   *  Sorting of maps by key is not required.  The EAT decoder must not
-      rely on sorting.
-
-   *  Deterministic encoding described in Section 4.2 of [RFC8949] is
-      not required.
-
-
-
 
 
 
@@ -2745,6 +2745,12 @@ Lundblade, et al.       Expires 10 November 2022               [Page 49]
 
 Internet-Draft                     EAT                          May 2022
 
+
+   *  Sorting of maps by key is not required.  The EAT decoder must not
+      rely on sorting.
+
+   *  Deterministic encoding described in Section 4.2 of [RFC8949] is
+      not required.
 
    *  Basic validity described in section 5.3.1 of [RFC8949] must be
       followed.  The EAT encoder must not send duplicate map keys/labels
@@ -2766,9 +2772,11 @@ Internet-Draft                     EAT                          May 2022
    token can be nested inside a JSON token and vice versa.  Nested-Token
    is defined in the following sections.
 
-   general-time-int = JC<int, #6.1(int)>
+   time-int = #6.1(int)
 
-   binary-data = JC<base64-url-text, bstr>
+   general-time-int = JC< int, ~time-int >
+
+   binary-data = JC< base64-url-text, bstr>
 
    base64-url-text = tstr .regexp "[A-Za-z0-9_=-]+"
 
@@ -2776,7 +2784,7 @@ Internet-Draft                     EAT                          May 2022
 
    json-oid = tstr .regexp "[0-9\.]+"
 
-   general-uri = text
+   general-uri = JC< text, ~uri >
 
    $$Claims-Set-Claims //= (ueid-label => ueid-type)
 
@@ -2786,14 +2794,6 @@ Internet-Draft                     EAT                          May 2022
 
    sueids-type = {
        + tstr => ueid-type
-   }
-
-   $$Claims-Set-Claims //= (
-       oemid-label => oemid-pen / oemid-ieee / oemid-random
-   )
-
-   oemid-pen = int
-
 
 
 
@@ -2801,6 +2801,14 @@ Lundblade, et al.       Expires 10 November 2022               [Page 50]
 
 Internet-Draft                     EAT                          May 2022
 
+
+   }
+
+   $$Claims-Set-Claims //= (
+       oemid-label => oemid-pen / oemid-ieee / oemid-random
+   )
+
+   oemid-pen = int
 
    oemid-ieee = JC<oemid-ieee-json, oemid-ieee-cbor>
    oemid-ieee-cbor = bstr .size 3
@@ -2842,20 +2850,20 @@ Internet-Draft                     EAT                          May 2022
    security-level-type = unrestricted /
                          restricted /
                          secure-restricted /
-                         hardware
-
-   unrestricted       = JC< "unrestricted",      1>
-   restricted         = JC< "restriced",         2>
-   secure-restricted  = JC< "secure-restricted", 3>
-   hardware           = JC< "hardware",          4>
-
-
 
 
 
 Lundblade, et al.       Expires 10 November 2022               [Page 51]
 
 Internet-Draft                     EAT                          May 2022
+
+
+                         hardware
+
+   unrestricted       = JC< "unrestricted",      1>
+   restricted         = JC< "restriced",         2>
+   secure-restricted  = JC< "secure-restricted", 3>
+   hardware           = JC< "hardware",          4>
 
 
    $$Claims-Set-Claims //= (secure-boot-label => bool)
@@ -2899,6 +2907,13 @@ Internet-Draft                     EAT                          May 2022
    timestamp         = JC< "timestamp",         8 >
    age               = JC< "age",               9 >
 
+
+
+Lundblade, et al.       Expires 10 November 2022               [Page 52]
+
+Internet-Draft                     EAT                          May 2022
+
+
    $$Claims-Set-Claims //= (uptime-label => uint)
 
    $$Claims-Set-Claims //=  (boot-seed-label => binary-data)
@@ -2906,13 +2921,6 @@ Internet-Draft                     EAT                          May 2022
    $$Claims-Set-Claims //= (odometer-label => uint)
 
    $$Claims-Set-Claims //= ( intended-use-label => intended-use-type )
-
-
-
-Lundblade, et al.       Expires 10 November 2022               [Page 52]
-
-Internet-Draft                     EAT                          May 2022
-
 
    intended-use-type = generic /
                        registration /
@@ -2954,14 +2962,6 @@ Internet-Draft                     EAT                          May 2022
    $$manifest-body-json /= base64-url-text
 
    $$manifest-body-cbor /= bytes .cbor SUIT_Envelope
-   $$manifest-body-json /= base64-url-text
-
-   suit-directive-process-dependency = 19
-
-   $$Claims-Set-Claims //= (
-       swevidence-label => swevidence-type
-   )
-
 
 
 
@@ -2969,6 +2969,14 @@ Lundblade, et al.       Expires 10 November 2022               [Page 53]
 
 Internet-Draft                     EAT                          May 2022
 
+
+   $$manifest-body-json /= base64-url-text
+
+   suit-directive-process-dependency = 19
+
+   $$Claims-Set-Claims //= (
+       swevidence-label => swevidence-type
+   )
 
    swevidence-type = [+ swevidence-format]
 
@@ -3010,6 +3018,14 @@ Internet-Draft                     EAT                          May 2022
                                  system-libs /
                                  partial
 
+
+
+
+Lundblade, et al.       Expires 10 November 2022               [Page 54]
+
+Internet-Draft                     EAT                          May 2022
+
+
    all         = JC< "all",         1 >
    firmware    = JC< "firmware",    2 >
    kernel      = JC< "kernel",      3 >
@@ -3017,13 +3033,6 @@ Internet-Draft                     EAT                          May 2022
    system-libs = JC< "system-libs", 5 >
    partial     = JC< "partial",     6 >
 
-
-
-
-
-Lundblade, et al.       Expires 10 November 2022               [Page 54]
-
-Internet-Draft                     EAT                          May 2022
 
 
    $$Claims-Set-Claims //= (submods-label => { + text => Submodule })
@@ -3065,6 +3074,14 @@ Internet-Draft                     EAT                          May 2022
    hardware-version-label = JC< "hwvers",     260 >
    secure-boot-label      = JC< "secboot",    262 >
    debug-status-label     = JC< "dbgstat",    263 >
+
+
+
+Lundblade, et al.       Expires 10 November 2022               [Page 55]
+
+Internet-Draft                     EAT                          May 2022
+
+
    location-label         = JC< "location",   264 >
    profile-label          = JC< "profile",    265 >
    submods-label          = JC< "submods",    266 >
@@ -3074,14 +3091,6 @@ Internet-Draft                     EAT                          May 2022
    boot-seed-label        = JC< "bootseed",   TBD >
    intended-use-label     = JC< "intuse",     TBD >
    dloas-label            = JC< "dloas",      TBD >
-
-
-
-Lundblade, et al.       Expires 10 November 2022               [Page 55]
-
-Internet-Draft                     EAT                          May 2022
-
-
    sw-name-label          = JC< "swname",     TBD >
    sw-version-label       = JC< "swversion",  TBD >
    manifests-label        = JC< "manifests",  TBD >
@@ -3116,15 +3125,6 @@ Internet-Draft                     EAT                          May 2022
    nonce-type = bstr .size (8..64)
 
 8.4.3.  JSON-Specific CDDL
-
-
-
-
-
-
-
-
-
 
 
 
