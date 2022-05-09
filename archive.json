@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-08T17:01:28.184504+00:00",
+  "timestamp": "2022-05-09T05:16:57.744976+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -2879,7 +2879,7 @@
       ],
       "body": "The idea in EAT is to carry formats like Coswid and Corim for Manifests and SWResults. A way to identify their type is needed. Right now CBOR tags are used, but MIME type or Coap content type is probably better.",
       "createdAt": "2022-04-30T22:45:22Z",
-      "updatedAt": "2022-05-02T15:14:31Z",
+      "updatedAt": "2022-05-08T17:05:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -2888,6 +2888,13 @@
           "body": "Any proposal for new media types or subtypes should have a justification why the existing CWT media type is insufficient.  \r\n\r\nIf a subtype is being proposed for Corim/etc., then there should be a specific proposal and examples on how the subtypes are being conveyed.  I would suggest a POST example.",
           "createdAt": "2022-04-30T23:50:18Z",
           "updatedAt": "2022-04-30T23:50:18Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #179 ",
+          "createdAt": "2022-05-08T17:05:56Z",
+          "updatedAt": "2022-05-08T17:05:56Z"
         }
       ]
     },
@@ -8438,13 +8445,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-04-29T23:06:57Z",
-      "updatedAt": "2022-05-08T05:57:37Z",
+      "updatedAt": "2022-05-09T05:16:27Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
+      "baseRefOid": "e637243fea7edbc510727d80b4dfe73f1b4a8e20",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jc-cddl",
-      "headRefOid": "974909bc22a3564e02c89de9d763e13451e7f1c9",
+      "headRefOid": "ae2f9b6d2c6f780ba7ed2adc822118676e1eef5c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -8457,24 +8464,26 @@
       "id": "PR_kwDOCEWCXc43MYa6",
       "title": "Use CoAP Content format for swevidence and manifest claims",
       "url": "https://github.com/ietf-rats-wg/eat/pull/179",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Address #177. \r\n\r\nPrevious text was broken for JSON tokens and this seems like a much better and more universal design.",
       "createdAt": "2022-05-02T21:34:28Z",
-      "updatedAt": "2022-05-08T17:00:57Z",
+      "updatedAt": "2022-05-08T17:05:32Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "CoAP",
-      "headRefOid": "94a2c375f521fa4f28949b24965b53c20153367e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f7a0aacedc08a954ca0d597b4b5412578894bfa0",
+      "closedAt": "2022-05-08T17:05:28Z",
+      "mergedAt": "2022-05-08T17:05:28Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "e637243fea7edbc510727d80b4dfe73f1b4a8e20"
+      },
       "comments": [],
       "reviews": []
     }
