@@ -94,12 +94,12 @@ Table of Contents
          4.2.10.1.  Enabled  . . . . . . . . . . . . . . . . . . . .  23
          4.2.10.2.  Disabled . . . . . . . . . . . . . . . . . . . .  23
          4.2.10.3.  Disabled Since Boot  . . . . . . . . . . . . . .  23
-         4.2.10.4.  Disabled Permanently . . . . . . . . . . . . . .  23
-         4.2.10.5.  Disabled Fully and Permanently . . . . . . . . .  23
+         4.2.10.4.  Disabled Permanently . . . . . . . . . . . . . .  24
+         4.2.10.5.  Disabled Fully and Permanently . . . . . . . . .  24
        4.2.11. The Location Claim (location) . . . . . . . . . . . .  24
        4.2.12. The Uptime Claim (uptime) . . . . . . . . . . . . . .  25
        4.2.13. The Boot Odometer Claim (odometer)  . . . . . . . . .  25
-       4.2.14. The Boot Seed Claim (boot-seed) . . . . . . . . . . .  25
+       4.2.14. The Boot Seed Claim (boot-seed) . . . . . . . . . . .  26
        4.2.15. The DLOA (Digital Letter of Approval) Claim
                (dloas) . . . . . . . . . . . . . . . . . . . . . . .  26
        4.2.16. The Software Manifests Claim (manifests)  . . . . . .  27
@@ -251,7 +251,7 @@ Internet-Draft                     EAT                          May 2022
      E.12. From draft-ietf-rats-eat-10 . . . . . . . . . . . . . . . 104
      E.13. From draft-ietf-rats-eat-11 . . . . . . . . . . . . . . . 105
      E.14. From draft-ietf-rats-eat-12 . . . . . . . . . . . . . . . 106
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 106
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 107
 
 1.  Introduction
 
@@ -1100,18 +1100,18 @@ Internet-Draft                     EAT                          May 2022
 4.2.8.  The Security Level Claim (security-level)
 
    This claim characterizes the entity's ability to defend against
-   attacks aimed at capturing the signing key, forging claims and at
-   forging EATs.  This is by defining four security levels.
+   attacks aimed at capturing the signing key, forging claims and
+   forging EATs.
 
-   This claim describes the security environment and countermeasures
-   available on the entity where the attestation key resides and the
-   claims originate.
+   The intent of this claim is only to give the recipient a rough idea
+   of the security the entity is aiming for.  This is via a simple, non-
+   extensible set of three levels.
 
-   1 - Unrestricted:  There is some expectation that implementor will
-      protect the attestation signing keys at this level.  Otherwise,
-      the EAT provides no meaningful security assurances.
+   This takes a broad view of the range of defenses because EAT is
+   targeted at a broad range of use cases.  The least secure level
+   involves minimal SW defenses.  The most secure level involves
+   specialized hardware to defend against hardware-based attacks.
 
-   2 - Restricted:  Entities at this level are not general-purpose
 
 
 
@@ -1122,54 +1122,54 @@ Lundblade, et al.       Expires 17 November 2022               [Page 20]
 Internet-Draft                     EAT                          May 2022
 
 
-      operating environments that host features, such as app download
-      systems, web browsers and complex applications.  It is akin to the
-      secure-restricted level (see below) without the security
-      orientation.  Examples include a Wi-Fi subsystem, an IoT camera,
-      or sensor device.  Often these can be considered more secure than
-      unrestricted just because they are much simpler and a smaller
-      attack surface, but this won't always be the case.  Some
-      unrestricted devices may be implemented in a way that provides
-      poor protection of signing keys.
+   Only through expansive certification programs like Common Criteria
+   and FIDO certification is it possible to sharply define security
+   levels.  Sharp definition of security levels is not possible here
+   because the IETF doesn't define and operate certification programs.
+   It is also not possible here because any sharp definition of security
+   levels would be a document larger than the EAT specification.  Thus,
+   this definition takes the view that the security level definition
+   possible here is a simple, modest, rough characterization.
 
-   3 - Secure-Restricted:  Entities at this level must meet the criteria
+   1 - Unrestricted:  An entity is categorized as unrestricted when it
+      doesn't meet the criteria for any of the higher levels.  This
+      level does not indicate there is no protection at all, just that
+      the entity doesn't qualify for the higher levels.
+
+   2 - Restricted:  Entities at this level MUST meet the criteria
       defined in Section 4 of FIDO Allowed Restricted Operating
       Environments [FIDO.AROE].  Examples include TEE's and schemes
       using virtualization-based security.  Security at this level is
-      aimed at defending against large-scale network/remote attacks
-      against the entity.
+      aimed at defending against large-scale network/remote attacks by
+      having a reduced attack surface.
 
-   4 - Hardware:  Entities at this level must include substantial
-      defense against physical or electrical attacks against the entity
-      itself.  It is assumed the potential attacker has captured the
-      entity and can disassemble it.  Examples include TPMs and Secure
-      Elements.
+   3 - Hardware:  Entities at this level are indicating they have some
+      countermeasures to defend against physical or electrical attacks
+      against the entity.  Security at this level is aimed at defending
+      against attackers that physically capture the entity to attack it.
+      Examples include TPMs and Secure Elements.
 
-   The entity should claim the highest security level it achieves and no
-   higher.  This set is not extensible so as to provide a common
-   interoperable description of security level to the Relying Party.  If
-   a particular use case considers this claim to be inadequate, it can
-   define its own proprietary claim.  It may consider including both
-   this claim as a coarse indication of security and its own proprietary
-   claim as a refined indication.
+   An entity should claim the highest security level it achieves and no
+   higher.
 
-   This claim is not intended as a replacement for a formal security
-   certification scheme, such as those based on FIPS 140 [FIPS-140] or
-   those based on Common Criteria [Common.Criteria].  See
-   Section 4.2.15.
+   This set of three is not extensible so this remains a broad
+   interoperable description of security level.
 
-   $$Claims-Set-Claims //=
-       ( security-level-label => security-level-type )
+   In particular use cases, alternate claims may be defined that give
+   finer grained information than this claim.
 
-   security-level-type = unrestricted /
-                         restricted /
-                         secure-restricted /
-                         hardware
+   See also the DLOAs claim in Section 4.2.15, a claim that specifically
+   provides information about certifications received.
 
-   unrestricted       = JC< "unrestricted",      1>
-   restricted         = JC< "restriced",         2>
-   secure-restricted  = JC< "secure-restricted", 3>
-   hardware           = JC< "hardware",          4>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1177,6 +1177,17 @@ Lundblade, et al.       Expires 17 November 2022               [Page 21]
 
 Internet-Draft                     EAT                          May 2022
 
+
+   $$Claims-Set-Claims //=
+       ( security-level-label => security-level-type )
+
+   security-level-type = unrestricted /
+                         restricted /
+                         hardware
+
+   unrestricted       = JC< "unrestricted",      1>
+   restricted         = JC< "restricted",        2>
+   hardware           = JC< "hardware",          3>
 
 4.2.9.  Secure Boot Claim (secure-boot)
 
@@ -1211,6 +1222,18 @@ Internet-Draft                     EAT                          May 2022
    not reported.  A conservative interpretation might assume the enabled
    state.
 
+
+
+
+
+
+
+
+Lundblade, et al.       Expires 17 November 2022               [Page 22]
+
+Internet-Draft                     EAT                          May 2022
+
+
    This claim is not extensible so as to provide a common interoperable
    description of debug status.  If a particular implementation
    considers this claim to be inadequate, it can define its own
@@ -1226,14 +1249,6 @@ Internet-Draft                     EAT                          May 2022
    There is no inheritance of claims from a submodule to a superior
    module or vice versa.  There is no assumption, requirement or
    guarantee that the target of a superior module encompasses the
-
-
-
-Lundblade, et al.       Expires 17 November 2022               [Page 22]
-
-Internet-Draft                     EAT                          May 2022
-
-
    targets of submodules.  Thus, every submodule must explicitly
    describe its own debug state.  The receiver of an EAT MUST not assume
    that debug is turned off in a submodule because there is a claim
@@ -1266,6 +1281,15 @@ Internet-Draft                     EAT                          May 2022
    This level indicates all debug facilities are currently disabled and
    have been so since the entity booted/started.
 
+
+
+
+
+Lundblade, et al.       Expires 17 November 2022               [Page 23]
+
+Internet-Draft                     EAT                          May 2022
+
+
 4.2.10.4.  Disabled Permanently
 
    This level indicates all non-manufacturer facilities are permanently
@@ -1278,17 +1302,6 @@ Internet-Draft                     EAT                          May 2022
 
    This level indicates that all debug facilities for the entity are
    permanently disabled.
-
-
-
-
-
-
-
-Lundblade, et al.       Expires 17 November 2022               [Page 23]
-
-Internet-Draft                     EAT                          May 2022
-
 
    $$Claims-Set-Claims //= ( debug-status-label => debug-status-type )
 
@@ -1323,19 +1336,6 @@ Internet-Draft                     EAT                          May 2022
    age data item can be used to quantify the cached period.  The
    timestamp data item is preferred as it a non-relative time.
 
-   The age data item can be used when the entity doesn't know what time
-   it is either because it doesn't have a clock or it isn't set.  The
-   entity MUST still have a "ticker" that can measure a time interval.
-   The age is the interval between acquisition of the location data and
-   token creation.
-
-   See location-related privacy considerations in Section 10.2.
-
-
-
-
-
-
 
 
 
@@ -1345,6 +1345,14 @@ Lundblade, et al.       Expires 17 November 2022               [Page 24]
 
 Internet-Draft                     EAT                          May 2022
 
+
+   The age data item can be used when the entity doesn't know what time
+   it is either because it doesn't have a clock or it isn't set.  The
+   entity MUST still have a "ticker" that can measure a time interval.
+   The age is the interval between acquisition of the location data and
+   token creation.
+
+   See location-related privacy considerations in Section 10.2.
 
    $$Claims-Set-Claims //= (location-label => location-type)
 
@@ -1385,6 +1393,15 @@ Internet-Draft                     EAT                          May 2022
 
    $$Claims-Set-Claims //= (odometer-label => uint)
 
+
+
+
+
+Lundblade, et al.       Expires 17 November 2022               [Page 25]
+
+Internet-Draft                     EAT                          May 2022
+
+
 4.2.14.  The Boot Seed Claim (boot-seed)
 
    The Boot Seed claim MUST contain a random value created at system
@@ -1394,13 +1411,6 @@ Internet-Draft                     EAT                          May 2022
    This value is usually public.  It is not a secret and MUST NOT be
    used for any purpose that a secret seed is needed, such as seeding a
    random number generator.
-
-
-
-Lundblade, et al.       Expires 17 November 2022               [Page 25]
-
-Internet-Draft                     EAT                          May 2022
-
 
    $$Claims-Set-Claims //=  (boot-seed-label => binary-data)
 
@@ -1433,16 +1443,6 @@ Internet-Draft                     EAT                          May 2022
    constructing the registrar URI, platform label and possibly
    application label is specified in [DLOA].
 
-   $$Claims-Set-Claims //= (
-       dloas-label => [ + dloa-type ]
-   )
-
-   dloa-type = [
-       dloa_registrar: general-uri
-       dloa_platform_label: text
-       ? dloa_application_label: text
-   ]
-
 
 
 
@@ -1457,6 +1457,16 @@ Lundblade, et al.       Expires 17 November 2022               [Page 26]
 
 Internet-Draft                     EAT                          May 2022
 
+
+   $$Claims-Set-Claims //= (
+       dloas-label => [ + dloa-type ]
+   )
+
+   dloa-type = [
+       dloa_registrar: general-uri
+       dloa_platform_label: text
+       ? dloa_application_label: text
+   ]
 
 4.2.16.  The Software Manifests Claim (manifests)
 
@@ -1497,6 +1507,13 @@ Internet-Draft                     EAT                          May 2022
    CBOR-encoded CoSWID is put in a JSON-encoded token, the manifest MUST
    be base-64 encoded.
 
+
+
+Lundblade, et al.       Expires 17 November 2022               [Page 27]
+
+Internet-Draft                     EAT                          May 2022
+
+
    This claim allows for multiple manifests in one token since multiple
    software packages are likely to be present.  The multiple manifests
    MAY be of different formats.  In some cases EAT submodules may be
@@ -1505,14 +1522,6 @@ Internet-Draft                     EAT                          May 2022
 
    When the [CoSWID] format is used, it MUST be a payload CoSWID, not an
    evidence CoSWID.
-
-
-
-
-Lundblade, et al.       Expires 17 November 2022               [Page 27]
-
-Internet-Draft                     EAT                          May 2022
-
 
    $$Claims-Set-Claims //= (
        manifests-label => manifests-type
@@ -1549,15 +1558,6 @@ Internet-Draft                     EAT                          May 2022
    Formats other than CoSWID can be used.  The identification of format
    is by CoAP Content Format, the same as the manifests claim in
    Section 4.2.16.
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2841,15 +2841,15 @@ Internet-Draft                     EAT                          May 2022
 
    security-level-type = unrestricted /
                          restricted /
-                         secure-restricted /
                          hardware
 
    unrestricted       = JC< "unrestricted",      1>
-   restricted         = JC< "restriced",         2>
-   secure-restricted  = JC< "secure-restricted", 3>
-   hardware           = JC< "hardware",          4>
+   restricted         = JC< "restricted",        2>
+   hardware           = JC< "hardware",          3>
 
+   $$Claims-Set-Claims //= (secure-boot-label => bool)
 
+   $$Claims-Set-Claims //= ( debug-status-label => debug-status-type )
 
 
 
@@ -2857,10 +2857,6 @@ Lundblade, et al.       Expires 17 November 2022               [Page 51]
 
 Internet-Draft                     EAT                          May 2022
 
-
-   $$Claims-Set-Claims //= (secure-boot-label => bool)
-
-   $$Claims-Set-Claims //= ( debug-status-label => debug-status-type )
 
    debug-status-type = ds-enabled /
                        disabled /
@@ -2907,6 +2903,10 @@ Internet-Draft                     EAT                          May 2022
 
    $$Claims-Set-Claims //= ( intended-use-label => intended-use-type )
 
+   intended-use-type = generic /
+                       registration /
+                       provisioning /
+
 
 
 Lundblade, et al.       Expires 17 November 2022               [Page 52]
@@ -2914,9 +2914,6 @@ Lundblade, et al.       Expires 17 November 2022               [Page 52]
 Internet-Draft                     EAT                          May 2022
 
 
-   intended-use-type = generic /
-                       registration /
-                       provisioning /
                        csr /
                        pop
 
@@ -2962,6 +2959,9 @@ Internet-Draft                     EAT                          May 2022
        swevidence-label => swevidence-type
    )
 
+   swevidence-type = [+ swevidence-format]
+
+   swevidence-format = [
 
 
 
@@ -2970,9 +2970,6 @@ Lundblade, et al.       Expires 17 November 2022               [Page 53]
 Internet-Draft                     EAT                          May 2022
 
 
-   swevidence-type = [+ swevidence-format]
-
-   swevidence-format = [
        content-type:   uint,
        content-format: JC< $$swevidence-body-json,
                            $$swevidence-body-cbor >
@@ -3019,14 +3016,15 @@ Internet-Draft                     EAT                          May 2022
 
 
 
+   $$Claims-Set-Claims //= (submods-label => { + text => Submodule })
+
+
 
 
 Lundblade, et al.       Expires 17 November 2022               [Page 54]
 
 Internet-Draft                     EAT                          May 2022
 
-
-   $$Claims-Set-Claims //= (submods-label => { + text => Submodule })
 
    Submodule = Claims-Set / Nested-Token / Detached-Submodule-Digest
 
@@ -3074,6 +3072,8 @@ Internet-Draft                     EAT                          May 2022
    boot-seed-label        = JC< "bootseed",   TBD >
    intended-use-label     = JC< "intuse",     TBD >
    dloas-label            = JC< "dloas",      TBD >
+   sw-name-label          = JC< "swname",     TBD >
+   sw-version-label       = JC< "swversion",  TBD >
 
 
 
@@ -3082,8 +3082,6 @@ Lundblade, et al.       Expires 17 November 2022               [Page 55]
 Internet-Draft                     EAT                          May 2022
 
 
-   sw-name-label          = JC< "swname",     TBD >
-   sw-version-label       = JC< "swversion",  TBD >
    manifests-label        = JC< "manifests",  TBD >
    swevidence-label       = JC< "swevidence", TBD >
    swresults-label        = JC< "swresults" , TBD >
@@ -3116,6 +3114,8 @@ Internet-Draft                     EAT                          May 2022
    nonce-type = bstr .size (8..64)
 
 8.4.3.  JSON-Specific CDDL
+
+
 
 
 
@@ -5927,7 +5927,7 @@ E.14.  From draft-ietf-rats-eat-12
    *  Unassigned IANA requests are clearly TBD in the document (and have
       real values as is necessary in the example validation process)
 
-Authors' Addresses
+   *  Improve security-level claim
 
 
 
@@ -5937,6 +5937,8 @@ Lundblade, et al.       Expires 17 November 2022              [Page 106]
 
 Internet-Draft                     EAT                          May 2022
 
+
+Authors' Addresses
 
    Laurence Lundblade
    Security Theory LLC
@@ -5960,8 +5962,6 @@ Internet-Draft                     EAT                          May 2022
    United Kingdom
    Phone: +44 1252 363189
    Email: jodonogh@qti.qualcomm.com
-
-
 
 
 
