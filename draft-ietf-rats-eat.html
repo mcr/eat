@@ -2135,7 +2135,8 @@ Examples include TPMs and Secure Elements.<a href="#section-4.2.8-5.6.1" class="
 </dd>
           <dd class="break"></dd>
 </dl>
-<p id="section-4.2.8-6">An entity should claim the highest security level it achieves and no higher.<a href="#section-4.2.8-6" class="pilcrow">¶</a></p>
+<p id="section-4.2.8-6">The security level claimed should be for the weakest point in the entity, not the strongest.
+For example, if attestation key is protected by hardware, but the rest of the attester is in a TEE, the claim must be for restriced.<a href="#section-4.2.8-6" class="pilcrow">¶</a></p>
 <p id="section-4.2.8-7">This set of three is not extensible so this remains a broad interoperable description of security level.<a href="#section-4.2.8-7" class="pilcrow">¶</a></p>
 <p id="section-4.2.8-8">In particular use cases, alternate claims may be defined that give finer grained information than this claim.<a href="#section-4.2.8-8" class="pilcrow">¶</a></p>
 <p id="section-4.2.8-9">See also the DLOAs claim in <a href="#dloas" class="xref">Section 4.2.15</a>, a claim that specifically provides information about certifications received.<a href="#section-4.2.8-9" class="pilcrow">¶</a></p>
