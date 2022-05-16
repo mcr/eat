@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-09T16:22:18.383967+00:00",
+  "timestamp": "2022-05-16T02:59:20.659774+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -2919,6 +2919,58 @@
           "body": "#176",
           "createdAt": "2022-05-02T15:47:32Z",
           "updatedAt": "2022-05-02T15:48:12Z"
+        }
+      ]
+    },
+    {
+      "number": 180,
+      "id": "I_kwDOCEWCXc5JtCAW",
+      "title": "Multiple nonces in JSON",
+      "url": "https://github.com/ietf-rats-wg/eat/issues/180",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "wontfix"
+      ],
+      "body": "The CBOR definition of a nonce allows for multiple nonces to accommodate some of the more sophisticated use cases.\r\n\r\nThe JSON definition of a nonce is re used from the IANA JWT registry and doesn't allow multiple nonces.\r\n",
+      "createdAt": "2022-05-16T02:40:50Z",
+      "updatedAt": "2022-05-16T02:50:39Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Establish consensus within the group that multiple nonces are required, otherwise close.",
+          "createdAt": "2022-05-16T02:50:39Z",
+          "updatedAt": "2022-05-16T02:50:39Z"
+        }
+      ]
+    },
+    {
+      "number": 181,
+      "id": "I_kwDOCEWCXc5JtChI",
+      "title": "Swresults should be generalized to measurement results",
+      "url": "https://github.com/ietf-rats-wg/eat/issues/181",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "wontfix"
+      ],
+      "body": "This came out of an email discussion with Eric on the list.\r\n\r\nYou can measure other things than SW so swresults should be renamed measurement results and perhaps rearranged some.\r\n\r\nNote that this is for Evidence.  It is not just for Attestation Results, as it is possible to compare measurements to results on the entity. I know of products that did this.\r\n",
+      "createdAt": "2022-05-16T02:45:24Z",
+      "updatedAt": "2022-05-16T02:49:51Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Current proposal is that attestation results will be an EAT profile.  Take it to the mailing list and get consensus first.  Spec is near LC.",
+          "createdAt": "2022-05-16T02:49:51Z",
+          "updatedAt": "2022-05-16T02:49:51Z"
         }
       ]
     }
@@ -8445,13 +8497,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-04-29T23:06:57Z",
-      "updatedAt": "2022-05-09T16:21:42Z",
+      "updatedAt": "2022-05-16T02:58:51Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "e637243fea7edbc510727d80b4dfe73f1b4a8e20",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jc-cddl",
-      "headRefOid": "380f0ef21c884faf691d1ce8f7eca9c21ef6ac4a",
+      "headRefOid": "c6ded2a3635405d94da814d9ab59ad811ec013eb",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
