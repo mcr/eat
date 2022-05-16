@@ -2106,7 +2106,7 @@ sw-version-type = [
 <p id="section-4.2.8-1">This claim characterizes the entity's ability to defend against attacks aimed at capturing the signing key, forging claims and forging EATs.<a href="#section-4.2.8-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.8-2">The intent of this claim is only to give the recipient a rough idea of the security the entity is aiming for.
 This is via a simple, non-extensible set of three levels.<a href="#section-4.2.8-2" class="pilcrow">¶</a></p>
-<p id="section-4.2.8-3">This takes a very broad view of the range of defenses because EAT is targeted at a broad range of use cases.
+<p id="section-4.2.8-3">This takes a broad view of the range of defenses because EAT is targeted at a broad range of use cases.
 The least secure level involves minimal SW defenses.
 The most secure level involves specialized hardware to defend against hardware-based attacks.<a href="#section-4.2.8-3" class="pilcrow">¶</a></p>
 <p id="section-4.2.8-4">Only through expansive certification programs like Common Criteria and FIDO certification is it possible to sharply define security levels.
@@ -2129,18 +2129,17 @@ Security at this level is aimed at defending against large-scale network/remote 
             <dd class="break"></dd>
 <dt id="section-4.2.8-5.5">3 - Hardware:</dt>
             <dd style="margin-left: 1.5em" id="section-4.2.8-5.6">
-              <p id="section-4.2.8-5.6.1">Entities at this level are indicating they have some countermeasures to defend 
-against physical or electrical attacks against the entity itself.
-It is assumed the potential attacker has captured the entity and can 
-disassemble it. Examples include TPMs and Secure Elements.<a href="#section-4.2.8-5.6.1" class="pilcrow">¶</a></p>
+              <p id="section-4.2.8-5.6.1">Entities at this level are indicating they have some countermeasures to defend against physical or electrical attacks against the entity.
+Security at this level is aimed at defending against attackers that physically capture the entity to attack it.
+Examples include TPMs and Secure Elements.<a href="#section-4.2.8-5.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
 <p id="section-4.2.8-6">An entity should claim the highest security level it achieves and no higher.<a href="#section-4.2.8-6" class="pilcrow">¶</a></p>
 <p id="section-4.2.8-7">This set is not extensible so this remains a broad interoperable description of security level.<a href="#section-4.2.8-7" class="pilcrow">¶</a></p>
-<p id="section-4.2.8-8">In particular use cases, alternate claims may be defined that give more specific information than this claim about security level.
+<p id="section-4.2.8-8">In particular use cases, alternate claims may be defined that give more specific information than this claim.
 For example, FIDO defines several levels of security certification in the domain of user authentication that could be the basis for an alternate claim.<a href="#section-4.2.8-8" class="pilcrow">¶</a></p>
-<p id="section-4.2.8-9">See also the DLOAs claim in <a href="#dloas" class="xref">Section 4.2.15</a>, a claim that specifically provides certification information about the entity.<a href="#section-4.2.8-9" class="pilcrow">¶</a></p>
+<p id="section-4.2.8-9">See also the DLOAs claim in <a href="#dloas" class="xref">Section 4.2.15</a>, a claim that specifically provides information about certifications received.<a href="#section-4.2.8-9" class="pilcrow">¶</a></p>
 <div id="section-4.2.8-10">
 <pre class="lang-CDDL sourcecode">
 $$Claims-Set-Claims //=
