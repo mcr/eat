@@ -17,20 +17,21 @@ relying party, server or service to determine how much it wishes to trust the en
 claims. To a large degree, all this document does is extend
 CWT and JWT. 
     " name="description">
-<meta content="xml2rfc 3.11.1" name="generator">
+<meta content="xml2rfc 3.12.6" name="generator">
 <meta content="signing attestation cbor" name="keyword">
 <meta content="draft-ietf-rats-eat-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.11.1
+  xml2rfc 3.12.6
     Python 3.9.7
     appdirs 1.4.4
     ConfigArgParse 1.3
-    google-i18n-address 2.5.0
+    google-i18n-address 2.5.1
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 2.11.3
     kitchen 1.2.6
-    lxml 4.6.4
+    lxml 4.6.5
+    MarkupSafe 2.0.1
     pycountry 20.7.3
     pyflakes 2.3.1
     PyYAML 5.4.1
@@ -826,11 +827,11 @@ address div.right {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">EAT</td>
-<td class="right">January 2022</td>
+<td class="right">May 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Lundblade, et al.</td>
-<td class="center">Expires 3 August 2022</td>
+<td class="center">Expires 17 November 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -843,12 +844,12 @@ address div.right {
 <dd class="internet-draft">draft-ietf-rats-eat-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-01-30" class="published">30 January 2022</time>
+<time datetime="2022-05-16" class="published">16 May 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-08-03">3 August 2022</time></dd>
+<dd class="expires"><time datetime="2022-11-17">17 November 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -896,7 +897,7 @@ CWT and JWT.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 August 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1609,32 +1610,27 @@ BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href
 capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">This document reuses terminology from JWT <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span> and CWT <span>[<a href="#RFC8392" class="xref">RFC8392</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2-3">
-        <dt id="section-2-3.1">
-Claim:  </dt>
+        <dt id="section-2-3.1">Claim:</dt>
         <dd style="margin-left: 1.5em" id="section-2-3.2">
           <p id="section-2-3.2.1">A piece of information asserted about a subject. A claim is represented as pair with a value and either a name or key to identify it.<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-3.3">
-Claim Name:  </dt>
+<dt id="section-2-3.3">Claim Name:</dt>
         <dd style="margin-left: 1.5em" id="section-2-3.4">
           <p id="section-2-3.4.1">A unique text string that identifies the claim. It is used as the claim name for JSON encoding.<a href="#section-2-3.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-3.5">
-Claim Key:  </dt>
+<dt id="section-2-3.5">Claim Key:</dt>
         <dd style="margin-left: 1.5em" id="section-2-3.6">
           <p id="section-2-3.6.1">The CBOR map key used to identify a claim.<a href="#section-2-3.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-3.7">
-Claim Value:  </dt>
+<dt id="section-2-3.7">Claim Value:</dt>
         <dd style="margin-left: 1.5em" id="section-2-3.8">
           <p id="section-2-3.8.1">The value portion of the claim. A claim value can be any CBOR data item or JSON value.<a href="#section-2-3.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-3.9">
-CWT/JWT Claims Set:  </dt>
+<dt id="section-2-3.9">CWT/JWT Claims Set:</dt>
         <dd style="margin-left: 1.5em" id="section-2-3.10">
           <p id="section-2-3.10.1">The CBOR map or JSON object that contains the claims conveyed by the CWT or JWT.<a href="#section-2-3.10.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1642,38 +1638,32 @@ CWT/JWT Claims Set:  </dt>
 </dl>
 <p id="section-2-4">This document reuses terminology from RATS Architecure <span>[<a href="#RATS.Architecture" class="xref">RATS.Architecture</a>]</span><a href="#section-2-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2-5">
-        <dt id="section-2-5.1">
-Attester:  </dt>
+        <dt id="section-2-5.1">Attester:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.2">
           <p id="section-2-5.2.1">A role performed by an entity (typically a device) whose Evidence must be appraised in order to infer the extent to which the Attester is considered trustworthy, such as when deciding whether it is authorized to perform some operation.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.3">
-Verifier:  </dt>
+<dt id="section-2-5.3">Verifier:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.4">
           <p id="section-2-5.4.1">A role that appraises the validity of Attestation Evidence about an Attester and produces Attestation Results to be used by a Relying Party.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.5">
-Relying Party:  </dt>
+<dt id="section-2-5.5">Relying Party:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.6">
           <p id="section-2-5.6.1">A role that depends on the validity of information about an Attester, for purposes of reliably applying application specific actions. Compare /relying party/ in <span>[<a href="#RFC4949" class="xref">RFC4949</a>]</span>.<a href="#section-2-5.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.7">
-Attestation Evidence:  </dt>
+<dt id="section-2-5.7">Attestation Evidence:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.8">
           <p id="section-2-5.8.1">A Claims Set generated by an Attester to be appraised by a Verifier.  Attestation Evidence may include configuration data, measurements, telemetry, or inferences.<a href="#section-2-5.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.9">
-Attestation Results:  </dt>
+<dt id="section-2-5.9">Attestation Results:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.10">
           <p id="section-2-5.10.1">The output generated by a Verifier, typically including information about an Attester, where the Verifier vouches for the validity of the results<a href="#section-2-5.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.11">
-Reference Values:  </dt>
+<dt id="section-2-5.11">Reference Values:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.12">
           <p id="section-2-5.12.1">A set of values against which values of Claims can be compared as part of applying an Appraisal Policy for Attestation Evidence.  Reference Values are sometimes referred to in other documents as known-good values, golden measurements, or nominal values, although those terms typically assume comparison for equality, whereas here Reference Values might be more general and be used in any sort of comparison.<a href="#section-2-5.12.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2061,16 +2051,14 @@ defining four security levels.<a href="#section-3.11-1" class="pilcrow">¶</a></
 available on the entity where the attestation key
 resides and the claims originate.<a href="#section-3.11-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.11-3">
-          <dt id="section-3.11-3.1">
-1 - Unrestricted:  </dt>
+          <dt id="section-3.11-3.1">1 - Unrestricted:</dt>
           <dd style="margin-left: 1.5em" id="section-3.11-3.2">
             <p id="section-3.11-3.2.1">There is some expectation that implementor will
 protect the attestation signing keys at this level. Otherwise,
 the EAT provides no meaningful security assurances.<a href="#section-3.11-3.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.11-3.3">
-2 - Restricted:  </dt>
+<dt id="section-3.11-3.3">2 - Restricted:</dt>
           <dd style="margin-left: 1.5em" id="section-3.11-3.4">
             <p id="section-3.11-3.4.1">Entities at this level are not general-purpose
 operating environments that host features, such as app download
@@ -2082,8 +2070,7 @@ Often these can be considered more secure than unrestricted just because they ar
 Some unrestricted devices may be implemented in a way that provides poor protection of signing keys.<a href="#section-3.11-3.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.11-3.5">
-3 - Secure-Restricted:  </dt>
+<dt id="section-3.11-3.5">3 - Secure-Restricted:</dt>
           <dd style="margin-left: 1.5em" id="section-3.11-3.6">
             <p id="section-3.11-3.6.1">Entities at this level must meet the criteria defined in Section 4 of FIDO Allowed
 Restricted Operating Environments <span>[<a href="#FIDO.AROE" class="xref">FIDO.AROE</a>]</span>. Examples include TEE's and 
@@ -2092,8 +2079,7 @@ Security at this level is aimed at defending against large-scale
 network/remote attacks against the entity.<a href="#section-3.11-3.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.11-3.7">
-4 - Hardware:  </dt>
+<dt id="section-3.11-3.7">4 - Hardware:</dt>
           <dd style="margin-left: 1.5em" id="section-3.11-3.8">
             <p id="section-3.11-3.8.1">Entities at this level must include substantial defense 
 against physical or electrical attacks against the entity itself.
@@ -2102,8 +2088,8 @@ disassemble it. Examples include TPMs and Secure Elements.<a href="#section-3.11
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-3.11-4">The security level claimed MUST be for the weakest point in the entity, not the strongest.
-For example, if attestation key is protected by hardware, but the rest of the attester is in a TEE, the claim must be for secure-restriced.<a href="#section-3.11-4" class="pilcrow">¶</a></p>
+<p id="section-3.11-4">The security level claimed should be for the weakest point in the entity, not the strongest.
+For example, if attestation key is protected by hardware, but the rest of the attester is in a TEE, the claim must be for restriced.<a href="#section-3.11-4" class="pilcrow">¶</a></p>
 <p id="section-3.11-5">This set is not extensible so as to provide a common interoperable description of security level to the Relying Party.
 If a particular use case considers this claim to be inadequate, it can define its own proprietary claim.
 It may consider including both this claim as a coarse indication of security and its own proprietary claim as a refined indication.<a href="#section-3.11-5" class="pilcrow">¶</a></p>
@@ -2388,40 +2374,35 @@ $$claims-set-claims //=  (boot-seed-label =&gt; bytes)
 claim provides an indication to an EAT consumer about  the intended usage
 of the token. This claim can be used as a way for an application using EAT to internally distinguish between different ways it uses EAT.<a href="#section-3.18-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.18-2">
-          <dt id="section-3.18-2.1">
-1 -- Generic:  </dt>
+          <dt id="section-3.18-2.1">1 -- Generic:</dt>
           <dd style="margin-left: 1.5em" id="section-3.18-2.2">
             <p id="section-3.18-2.2.1">Generic attestation describes an application where the EAT consumer
 requires the most up-to-date security assessment of the attesting entity. It
 is expected that this is the most commonly-used application of EAT.<a href="#section-3.18-2.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.18-2.3">
-2-- Registration:  </dt>
+<dt id="section-3.18-2.3">2-- Registration:</dt>
           <dd style="margin-left: 1.5em" id="section-3.18-2.4">
             <p id="section-3.18-2.4.1">Entities that are registering for a new service may be expected to 
 provide an attestation as part of the registration process.  This intended-use
 setting indicates that the attestation is not intended for any use but registration.<a href="#section-3.18-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.18-2.5">
-3 -- Provisioning:  </dt>
+<dt id="section-3.18-2.5">3 -- Provisioning:</dt>
           <dd style="margin-left: 1.5em" id="section-3.18-2.6">
             <p id="section-3.18-2.6.1">Entities may be provisioned with different values or settings by an EAT
 consumer.  Examples include key material or device management trees.  The consumer
 may require an EAT to assess entity security state of the entity prior to provisioning.<a href="#section-3.18-2.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.18-2.7">
-4 -- Certificate Issuance  </dt>
+<dt id="section-3.18-2.7">4 -- Certificate Issuance</dt>
           <dd style="margin-left: 1.5em" id="section-3.18-2.8">
             <p id="section-3.18-2.8.1">Certification Authorities (CA's) may require attestations prior to
 the issuance of certificates related to keypairs hosted at the entity.  An
 EAT may be used as part of the certificate signing request (CSR).<a href="#section-3.18-2.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.18-2.9">
-5 -- Proof-of-Possession:  </dt>
+<dt id="section-3.18-2.9">5 -- Proof-of-Possession:</dt>
           <dd style="margin-left: 1.5em" id="section-3.18-2.10">
             <p id="section-3.18-2.10.1">An EAT consumer may require an attestation as part of an accompanying 
 proof-of-possession (PoP) application. More precisely, a PoP transaction is intended
@@ -2626,38 +2607,32 @@ It may be the name of a commercial product or such.<a href="#section-3.23.1-1" c
 This corresponds to the attestation target or the submodule.
 If all of the indicated target is not covered, the measurement must indicate partial.<a href="#section-3.23.2-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.23.2-2">
-            <dt id="section-3.23.2-2.1">
-1 -- all:  </dt>
+            <dt id="section-3.23.2-2.1">1 -- all:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.2-2.2">
               <p id="section-3.23.2-2.2.1">Indicates all the software has been verified, for example, all the software in the attestation target or the submodule<a href="#section-3.23.2-2.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.2-2.3">
-2 -- firmware:  </dt>
+<dt id="section-3.23.2-2.3">2 -- firmware:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.2-2.4">
               <p id="section-3.23.2-2.4.1">Indicates all of and only the firmware<a href="#section-3.23.2-2.4.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.2-2.5">
-3 -- kernel:  </dt>
+<dt id="section-3.23.2-2.5">3 -- kernel:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.2-2.6">
               <p id="section-3.23.2-2.6.1">Refers to all of the most-privileged software, for example the Linux kernel<a href="#section-3.23.2-2.6.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.2-2.7">
-4 -- privileged:  </dt>
+<dt id="section-3.23.2-2.7">4 -- privileged:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.2-2.8">
               <p id="section-3.23.2-2.8.1">Refers to all of the software used by the root, system or administrative account<a href="#section-3.23.2-2.8.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.2-2.9">
-5 -- system-libs:  </dt>
+<dt id="section-3.23.2-2.9">5 -- system-libs:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.2-2.10">
               <p id="section-3.23.2-2.10.1">Refers to all of the system libraries that are broadly shared and used by applications and such<a href="#section-3.23.2-2.10.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.2-2.11">
-6 -- partial:  </dt>
+<dt id="section-3.23.2-2.11">6 -- partial:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.2-2.12">
               <p id="section-3.23.2-2.12.1">Some other partial set of the software<a href="#section-3.23.2-2.12.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2672,32 +2647,27 @@ If all of the indicated target is not covered, the measurement must indicate par
           </h4>
 <p id="section-3.23.3-1">This describes the result of the measurement and also the comparison to Reference Values.<a href="#section-3.23.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.23.3-2">
-            <dt id="section-3.23.3-2.1">
-1 -- verification-not-run:  </dt>
+            <dt id="section-3.23.3-2.1">1 -- verification-not-run:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.3-2.2">
               <p id="section-3.23.3-2.2.1">Indicates that no attempt was made to run the verification<a href="#section-3.23.3-2.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.3-2.3">
-2 -- verification-indeterminite:  </dt>
+<dt id="section-3.23.3-2.3">2 -- verification-indeterminite:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.3-2.4">
               <p id="section-3.23.3-2.4.1">The verification was attempted, but it did not produce a result; perhaps it ran out of memory, the battery died or such<a href="#section-3.23.3-2.4.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.3-2.5">
-3 -- verification-failed:  </dt>
+<dt id="section-3.23.3-2.5">3 -- verification-failed:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.3-2.6">
               <p id="section-3.23.3-2.6.1">The verification ran to completion, the comparison was completed and did not compare correctly to the Reference Values<a href="#section-3.23.3-2.6.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.3-2.7">
-4 -- fully-verified:  </dt>
+<dt id="section-3.23.3-2.7">4 -- fully-verified:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.3-2.8">
               <p id="section-3.23.3-2.8.1">The verification ran to completion and all measurements compared correctly to Reference Values<a href="#section-3.23.3-2.8.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.23.3-2.9">
-5 -- partially-verified:  </dt>
+<dt id="section-3.23.3-2.9">5 -- partially-verified:</dt>
             <dd style="margin-left: 1.5em" id="section-3.23.3-2.10">
               <p id="section-3.23.3-2.10.1">The verification ran to completion and some, but not all, measurements compared correctly to Reference Values<a href="#section-3.23.3-2.10.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2839,20 +2809,17 @@ The first item is a string identifying the type of the token.
 The second item is the JSON-encoded token.<a href="#section-3.24.1.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.24.1.2.1-4">The string identifying the JSON-encoded token MUST be one of the following:<a href="#section-3.24.1.2.1-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.24.1.2.1-5">
-                <dt id="section-3.24.1.2.1-5.1">
-"JWT":  </dt>
+                <dt id="section-3.24.1.2.1-5.1">"JWT":</dt>
                 <dd style="margin-left: 1.5em" id="section-3.24.1.2.1-5.2">
                   <p id="section-3.24.1.2.1-5.2.1">The second item MUST be a JWT formatted according to <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span><a href="#section-3.24.1.2.1-5.2.1" class="pilcrow">¶</a></p>
 </dd>
                 <dd class="break"></dd>
-<dt id="section-3.24.1.2.1-5.3">
-"UJCS":  </dt>
+<dt id="section-3.24.1.2.1-5.3">"UJCS":</dt>
                 <dd style="margin-left: 1.5em" id="section-3.24.1.2.1-5.4">
                   <p id="section-3.24.1.2.1-5.4.1">The second item MUST be a UJCS-Message as defined in this document.<a href="#section-3.24.1.2.1-5.4.1" class="pilcrow">¶</a></p>
 </dd>
                 <dd class="break"></dd>
-<dt id="section-3.24.1.2.1-5.5">
-"DEB":  </dt>
+<dt id="section-3.24.1.2.1-5.5">"DEB":</dt>
                 <dd style="margin-left: 1.5em" id="section-3.24.1.2.1-5.6">
                   <p id="section-3.24.1.2.1-5.6.1">The second item MUST be a JSON-encoded Detached EAT Bundle as defined in this document.<a href="#section-3.24.1.2.1-5.6.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2883,8 +2850,7 @@ Nested-Token =
 <p id="section-3.24.1.2.2-2">The nested token MUST be an array of two in the same format as described in the section above.<a href="#section-3.24.1.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.24.1.2.2-3">A CBOR-encoded token nested inside a JSON-encoded MUST use the same array of two, but with the type as follows:<a href="#section-3.24.1.2.2-3" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.24.1.2.2-4">
-                <dt id="section-3.24.1.2.2-4.1">
-"CBOR":  </dt>
+                <dt id="section-3.24.1.2.2-4.1">"CBOR":</dt>
                 <dd style="margin-left: 1.5em" id="section-3.24.1.2.2-4.2">
                   <p id="section-3.24.1.2.2-4.2.1">Some base64url-encoded CBOR that is a tag, typically a CWT, UCCS or CBOR-encoded DEB<a href="#section-3.24.1.2.2-4.2.1" class="pilcrow">¶</a></p>
 </dd>
@@ -3490,7 +3456,7 @@ The EAT encoder must not send duplicate map keys/labels or invalid UTF-8 strings
 <a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-collected-common-cddl" class="section-name selfRef">Collected Common CDDL</a>
         </h3>
 <div id="section-8.4-1">
-<pre class="lang-JSON sourcecode">
+<pre class="breakable lang-JSON sourcecode">
 Claims-Set = {
     * $$claims-set-claims,
     * Claim-Label .feature "extended-label" =&gt; any
@@ -3757,7 +3723,7 @@ cbor-wrapped-claims-set = bstr .cbor Claims-Set
 <a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-collected-cddl-for-cbor" class="section-name selfRef">Collected CDDL for CBOR</a>
         </h3>
 <div id="section-8.5-1">
-<pre class="lang-CDDL sourcecode">
+<pre class="breakable lang-CDDL sourcecode">
 CBOR-Token = Tagged-CBOR-Token / Untagged-CBOR-Token
 
 
@@ -3832,7 +3798,7 @@ hardware-model-label = &lt;TBD39&gt;
 <a href="#section-8.6" class="section-number selfRef">8.6. </a><a href="#name-collected-cddl-for-json" class="section-name selfRef">Collected CDDL for JSON</a>
         </h3>
 <div id="section-8.6-1">
-<pre class="lang-JSON sourcecode">
+<pre class="breakable lang-JSON sourcecode">
 JWT-Message = text .regexp [A-Za-z0-9_=-]+\.[A-Za-z0-9_=-]+\.[A-Za-z0-9_=-]+
 
 UJCS-Message = Claims-Set
@@ -4435,7 +4401,7 @@ the EAT they are consuming.<a href="#section-11.3-3" class="pilcrow">¶</a></p>
 <dl class="references">
 <dt id="CoSWID">[CoSWID]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fitzgerald-McKay, J.</span>, <span class="refAuthor">Schmidt, C.</span>, and <span class="refAuthor">D. Waltermire</span>, <span class="refTitle">"Concise Software Identification Tags"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sacm-coswid-20</span>, <time datetime="2022-01-26" class="refDate">26 January 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-20.txt">https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-20.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fitzgerald-McKay, J.</span>, <span class="refAuthor">Schmidt, C.</span>, and <span class="refAuthor">D. Waltermire</span>, <span class="refTitle">"Concise Software Identification Tags"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sacm-coswid-21</span>, <time datetime="2022-03-07" class="refDate">7 March 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.txt">https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="DLOA">[DLOA]</dt>
         <dd>
@@ -4594,7 +4560,7 @@ the EAT they are consuming.<a href="#section-11.3-3" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="RATS.Architecture">[RATS.Architecture]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote Attestation Procedures Architecture"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-architecture-14</span>, <time datetime="2021-12-09" class="refDate">9 December 2021</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-rats-architecture-14.txt">https://www.ietf.org/archive/id/draft-ietf-rats-architecture-14.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote Attestation Procedures Architecture"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-architecture-15</span>, <time datetime="2022-02-08" class="refDate">8 February 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-rats-architecture-15.txt">https://www.ietf.org/archive/id/draft-ietf-rats-architecture-15.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC4122">[RFC4122]</dt>
         <dd>
