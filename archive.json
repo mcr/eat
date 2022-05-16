@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-16T02:59:20.659774+00:00",
+  "timestamp": "2022-05-16T15:55:51.966403+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -2664,16 +2664,24 @@
       "id": "I_kwDOCEWCXc5CW-9A",
       "title": "Update CDDL to use .feature for JSON vs CBOR",
       "url": "https://github.com/ietf-rats-wg/eat/issues/155",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The new UCCS draft uses .feature to branch between JSON and CBOR. This needs to be carried into the CDDL for all the claims that are different between JSON and CBOR, particularly for nested tokens.",
       "createdAt": "2022-01-25T01:30:52Z",
-      "updatedAt": "2022-01-25T01:30:52Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2022-05-16T03:31:02Z",
+      "closedAt": "2022-05-16T03:31:01Z",
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #176",
+          "createdAt": "2022-05-16T03:31:01Z",
+          "updatedAt": "2022-05-16T03:31:01Z"
+        }
+      ]
     },
     {
       "number": 157,
@@ -2870,7 +2878,7 @@
       "id": "I_kwDOCEWCXc5I1UY-",
       "title": "Use content or media type for Manifest and SWMeasurements",
       "url": "https://github.com/ietf-rats-wg/eat/issues/177",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -2879,8 +2887,8 @@
       ],
       "body": "The idea in EAT is to carry formats like Coswid and Corim for Manifests and SWResults. A way to identify their type is needed. Right now CBOR tags are used, but MIME type or Coap content type is probably better.",
       "createdAt": "2022-04-30T22:45:22Z",
-      "updatedAt": "2022-05-08T17:05:56Z",
-      "closedAt": null,
+      "updatedAt": "2022-05-16T03:18:15Z",
+      "closedAt": "2022-05-16T03:18:15Z",
       "comments": [
         {
           "author": "gmandyam",
@@ -2903,15 +2911,15 @@
       "id": "I_kwDOCEWCXc5I5eWL",
       "title": "Remove all normative references to UCCS",
       "url": "https://github.com/ietf-rats-wg/eat/issues/178",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As per Working Group consensus decision at IETF 113.  Starting with Sec. 1.2.",
       "createdAt": "2022-05-02T15:28:14Z",
-      "updatedAt": "2022-05-02T15:48:12Z",
-      "closedAt": null,
+      "updatedAt": "2022-05-16T03:30:34Z",
+      "closedAt": "2022-05-16T03:30:34Z",
       "comments": [
         {
           "author": "laurencelundblade",
@@ -2931,12 +2939,10 @@
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [
-        "wontfix"
-      ],
+      "labels": [],
       "body": "The CBOR definition of a nonce allows for multiple nonces to accommodate some of the more sophisticated use cases.\r\n\r\nThe JSON definition of a nonce is re used from the IANA JWT registry and doesn't allow multiple nonces.\r\n",
       "createdAt": "2022-05-16T02:40:50Z",
-      "updatedAt": "2022-05-16T02:50:39Z",
+      "updatedAt": "2022-05-16T15:35:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -2945,6 +2951,41 @@
           "body": "Establish consensus within the group that multiple nonces are required, otherwise close.",
           "createdAt": "2022-05-16T02:50:39Z",
           "updatedAt": "2022-05-16T02:50:39Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Wasn't it you that wanted the multiple nonces?\r\n\r\nAlso something HAS to be fixed because it is inconsistent as is. Thus I've remove the wont fix.",
+          "createdAt": "2022-05-16T03:17:08Z",
+          "updatedAt": "2022-05-16T03:17:08Z"
+        },
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">Wasn't it you that wanted the multiple nonces?\r\n\r\nNot that I can recall.  If I did, then I would understand the use case.  Since we have disagreement among the editors, the proper place to raise this issue is on the list. ",
+          "createdAt": "2022-05-16T03:19:34Z",
+          "updatedAt": "2022-05-16T03:19:34Z"
+        },
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Until this is resolved on mailing list, restoring wontfix label.",
+          "createdAt": "2022-05-16T03:20:50Z",
+          "updatedAt": "2022-05-16T03:20:50Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Something has to be fixed here. It is not OK to have the CBOR nonce different from the JSON nonce.\r\n\r\nWould appreciate us coming to consensus on wontfix before assign it. \r\n\r\nRemoving wontfix.",
+          "createdAt": "2022-05-16T03:29:35Z",
+          "updatedAt": "2022-05-16T03:29:35Z"
+        },
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "PR to be filed for Draft -13.  Multiple CWT nonces seems to be allowed by current spec text, so no need to change this definition (nor impact existing CWT registry).  New text to focus on JWT.\r\n\r\nhttps://datatracker.ietf.org/doc/html/draft-ietf-rats-architecture#section-10.2 calls out at least 2 possible sources of nonces:  verifier and RP.  So there are use cases that require multiple nonces.",
+          "createdAt": "2022-05-16T15:33:03Z",
+          "updatedAt": "2022-05-16T15:35:26Z"
         }
       ]
     },
@@ -2957,12 +2998,10 @@
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [
-        "wontfix"
-      ],
+      "labels": [],
       "body": "This came out of an email discussion with Eric on the list.\r\n\r\nYou can measure other things than SW so swresults should be renamed measurement results and perhaps rearranged some.\r\n\r\nNote that this is for Evidence.  It is not just for Attestation Results, as it is possible to compare measurements to results on the entity. I know of products that did this.\r\n",
       "createdAt": "2022-05-16T02:45:24Z",
-      "updatedAt": "2022-05-16T02:49:51Z",
+      "updatedAt": "2022-05-16T03:23:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -2971,6 +3010,20 @@
           "body": "Current proposal is that attestation results will be an EAT profile.  Take it to the mailing list and get consensus first.  Spec is near LC.",
           "createdAt": "2022-05-16T02:49:51Z",
           "updatedAt": "2022-05-16T02:49:51Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I clearly explained this is not an Attestation Results issue.\r\n\r\nPlease be thoughtful and considerate and provide a technical argument the issue before you label wontfix.\r\n\r\n",
+          "createdAt": "2022-05-16T03:20:25Z",
+          "updatedAt": "2022-05-16T03:20:25Z"
+        },
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Removed 'wontfix' label.  My apologies.  My misunderstanding.\r\n\r\nI don't understand 'rearranged some'  Until there is a specific proposal this issue is not actionable.",
+          "createdAt": "2022-05-16T03:23:43Z",
+          "updatedAt": "2022-05-16T03:23:43Z"
         }
       ]
     }
@@ -8490,24 +8543,26 @@
       "id": "PR_kwDOCEWCXc43Gupj",
       "title": "Use JC<> Generic for Java vs CBOR; remove UCCS reference...",
       "url": "https://github.com/ietf-rats-wg/eat/pull/176",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2022-04-29T23:06:57Z",
-      "updatedAt": "2022-05-16T02:58:51Z",
+      "updatedAt": "2022-05-16T03:15:14Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "e637243fea7edbc510727d80b4dfe73f1b4a8e20",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jc-cddl",
-      "headRefOid": "c6ded2a3635405d94da814d9ab59ad811ec013eb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "720dab748e68268260ebf309afe57ac59b1eb37e",
+      "closedAt": "2022-05-16T03:15:10Z",
+      "mergedAt": "2022-05-16T03:15:10Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "0dc8ba028cde570cabe862e82ffb7333b05e0161"
+      },
       "comments": [],
       "reviews": []
     },
@@ -8536,6 +8591,32 @@
       "mergeCommit": {
         "oid": "e637243fea7edbc510727d80b4dfe73f1b4a8e20"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 182,
+      "id": "PR_kwDOCEWCXc432boC",
+      "title": "Improved sec level",
+      "url": "https://github.com/ietf-rats-wg/eat/pull/182",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Reduce to 3 levels.\r\n\r\nExplain this is only a rough broad simple characterization that can't be made sharp.\r\n\r\nIf there is no consensus around this, then I will drop if from the document and registered in the specification-required range, not the standards-action range.",
+      "createdAt": "2022-05-16T04:26:45Z",
+      "updatedAt": "2022-05-16T15:55:17Z",
+      "baseRepository": "ietf-rats-wg/eat",
+      "baseRefName": "master",
+      "baseRefOid": "0dc8ba028cde570cabe862e82ffb7333b05e0161",
+      "headRepository": "ietf-rats-wg/eat",
+      "headRefName": "improved-sec-level",
+      "headRefOid": "e634c7d09aba8fd4fef5a809c02ed27145c367be",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
