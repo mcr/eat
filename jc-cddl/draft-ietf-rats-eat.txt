@@ -5910,9 +5910,6 @@ E.14.  From draft-ietf-rats-eat-12
       can't be used for examples any more (It was nice because you could
       see the payload claims in it easily, where you can't with CWT)
 
-   *  Use JC<> Generic for most of the CDDL that varies between CBOR and
-      JSON
-
    *  DEB tag number is TBD rather than hard coded
 
    *  Add appendix with non-normative CDDL for a Claims-Set, CWT and JWT
@@ -5923,11 +5920,14 @@ E.14.  From draft-ietf-rats-eat-12
    *  Use CoAP content format ID to distinguish manifest and evidence
       formats instead of CBOR tag
 
-Authors' Addresses
+   *  Added more examples, both CBOR and JSON
 
-   Laurence Lundblade
-   Security Theory LLC
-   Email: lgl@securitytheory.com
+   *  All CDDL is validating against all examples
+
+   *  Unassigned IANA requests are clearly TBD in the document (and have
+      real values as is necessary in the example validation process)
+
+Authors' Addresses
 
 
 
@@ -5936,6 +5936,11 @@ Authors' Addresses
 Lundblade, et al.       Expires 17 November 2022              [Page 106]
 
 Internet-Draft                     EAT                          May 2022
+
+
+   Laurence Lundblade
+   Security Theory LLC
+   Email: lgl@securitytheory.com
 
 
    Giridhar Mandyam
@@ -5955,11 +5960,6 @@ Internet-Draft                     EAT                          May 2022
    United Kingdom
    Phone: +44 1252 363189
    Email: jodonogh@qti.qualcomm.com
-
-
-
-
-
 
 
 
