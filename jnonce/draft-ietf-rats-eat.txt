@@ -5,9 +5,9 @@
 RATS Working Group                                          L. Lundblade
 Internet-Draft                                       Security Theory LLC
 Intended status: Standards Track                              G. Mandyam
-Expires: 17 November 2022                                  J. O'Donoghue
+Expires: 18 November 2022                                  J. O'Donoghue
                                               Qualcomm Technologies Inc.
-                                                             16 May 2022
+                                                             17 May 2022
 
 
                    The Entity Attestation Token (EAT)
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 November 2022.
+   This Internet-Draft will expire on 18 November 2022.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 1]
+Lundblade, et al.       Expires 18 November 2022                [Page 1]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -78,7 +78,7 @@ Table of Contents
    4.  The Claims  . . . . . . . . . . . . . . . . . . . . . . . . .  12
      4.1.  Nonce Claim (nonce) . . . . . . . . . . . . . . . . . . .  13
      4.2.  Claims Describing the Entity  . . . . . . . . . . . . . .  13
-       4.2.1.  Universal Entity ID Claim (ueid)  . . . . . . . . . .  13
+       4.2.1.  Universal Entity ID Claim (ueid)  . . . . . . . . . .  14
        4.2.2.  Semi-permanent UEIDs (SUEIDs) . . . . . . . . . . . .  16
        4.2.3.  Hardware OEM Identification (oemid) . . . . . . . . .  17
          4.2.3.1.  Random Number Based OEMID . . . . . . . . . . . .  17
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 2]
+Lundblade, et al.       Expires 18 November 2022                [Page 2]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -165,7 +165,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 3]
+Lundblade, et al.       Expires 18 November 2022                [Page 3]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -221,7 +221,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 4]
+Lundblade, et al.       Expires 18 November 2022                [Page 4]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -277,7 +277,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 5]
+Lundblade, et al.       Expires 18 November 2022                [Page 5]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -333,7 +333,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 6]
+Lundblade, et al.       Expires 18 November 2022                [Page 6]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -389,7 +389,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 7]
+Lundblade, et al.       Expires 18 November 2022                [Page 7]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -445,7 +445,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 8]
+Lundblade, et al.       Expires 18 November 2022                [Page 8]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -501,7 +501,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022                [Page 9]
+Lundblade, et al.       Expires 18 November 2022                [Page 9]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -557,7 +557,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 10]
+Lundblade, et al.       Expires 18 November 2022               [Page 10]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -613,7 +613,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 11]
+Lundblade, et al.       Expires 18 November 2022               [Page 11]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -669,7 +669,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 12]
+Lundblade, et al.       Expires 18 November 2022               [Page 12]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -681,26 +681,31 @@ Internet-Draft                     EAT                          May 2022
 
 4.1.  Nonce Claim (nonce)
 
-   All EATs MUST have a nonce to prevent replay attacks.  Multiple
-   nonces are allowed to accommodate multistage verification and
-   consumption.  See the extensive discussion on attestation freshness
-   in Appendix A of RATS Architecture [RATS.Architecture]
+   All EATs MUST have a nonce to prevent replay attacks.
 
-   This defines the nonce claim for registration in the IANA CWT claims
-   registry.  This claim is also to be registered in the IANA JWT claims
-   registry.  While there is already a nonce claim registered for JWT,
-   it doesn't allow multiple nonces.
+   This claim is either a single byte or text string or an array of byte
+   or text strings.  The array is to accommodate multistage EAT
+   verification and consumption.  See the extensive discussion on
+   attestation freshness in Appendix A of RATS Architecture
+   [RATS.Architecture].
 
-   For CBOR the byte string nonce MUST be at least 8 bytes (64 bits)
-   long as fewer bytes are unlikely to be secure.  The nonce MUST be 64
-   bytes or less in length to limit the memory a constrained
-   implementation uses.  The receiver of an EAT MUST be able to process
-   a 64 byte nonce.
+   A claim named "nonce" is previously defined and registered with IANA
+   for JWT, but MUST not be used in an EAT.  It does not support
+   multiple nonces.  No previous nonce claim was defined for CWT.
 
-   In JSON the nonce is a text string.  Working off the assumption that
-   only characters represented by the lower 7 bits will be used, it is
-   recommended that a text string nonce be one seventh larger than a
-   byte string nonce to achive equivalent entropy.
+   The nonce MUST have 64 bits of entropy as fewer bits are unlikely to
+   be secure.  A maximum nonce size is set to limit the memory required
+   for an implementation.  All receivers MUST be able to accommodate the
+   maximum size.
+
+   In CBOR, the nonce is a byte string and every bit in the byte string
+   contributes to entropy.  The minimum size is 8 bytes.  The maximum
+   size is 64 bytes.
+
+   In JSON the nonce is a text string.  It is assumed that the only
+   characters represented by the lower 7 bits will be used so the text
+   string must be one-seventh longer.  The minimum size is 10 bytes.
+   The maximum size is 74 bytes.
 
    $$Claims-Set-Claims //=
        (nonce-label => nonce-type / [ 2* nonce-type ])
@@ -714,6 +719,17 @@ Internet-Draft                     EAT                          May 2022
    Attestation Results.  See Section 1.4.1 for discussion on how
    Attestation Results relate to Attestation Evidence.
 
+
+
+
+
+
+
+Lundblade, et al.       Expires 18 November 2022               [Page 13]
+
+Internet-Draft                     EAT                          May 2022
+
+
 4.2.1.  Universal Entity ID Claim (ueid)
 
    A UEID identifies an individual manufactured entity like a mobile
@@ -721,14 +737,6 @@ Internet-Draft                     EAT                          May 2022
    camera.  It may identify the entire entity or a submodule.  It does
    not identify types, models or classes of entities.  It is akin to a
    serial number, though it does not have to be sequential.
-
-
-
-
-Lundblade, et al.       Expires 17 November 2022               [Page 13]
-
-Internet-Draft                     EAT                          May 2022
-
 
    UEIDs MUST be universally and globally unique across manufacturers
    and countries.  UEIDs MUST also be unique across protocols and
@@ -773,15 +781,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-
-
-
-
-
-
-
-
-Lundblade, et al.       Expires 17 November 2022               [Page 14]
+Lundblade, et al.       Expires 18 November 2022               [Page 14]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -837,7 +837,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 15]
+Lundblade, et al.       Expires 18 November 2022               [Page 15]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -893,7 +893,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 16]
+Lundblade, et al.       Expires 18 November 2022               [Page 16]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -949,7 +949,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 17]
+Lundblade, et al.       Expires 18 November 2022               [Page 17]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1005,7 +1005,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 18]
+Lundblade, et al.       Expires 18 November 2022               [Page 18]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1061,7 +1061,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 19]
+Lundblade, et al.       Expires 18 November 2022               [Page 19]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1117,7 +1117,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 20]
+Lundblade, et al.       Expires 18 November 2022               [Page 20]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1173,7 +1173,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 21]
+Lundblade, et al.       Expires 18 November 2022               [Page 21]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1229,7 +1229,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 22]
+Lundblade, et al.       Expires 18 November 2022               [Page 22]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1285,7 +1285,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 23]
+Lundblade, et al.       Expires 18 November 2022               [Page 23]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1341,7 +1341,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 24]
+Lundblade, et al.       Expires 18 November 2022               [Page 24]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1397,7 +1397,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 25]
+Lundblade, et al.       Expires 18 November 2022               [Page 25]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1453,7 +1453,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 26]
+Lundblade, et al.       Expires 18 November 2022               [Page 26]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1509,7 +1509,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 27]
+Lundblade, et al.       Expires 18 November 2022               [Page 27]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1565,7 +1565,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 28]
+Lundblade, et al.       Expires 18 November 2022               [Page 28]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1621,7 +1621,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 29]
+Lundblade, et al.       Expires 18 November 2022               [Page 29]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1677,7 +1677,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 30]
+Lundblade, et al.       Expires 18 November 2022               [Page 30]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1733,7 +1733,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 31]
+Lundblade, et al.       Expires 18 November 2022               [Page 31]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1789,7 +1789,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 32]
+Lundblade, et al.       Expires 18 November 2022               [Page 32]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1845,7 +1845,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 33]
+Lundblade, et al.       Expires 18 November 2022               [Page 33]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1901,7 +1901,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 34]
+Lundblade, et al.       Expires 18 November 2022               [Page 34]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -1957,7 +1957,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 35]
+Lundblade, et al.       Expires 18 November 2022               [Page 35]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2013,7 +2013,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 36]
+Lundblade, et al.       Expires 18 November 2022               [Page 36]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2069,7 +2069,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 37]
+Lundblade, et al.       Expires 18 November 2022               [Page 37]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2125,7 +2125,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 38]
+Lundblade, et al.       Expires 18 November 2022               [Page 38]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2181,7 +2181,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 39]
+Lundblade, et al.       Expires 18 November 2022               [Page 39]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2237,7 +2237,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 40]
+Lundblade, et al.       Expires 18 November 2022               [Page 40]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2293,7 +2293,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 41]
+Lundblade, et al.       Expires 18 November 2022               [Page 41]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2349,7 +2349,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 42]
+Lundblade, et al.       Expires 18 November 2022               [Page 42]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2405,7 +2405,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 43]
+Lundblade, et al.       Expires 18 November 2022               [Page 43]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2461,7 +2461,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 44]
+Lundblade, et al.       Expires 18 November 2022               [Page 44]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2517,7 +2517,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 45]
+Lundblade, et al.       Expires 18 November 2022               [Page 45]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2573,7 +2573,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 46]
+Lundblade, et al.       Expires 18 November 2022               [Page 46]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2629,7 +2629,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 47]
+Lundblade, et al.       Expires 18 November 2022               [Page 47]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2685,7 +2685,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 48]
+Lundblade, et al.       Expires 18 November 2022               [Page 48]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2741,7 +2741,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 49]
+Lundblade, et al.       Expires 18 November 2022               [Page 49]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2797,7 +2797,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 50]
+Lundblade, et al.       Expires 18 November 2022               [Page 50]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2853,7 +2853,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 51]
+Lundblade, et al.       Expires 18 November 2022               [Page 51]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2909,7 +2909,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 52]
+Lundblade, et al.       Expires 18 November 2022               [Page 52]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -2965,7 +2965,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 53]
+Lundblade, et al.       Expires 18 November 2022               [Page 53]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3021,7 +3021,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 54]
+Lundblade, et al.       Expires 18 November 2022               [Page 54]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3077,7 +3077,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 55]
+Lundblade, et al.       Expires 18 November 2022               [Page 55]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3133,7 +3133,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 56]
+Lundblade, et al.       Expires 18 November 2022               [Page 56]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3189,7 +3189,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 57]
+Lundblade, et al.       Expires 18 November 2022               [Page 57]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3245,7 +3245,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 58]
+Lundblade, et al.       Expires 18 November 2022               [Page 58]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3301,7 +3301,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 59]
+Lundblade, et al.       Expires 18 November 2022               [Page 59]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3357,7 +3357,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 60]
+Lundblade, et al.       Expires 18 November 2022               [Page 60]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3413,7 +3413,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 61]
+Lundblade, et al.       Expires 18 November 2022               [Page 61]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3469,7 +3469,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 62]
+Lundblade, et al.       Expires 18 November 2022               [Page 62]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3525,7 +3525,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 63]
+Lundblade, et al.       Expires 18 November 2022               [Page 63]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3581,7 +3581,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 64]
+Lundblade, et al.       Expires 18 November 2022               [Page 64]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3637,7 +3637,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 65]
+Lundblade, et al.       Expires 18 November 2022               [Page 65]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3693,7 +3693,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 66]
+Lundblade, et al.       Expires 18 November 2022               [Page 66]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3749,7 +3749,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 67]
+Lundblade, et al.       Expires 18 November 2022               [Page 67]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3805,7 +3805,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 68]
+Lundblade, et al.       Expires 18 November 2022               [Page 68]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3861,7 +3861,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 69]
+Lundblade, et al.       Expires 18 November 2022               [Page 69]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3917,7 +3917,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 70]
+Lundblade, et al.       Expires 18 November 2022               [Page 70]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -3973,7 +3973,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 71]
+Lundblade, et al.       Expires 18 November 2022               [Page 71]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4029,7 +4029,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 72]
+Lundblade, et al.       Expires 18 November 2022               [Page 72]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4085,7 +4085,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 73]
+Lundblade, et al.       Expires 18 November 2022               [Page 73]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4141,7 +4141,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 74]
+Lundblade, et al.       Expires 18 November 2022               [Page 74]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4197,7 +4197,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 75]
+Lundblade, et al.       Expires 18 November 2022               [Page 75]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4253,7 +4253,7 @@ A.1.1.  Simple TEE Attestation
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 76]
+Lundblade, et al.       Expires 18 November 2022               [Page 76]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4309,7 +4309,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 77]
+Lundblade, et al.       Expires 18 November 2022               [Page 77]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4365,7 +4365,7 @@ A.1.2.  Submodules for Board and Device
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 78]
+Lundblade, et al.       Expires 18 November 2022               [Page 78]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4421,7 +4421,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 79]
+Lundblade, et al.       Expires 18 November 2022               [Page 79]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4477,7 +4477,7 @@ A.1.4.  Key / Key Store Attestation
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 80]
+Lundblade, et al.       Expires 18 November 2022               [Page 80]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4533,7 +4533,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 81]
+Lundblade, et al.       Expires 18 November 2022               [Page 81]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4589,7 +4589,7 @@ A.1.5.  Submodules for Board and Device
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 82]
+Lundblade, et al.       Expires 18 November 2022               [Page 82]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4645,7 +4645,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 83]
+Lundblade, et al.       Expires 18 November 2022               [Page 83]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4701,7 +4701,7 @@ A.1.7.  Key / Key Store Attestation
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 84]
+Lundblade, et al.       Expires 18 November 2022               [Page 84]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4757,7 +4757,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 85]
+Lundblade, et al.       Expires 18 November 2022               [Page 85]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4813,7 +4813,7 @@ A.1.8.  SW Measurements of an IoT Device
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 86]
+Lundblade, et al.       Expires 18 November 2022               [Page 86]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4869,7 +4869,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 87]
+Lundblade, et al.       Expires 18 November 2022               [Page 87]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4925,7 +4925,7 @@ A.1.9.  Attestation Results in JSON format
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 88]
+Lundblade, et al.       Expires 18 November 2022               [Page 88]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -4981,7 +4981,7 @@ A.1.10.  JSON-encoded Token with Sumodules
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 89]
+Lundblade, et al.       Expires 18 November 2022               [Page 89]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5037,7 +5037,7 @@ A.2.1.  Basic CWT Example
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 90]
+Lundblade, et al.       Expires 18 November 2022               [Page 90]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5093,7 +5093,7 @@ A.2.2.  Detached EAT Bundle
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 91]
+Lundblade, et al.       Expires 18 November 2022               [Page 91]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5149,7 +5149,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 92]
+Lundblade, et al.       Expires 18 November 2022               [Page 92]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5205,7 +5205,7 @@ B.1.  Collision Probability
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 93]
+Lundblade, et al.       Expires 18 November 2022               [Page 93]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5261,7 +5261,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 94]
+Lundblade, et al.       Expires 18 November 2022               [Page 94]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5317,7 +5317,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 95]
+Lundblade, et al.       Expires 18 November 2022               [Page 95]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5373,7 +5373,7 @@ B.2.  No Use of UUID
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 96]
+Lundblade, et al.       Expires 18 November 2022               [Page 96]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5429,7 +5429,7 @@ C.1.  DevID Used With EAT
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 97]
+Lundblade, et al.       Expires 18 November 2022               [Page 97]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5485,7 +5485,7 @@ C.3.  An X.509 Format EAT
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 98]
+Lundblade, et al.       Expires 18 November 2022               [Page 98]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5541,7 +5541,7 @@ Appendix D.  CDDL for CWT and JWT
 
 
 
-Lundblade, et al.       Expires 17 November 2022               [Page 99]
+Lundblade, et al.       Expires 18 November 2022               [Page 99]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5597,7 +5597,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022              [Page 100]
+Lundblade, et al.       Expires 18 November 2022              [Page 100]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5653,7 +5653,7 @@ E.4.  From draft-ietf-rats-eat-02
 
 
 
-Lundblade, et al.       Expires 17 November 2022              [Page 101]
+Lundblade, et al.       Expires 18 November 2022              [Page 101]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5709,7 +5709,7 @@ E.6.  From draft-ietf-rats-eat-04
 
 
 
-Lundblade, et al.       Expires 17 November 2022              [Page 102]
+Lundblade, et al.       Expires 18 November 2022              [Page 102]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5765,7 +5765,7 @@ E.12.  From draft-ietf-rats-eat-10
 
 
 
-Lundblade, et al.       Expires 17 November 2022              [Page 103]
+Lundblade, et al.       Expires 18 November 2022              [Page 103]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5821,7 +5821,7 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022              [Page 104]
+Lundblade, et al.       Expires 18 November 2022              [Page 104]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5877,7 +5877,7 @@ E.14.  From draft-ietf-rats-eat-12
 
 
 
-Lundblade, et al.       Expires 17 November 2022              [Page 105]
+Lundblade, et al.       Expires 18 November 2022              [Page 105]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5933,7 +5933,7 @@ Authors' Addresses
 
 
 
-Lundblade, et al.       Expires 17 November 2022              [Page 106]
+Lundblade, et al.       Expires 18 November 2022              [Page 106]
 
 Internet-Draft                     EAT                          May 2022
 
@@ -5989,4 +5989,4 @@ Internet-Draft                     EAT                          May 2022
 
 
 
-Lundblade, et al.       Expires 17 November 2022              [Page 107]
+Lundblade, et al.       Expires 18 November 2022              [Page 107]
