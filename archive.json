@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-16T15:55:51.966403+00:00",
+  "timestamp": "2022-05-17T03:29:22.265411+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -2632,16 +2632,24 @@
       "id": "I_kwDOCEWCXc5B_zSA",
       "title": "Remove Section 4 (unsigned JWT) from draft",
       "url": "https://github.com/ietf-rats-wg/eat/issues/151",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Already covered in Appendix A of  https://www.ietf.org/rfcdiff?url2=draft-ietf-rats-uccs-02.txt",
       "createdAt": "2022-01-18T18:43:11Z",
-      "updatedAt": "2022-01-18T19:17:39Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2022-05-16T19:44:18Z",
+      "closedAt": "2022-05-16T19:44:18Z",
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #176",
+          "createdAt": "2022-05-16T19:44:18Z",
+          "updatedAt": "2022-05-16T19:44:18Z"
+        }
+      ]
     },
     {
       "number": 153,
@@ -2942,7 +2950,7 @@
       "labels": [],
       "body": "The CBOR definition of a nonce allows for multiple nonces to accommodate some of the more sophisticated use cases.\r\n\r\nThe JSON definition of a nonce is re used from the IANA JWT registry and doesn't allow multiple nonces.\r\n",
       "createdAt": "2022-05-16T02:40:50Z",
-      "updatedAt": "2022-05-16T15:35:26Z",
+      "updatedAt": "2022-05-16T20:09:39Z",
       "closedAt": null,
       "comments": [
         {
@@ -2986,6 +2994,13 @@
           "body": "PR to be filed for Draft -13.  Multiple CWT nonces seems to be allowed by current spec text, so no need to change this definition (nor impact existing CWT registry).  New text to focus on JWT.\r\n\r\nhttps://datatracker.ietf.org/doc/html/draft-ietf-rats-architecture#section-10.2 calls out at least 2 possible sources of nonces:  verifier and RP.  So there are use cases that require multiple nonces.",
           "createdAt": "2022-05-16T15:33:03Z",
           "updatedAt": "2022-05-16T15:35:26Z"
+        },
+        {
+          "author": "gmandyam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I couldn't identify where in https://openid.net/specs/openid-connect-core-1_0.html#IDToken there is a prohibition against multiple nonces in a single token.  That being said, the use of nonce in the OpenID spec is bound to an ID token. So it may be good to distinguish the JWT name-space for EAT nonce from the existing JWT nonce.",
+          "createdAt": "2022-05-16T20:08:30Z",
+          "updatedAt": "2022-05-16T20:09:39Z"
         }
       ]
     },
@@ -8230,24 +8245,26 @@
       "id": "PR_kwDOCEWCXc4xzGu2",
       "title": "Clarify the security level claimed ",
       "url": "https://github.com/ietf-rats-wg/eat/pull/162",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From mailing list comment by MCR.\r\n\r\nLaurence Lundblade <lgl@island-resort.com> wrote:\r\n- It is claiming the lowest level possible (as a warning)\r\n\r\nI think that this is the key part that makes it useful, even when self-asserted.\r\n\r\nIt is saying, \"I am *least* THIS vulnerable\",\r\n         not \"I am at *most* THIS secure\".\r\n",
       "createdAt": "2022-01-30T18:53:07Z",
-      "updatedAt": "2022-04-29T23:14:53Z",
+      "updatedAt": "2022-05-16T16:21:50Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
-      "baseRefOid": "37eb1857258c0dcef61154a0e390fd350705398d",
+      "baseRefOid": "3dd71068383b9738b9afab1aa588ccf70f986b94",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "sl1",
-      "headRefOid": "ef70fe7c2a4b1352863cd355fc661bf6e371ccba",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f2c42015cca8e93da6d1f789d323f2c49bc36f67",
+      "closedAt": "2022-05-16T16:21:47Z",
+      "mergedAt": "2022-05-16T16:21:47Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "d4c8feadae672393a92552c0b104ee648801fa8f"
+      },
       "comments": [
         {
           "author": "gmandyam",
@@ -8599,20 +8616,76 @@
       "id": "PR_kwDOCEWCXc432boC",
       "title": "Improved sec level",
       "url": "https://github.com/ietf-rats-wg/eat/pull/182",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Reduce to 3 levels.\r\n\r\nExplain this is only a rough broad simple characterization that can't be made sharp.\r\n\r\nIf there is no consensus around this, then I will drop if from the document and registered in the specification-required range, not the standards-action range.",
       "createdAt": "2022-05-16T04:26:45Z",
-      "updatedAt": "2022-05-16T15:55:17Z",
+      "updatedAt": "2022-05-16T16:07:13Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "0dc8ba028cde570cabe862e82ffb7333b05e0161",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "improved-sec-level",
-      "headRefOid": "e634c7d09aba8fd4fef5a809c02ed27145c367be",
+      "headRefOid": "492537537ace6139eb81a3e762567f1f98819d17",
+      "closedAt": "2022-05-16T16:07:08Z",
+      "mergedAt": "2022-05-16T16:07:08Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "3dd71068383b9738b9afab1aa588ccf70f986b94"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 183,
+      "id": "PR_kwDOCEWCXc435yDP",
+      "title": "correct JSON label for profile claim",
+      "url": "https://github.com/ietf-rats-wg/eat/pull/183",
+      "state": "MERGED",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "There is already a profile claim registered for JWT that serves a different purpose so the \"profile\" label can't be used.\r\n\r\nIt was called \"eat_profile\" in previous drafts, but got unfixed, so the change puts it back correct.",
+      "createdAt": "2022-05-16T19:20:44Z",
+      "updatedAt": "2022-05-16T19:21:02Z",
+      "baseRepository": "ietf-rats-wg/eat",
+      "baseRefName": "master",
+      "baseRefOid": "d4c8feadae672393a92552c0b104ee648801fa8f",
+      "headRepository": "ietf-rats-wg/eat",
+      "headRefName": "profilelabel",
+      "headRefOid": "3abd928d666a97750a27a8f496b6535fc9ef1940",
+      "closedAt": "2022-05-16T19:20:58Z",
+      "mergedAt": "2022-05-16T19:20:58Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "f1fb51349bb3b772f4665f89bc38010cf0775ea5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 184,
+      "id": "PR_kwDOCEWCXc4353kx",
+      "title": "make JSON nonce the same as the EAT CBOR nonce",
+      "url": "https://github.com/ietf-rats-wg/eat/pull/184",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Address #180",
+      "createdAt": "2022-05-16T19:42:41Z",
+      "updatedAt": "2022-05-17T03:28:51Z",
+      "baseRepository": "ietf-rats-wg/eat",
+      "baseRefName": "master",
+      "baseRefOid": "f1fb51349bb3b772f4665f89bc38010cf0775ea5",
+      "headRepository": "ietf-rats-wg/eat",
+      "headRefName": "jnonce",
+      "headRefOid": "df1d2f175cc25492fb9204f39269c576915d4414",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
