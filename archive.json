@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-17T03:29:22.265411+00:00",
+  "timestamp": "2022-05-19T01:30:29.623376+00:00",
   "repo": "ietf-rats-wg/eat",
   "labels": [
     {
@@ -2943,15 +2943,15 @@
       "id": "I_kwDOCEWCXc5JtCAW",
       "title": "Multiple nonces in JSON",
       "url": "https://github.com/ietf-rats-wg/eat/issues/180",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The CBOR definition of a nonce allows for multiple nonces to accommodate some of the more sophisticated use cases.\r\n\r\nThe JSON definition of a nonce is re used from the IANA JWT registry and doesn't allow multiple nonces.\r\n",
       "createdAt": "2022-05-16T02:40:50Z",
-      "updatedAt": "2022-05-16T20:09:39Z",
-      "closedAt": null,
+      "updatedAt": "2022-05-17T03:33:15Z",
+      "closedAt": "2022-05-17T03:33:15Z",
       "comments": [
         {
           "author": "gmandyam",
@@ -3001,6 +3001,20 @@
           "body": "I couldn't identify where in https://openid.net/specs/openid-connect-core-1_0.html#IDToken there is a prohibition against multiple nonces in a single token.  That being said, the use of nonce in the OpenID spec is bound to an ID token. So it may be good to distinguish the JWT name-space for EAT nonce from the existing JWT nonce.",
           "createdAt": "2022-05-16T20:08:30Z",
           "updatedAt": "2022-05-16T20:09:39Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "You can't have multiple claims with the same label and the OpenID nonce is a string, so no way to do multiple nonces with what's there.\r\n",
+          "createdAt": "2022-05-17T03:32:53Z",
+          "updatedAt": "2022-05-17T03:32:53Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #184",
+          "createdAt": "2022-05-17T03:33:15Z",
+          "updatedAt": "2022-05-17T03:33:15Z"
         }
       ]
     },
@@ -8672,24 +8686,26 @@
       "id": "PR_kwDOCEWCXc4353kx",
       "title": "make JSON nonce the same as the EAT CBOR nonce",
       "url": "https://github.com/ietf-rats-wg/eat/pull/184",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "laurencelundblade",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Address #180",
       "createdAt": "2022-05-16T19:42:41Z",
-      "updatedAt": "2022-05-17T03:28:51Z",
+      "updatedAt": "2022-05-17T03:31:50Z",
       "baseRepository": "ietf-rats-wg/eat",
       "baseRefName": "master",
       "baseRefOid": "f1fb51349bb3b772f4665f89bc38010cf0775ea5",
       "headRepository": "ietf-rats-wg/eat",
       "headRefName": "jnonce",
       "headRefOid": "df1d2f175cc25492fb9204f39269c576915d4414",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-05-17T03:31:47Z",
+      "mergedAt": "2022-05-17T03:31:46Z",
+      "mergedBy": "laurencelundblade",
+      "mergeCommit": {
+        "oid": "a012c58711fc4af8c3117d97591f41418df5d0a5"
+      },
       "comments": [],
       "reviews": []
     }
