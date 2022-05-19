@@ -4784,7 +4784,7 @@ It is shown this way because the payload is all the claims, the most interesting
 
 {
     / nonce /           10: h'948f8860d13a463e',
-    / security-level / 261: 3, / secure-restricted /
+    / security-level / 261: 2, / restricted /
     / secure-boot /    262: true,
     / debug-status /   263: 2, / disabled-since-boot /
     / manfests /       273: [
@@ -4889,7 +4889,7 @@ It is shown this way because the payload is all the claims, the most interesting
     / secure-boot /    262: true,
     / debug-status /   263: 3, / permanent-disable  /
     / timestamp (iat) /  6: 1526542894,
-    / security-level / 261: 3, / secure restricted OS /
+    / security-level / 261: 2, / restricted OS /
     / submods / 266: {
         / A submodule to hold some claims about the circuit board /
         "board" :  {
@@ -4928,7 +4928,7 @@ It is shown this way because the payload is all the claims, the most interesting
     / nonce /           10: h'948f8860d13a463e',
     / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
     / OEMID /          258: 64242, / Private Enterprise Number /
-    / security-level / 261: 4, / hardware level security /
+    / security-level / 261: 3, / hardware level security /
     / secure-boot /    262: true,
     / debug-status /   263: 3, / disabled-permanently /
     / HW version /     260: [ "3.1", 1 ] / Type is multipartnumeric /
@@ -4949,7 +4949,7 @@ It is shown this way because the payload is all the claims, the most interesting
 
 {
     / nonce /           10: h'948f8860d13a463e',
-    / security-level / 261: 3, / secure-restricted /
+    / security-level / 261: 2, / restricted /
     / secure-boot /    262: true,
     / debug-status /   263: 2, / disabled-since-boot /
     / manfests /       273: [
@@ -5054,7 +5054,7 @@ It is shown this way because the payload is all the claims, the most interesting
     / secure-boot /    262: true,
     / debug-status /   263: 3, / permanent-disable  /
     / timestamp (iat) /  6: 1526542894,
-    / security-level / 261: 3, / secure restricted OS /
+    / security-level / 261: 2, / restricted OS /
     / submods / 266: {
         / A submodule to hold some claims about the circuit board /
         "board" :  {
@@ -5093,7 +5093,7 @@ It is shown this way because the payload is all the claims, the most interesting
     / nonce /           10: h'948f8860d13a463e',
     / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
     / OEMID /          258: 64242, / Private Enterprise Number /
-    / security-level / 261: 4, / hardware level security /
+    / security-level / 261: 3, / hardware level security /
     / secure-boot /    262: true,
     / debug-status /   263: 3, / disabled-permanently /
     / HW version /     260: [ "3.1", 1 ] / Type is multipartnumeric /
@@ -5132,7 +5132,7 @@ It is shown this way because the payload is all the claims, the most interesting
 
 {
     / nonce /           10: h'948f8860d13a463e',
-    / security-level / 261: 3, / secure-restricted /
+    / security-level / 261: 2, / restricted /
     / secure-boot /    262: true,
     / debug-status /   263: 2, / disabled-since-boot /
     / manifests /      273: [
@@ -5216,7 +5216,7 @@ The CoSWID is in byte-string wrapped in the token and also shown in diagnostic f
 
 {
     / nonce /           10: h'948f8860d13a463e',
-    / security-level / 261: 3, / secure-restricted /
+    / security-level / 261: 2, / restricted /
     / secure-boot /    262: true,
     / debug-status /   263: 2, / disabled-since-boot /
     / OEMID /          258: h'8945ad', / IEEE CID based /
@@ -5332,8 +5332,8 @@ It informs the Relying Party that they were correct in the swresults claim.
 <div class="alignLeft art-text artwork" id="appendix-A.1.9-3">
 <pre>
 {
-    "eat_nonce" : "lI-IYNE6Rj4",
-    "seclevel" : "secure-restricted",
+    "eat_nonce" : "jkd8KL-8=Qlzg4",
+    "seclevel" : "restricted",
     "secboot" :  true,
     "dbgstat" :  "disabled-since-boot",
     "oemid" :    "iUWt",
@@ -5368,7 +5368,7 @@ It informs the Relying Party that they were correct in the swresults claim.
     "secboot":  true,
     "dbgstat":  "disabled-permanently",
     "iat":      1526542894,
-    "seclevel": "secure-restricted",
+    "seclevel": "restricted",
     "submods": {
         "Android App Foo" :  {
             "seclevel": "unrestricted"
@@ -5496,7 +5496,7 @@ Since the signature covers the digest from the TEE that Claims-Set is also secur
     / nonce /           10: h'948f8860d13a463e',
     / UEID /           256: h'0198f50a4ff6c05861c8860d13a638ea',
     / OEMID /          258: 64242, / Private Enterprise Number /
-    / security-level / 261: 4, / hardware level security /
+    / security-level / 261: 3, / hardware level security /
     / secure-boot /    262: true,
     / debug-status /   263: 3, / disabled-permanently /
     / hw version /     260: [ "3.1", 1 ], / multipartnumeric /
