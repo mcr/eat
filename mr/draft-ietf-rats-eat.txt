@@ -1692,7 +1692,7 @@ Internet-Draft                     EAT                          May 2022
    ]
 
    individual-result = [
-       results-id: tstr,
+       results-id: tstr / binary-data,
        result:     result-type,
    ]
 
@@ -2976,7 +2976,7 @@ Internet-Draft                     EAT                          May 2022
    ]
 
    individual-result = [
-       results-id: tstr,
+       results-id: tstr / binary-data,
        result:     result-type,
    ]
 
